@@ -1,0 +1,14 @@
+{
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "d:\\dev2\\c\\myemu",
+            "binaryPath": "d:\\dev2\\c\\myemu\\myemu",
+            "binaryArgs": []
+        }
+    ],
+    "files.associations": {
+        "Makefile": "makefile",
+        "*.ez80": "asm-intel-x86-generic",
+        "typeinfo": "c"
+    }
+}
