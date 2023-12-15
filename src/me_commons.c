@@ -167,15 +167,19 @@ void triml(char *pc)
    
 }
 
-bool cmpstrings(char *str1, char *str2)
+bool cmpstrings(const char *str1, const char *str2)
 {
     size_t l1 = strnlen(str1, 1000);
-    size_t l2 = strnlen(str2, l1);
-    printf("%d %d\n", l1, l2);
-    if(l1 == l2)
+    size_t l2 = strnlen(str2, 1000);
+
+    for (size_t i1 = 0; i1 < MAX(l1,l2); i1++)
     {
-        if(strcmp(str1,str2) == 0)
-            return true;
+        if(i1 >= MIN(l1,l2))
+            return false;
+
+        char tmpc = str1[i1];
+        if(tmpc != str2[i1])
+            return false;
     }
-    return false;
+    return true;
 }

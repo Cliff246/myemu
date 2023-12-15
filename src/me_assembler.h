@@ -3,6 +3,7 @@
 
 #include <stdlib.h>
 
+static size_t errorcount = 0;
 void splitline(char **splitline, char tosplitby,  char *baseline);
 
 void assemble(char *dir, size_t size);

@@ -1,2 +1,9 @@
 EMU
 1
+
+NOTHING_
+SET
+    ADDC_AIC 10
+    ADDC_AIC 0x0000
+    ADDC_AIC 0x0000
+    ADDC_AIC hello

@@ -22,20 +22,28 @@
 #define COMBINE(a, b) (ushort)(((ushort)a) | ((ushort)b) << 8)
 #define SPLITL(a) (char)((ushort)a & 0x00ff)
 #define SPLITR(b) (char)((ushort)b & 0xff00)
+#define STR(x)  #x
+#define XSTR(x) STR(x)
+#define CONCAT(a,b) a ## b
+
+#define ARY_LENGTH(ary) (sizeof(ary)/sizeof(ary[0]))
+#define MAX(a,b) ((a > b)? a:b)
+#define MIN(a,b) ((a < b)? a:b)
+
+
 
 #if DEBUG == 1 
+#define OFFSET_DPRINTF(f, ...) DPRINTF("%s", offset); DPRINTF(f, __VA_ARGS__)
 #define DPRINTF(f,...) printf(f,__VA_ARGS__)
 #define DPRINT(f)  printf(f) 
 #define LINE printf("\n------%s:%d-------\n",__FILE__,__LINE__)
 #else
+#define OFFSET_DPRINTF(f, ...) printf()
 #define DPRINT(f)  
 #define DPRINTF(f,...)
 #define LINE()
 #endif
 
-#define STR(x)  #x
-#define XSTR(x) STR(x)
-#define CONCAT(a,b) a ## b
 
 typedef unsigned short ushort;
 
@@ -55,6 +63,6 @@ void reverse(char *ary);
 void triml(char *pc);
 void trimr(char *pc);
 
-bool cmpstrings(char *str1, char *str2);
+bool cmpstrings(const char *str1,const char *str2);
 
 #endif
