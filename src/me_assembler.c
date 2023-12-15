@@ -9,7 +9,6 @@
 #define MAX_FILE_SIZE 1024
 #define MAX_LINE_SIZE 1024
 
-
 typedef char * string_t;
 const string_t empty = "";
 
@@ -19,8 +18,6 @@ typedef struct tokens
     size_t *p_u_col;
     size_t nstr, line;
 }tok_t, *p_tok_t;
-
-
 
 void print_p_toks_st(p_tok_t token)
 {
@@ -167,6 +164,23 @@ int compare_with_instructions(char *str)
     return index;
 }
 
+//STOLEN FROM 
+//Barmak Shemirani answered Jan 25, 2018 at 5:50: 
+//https://stackoverflow.com/questions/48433741/counting-minimum-number-of-bytes-required-to-represent-a-signed-integer
+//thanks 
+int getmin(int64_t i)
+{
+    if(i == (int8_t)(i & 0xFF))
+        return 1;
+    if(i == (int16_t)(i & 0xFFFF))
+        return 2;
+    if(i == (int32_t)(i & 0xFFFFFFFF))
+        return 4;
+    return 8;
+}
+
+
+
 size_t get_tokens(p_tok_t **reftok,char *dir)
 {
     FILE *pfile = fopen(dir, "r");
@@ -184,14 +198,15 @@ size_t get_tokens(p_tok_t **reftok,char *dir)
         {   
             if(c == EOF)
                 gogo = false;
+            
             history[i_history++] = c;
             if(c == '\n' || c == EOF)
             {   
                 trimr(history);
+                size_t historylen = strlen(history);
                 p_tok_t tok = split_str_into_tokens(history, ' ', numline);
                 tokens = (p_tok_t *)REALLOC_SAFE(tokens, sizeof(p_tok_t) * (numline + 1));
-                tokens[tokiter++] = tok;
-
+                tokens[tokiter++] = tok; 
                 i_history = 0;
                 len_history = 1000;
                 history = REALLOC_SAFE(history, len_history + 1);
@@ -243,27 +258,72 @@ int get_argument_type(string_t *id_name_ary, size_t id_name_len, char *str)
     if(len == 0)
         return -1;
 
-    if(str[0] == '0' && (str[1] == 'x'||str[1] == 'X'))
+    //ARGUMENT_HEXCODE
+    if(len >= 2 && str[0] == '0' && (str[1] == 'x'||str[1] == 'X'))
     {
+       
         char* rest = str + 2;
         bool allow = true;
-        for(int i = 0; i < len - 2; i++)
+       
+        for(size_t hexchecki = 0; hexchecki < len - 3; hexchecki++)
         {
-            if(within_hex_codes(rest[i]) == false)
+            if(within_hex_codes(rest[hexchecki]) == false)
             {
                 allow = false;
                 break;
             }
         }
+        
+        
         //ERROR HEX VALUE NOT VALID
         if(!allow)
         {
             errorcount++;
             return -1;
         }
-        printf("THIS ARGUMENT IS A HEX\n");
-        return LITERAL_HEX;
+        char isptr = rest[len -3 ];
+       
+        if(isptr == 'p')
+        {
+            printf("THIS ARGUMENT IS A PTR\n");
+            return LITERAL_PTR;
+        }
+        else
+        {
+            printf("THIS ARGUMENT IS A HEX\n");
+            return LITERAL_HEX;
+        }
     }
+    //INTEGER
+    else if (isdigit(str[0]) || str[0] == '-' || str[0] == '+')
+    {
+        bool negative = false;
+        if(str[0] == '-' && len > 1)
+            negative = true;
+        if(str[0] == '+' && len > 1)
+            negative = false;
+        bool allow = true;
+        for(size_t intchecki = 1; intchecki < len - 1; intchecki++)
+        {
+            if(!isdigit(str[intchecki]))
+            {
+                allow =false;
+                break;
+            }
+        }
+        if(allow)
+        {
+            printf("THIS ARGUMENT IS A INT\n");
+            return LITERAL_INT;
+        }
+        //integer is not valid
+        else
+        {
+            errorcount++;
+            return ERROR;
+        }
+    }
+    //ARGUMENT CUSTOM LITTERAL
     else
     {
         if(len > 0)
@@ -294,51 +354,63 @@ int get_argument_type(string_t *id_name_ary, size_t id_name_len, char *str)
                         }
                     }
                     if(found)
+                    {
+                        printf("THIS ARGUMENT IS A CUSTOM TYPE\n");
                         return LITERAL_IDENTIFIER + id;
+                    }
                     else
+                    {
+                        errorcount++;
                         return ERROR;
+                    }
                 }
                 else 
                 {
+                    //FIRST INDEX MUST BE int
+                    errorcount++;
                     return ERROR;
                 }
             }
-
-
-            
-            
         }
-        else
-        {
-            return -1;
-        }   
     }
-
 }
 
 
 void assemble(char *dir, size_t size)
 {
+    
+
+    printf("%d\n", getmin(100));
+
+    
     p_tok_t *tokens = NULL;
     size_t lines = get_tokens(&tokens,dir); 
     
     DPRINTF("%d\n", lines);
+    
     size_t memorysize = 1, id_name_ary_length = 0;
     char *program = (char *)malloc(1);
+
     string_t *id_name_array = (string_t *)malloc(sizeof(string_t *));
+    id_name_array[id_name_ary_length++] = "hello";
     for(size_t iline = 0; iline < lines; iline++)
     {
         p_tok_t curline = tokens[iline];
         LINE;
+        //EMPTY LINE
         if(curline->nstr == 0)
         {
             DPRINTF("%d has zero tokens\n", iline);
             continue;
         }
+        //LINE WITH VALUES
         else
         {
+            bool iscomment = false;
             int cmp = -1;
             char *token = curline->p_sz_toks[0];
+            if(token[0] == '#')
+                iscomment = true;
             DPRINTF("%d has %-4d tokens\n", iline, curline->nstr);
             cmp = compare_with_instructions(token);
             //TEST if in instruction list
@@ -364,7 +436,7 @@ void assemble(char *dir, size_t size)
                         arg_types[iarg] = get_argument_type(id_name_array, id_name_ary_length, psz_args[iarg]);
                         printf("    argument types %d\n",arg_types[iarg]);
                     }
-
+                    continue;
 
                 }
                 //NOT ENOUGH ARGUMENTS ERROR
@@ -372,15 +444,30 @@ void assemble(char *dir, size_t size)
                 {
                     errorcount++;
                     printf("not enough arguments (has %d and needs %d)\n", curline->nstr, nargs);
-                
+                    continue;
                 }
                 
             }
+            // IS COMMENT
+
+            else if(iscomment == true)
+            {
+                printf("IS COMMENT\n");
+                for(size_t itok = 0; itok < curline->nstr; itok++)
+                {   
+                    char *argtoken = curline->p_sz_toks[itok];
+                    printf("%s ", argtoken);
+                }
+                printf("\n");
+                continue;
+            }
             //TODO ERROR CHECKING
+           
             else
             {
                 errorcount++;
                 printf("Unknown Instruction -> %s\n", token);
+                continue;
             }
             
         
