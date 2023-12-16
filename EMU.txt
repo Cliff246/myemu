@@ -1,13 +1,14 @@
 #EMU asdasdads
-#1
-
-
-
-
+1
+$test
+$test2
+$test3
+$test4
 
 NOTHING_
 #SET
     ADDC_AIC 10
+    ADDC_AIC $test
     ADDC_AIC 0x0000p
     ADDC_AIC 0x0000
     ADDC_AIC hello

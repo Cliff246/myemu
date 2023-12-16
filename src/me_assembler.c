@@ -247,10 +247,6 @@ bool within_hex_codes(char c)
 #define LITERAL_CHAR 5 
 #define LITERAL_IDENTIFIER 6
 
-
-
-
-
 int get_argument_type(string_t *id_name_ary, size_t id_name_len, char *str)
 {
     size_t len = strlen(str);
@@ -328,7 +324,7 @@ int get_argument_type(string_t *id_name_ary, size_t id_name_len, char *str)
     {
         if(len > 0)
         {
-            if(isalpha(str[0]))
+            if(str[0] == '$')
             {
                 bool allow = true;
                 for(size_t checkitr = 1; checkitr < len; checkitr++)
@@ -345,6 +341,7 @@ int get_argument_type(string_t *id_name_ary, size_t id_name_len, char *str)
                     bool found = false;
                     for(size_t namecheck = 0; namecheck < id_name_len; namecheck++)
                     {
+                        printf("%s\n",id_name_ary[namecheck]);
                         bool result = cmpstrings(id_name_ary[namecheck], str);
                         if(result == true)
                         {
@@ -391,8 +388,9 @@ void assemble(char *dir, size_t size)
     size_t memorysize = 1, id_name_ary_length = 0;
     char *program = (char *)malloc(1);
 
-    string_t *id_name_array = (string_t *)malloc(sizeof(string_t *));
-    id_name_array[id_name_ary_length++] = "hello";
+    string_t *id_name_array = (string_t *)calloc(id_name_ary_length++, sizeof(string_t));
+    printf("%d\n",(id_name_ary_length));
+
     for(size_t iline = 0; iline < lines; iline++)
     {
         p_tok_t curline = tokens[iline];
@@ -406,11 +404,13 @@ void assemble(char *dir, size_t size)
         //LINE WITH VALUES
         else
         {
-            bool iscomment = false;
+            bool iscomment = false, isidentifier = false;
             int cmp = -1;
             char *token = curline->p_sz_toks[0];
             if(token[0] == '#')
                 iscomment = true;
+            if(token[0] == '$')
+                isidentifier = true;
             DPRINTF("%d has %-4d tokens\n", iline, curline->nstr);
             cmp = compare_with_instructions(token);
             //TEST if in instruction list
@@ -433,7 +433,7 @@ void assemble(char *dir, size_t size)
 
                     for(size_t iarg = 0; iarg < nargs; iarg++)
                     {
-                        arg_types[iarg] = get_argument_type(id_name_array, id_name_ary_length, psz_args[iarg]);
+                        arg_types[iarg] = get_argument_type(id_name_array, id_name_ary_length - 1, psz_args[iarg]);
                         printf("    argument types %d\n",arg_types[iarg]);
                     }
                     continue;
@@ -461,17 +461,30 @@ void assemble(char *dir, size_t size)
                 printf("\n");
                 continue;
             }
+
+            //IS IDENTIFIER
+            else if(isidentifier == true)
+            {   
+                printf("IS IDENTFIER\n");
+                printf("%d\n",(id_name_ary_length));
+                printf("%p\n",id_name_array);
+                id_name_array = (string_t*)REALLOC_SAFE(id_name_array, (id_name_ary_length + 1) * sizeof(string_t));
+                id_name_array[id_name_ary_length - 1] = token;
+                
+                for(int i = 0; i < id_name_ary_length; i++)
+                {
+                    printf("%s\n", id_name_array[i]);
+                }
+                id_name_ary_length++;
+                continue;
+            }
             //TODO ERROR CHECKING
-           
             else
             {
                 errorcount++;
                 printf("Unknown Instruction -> %s\n", token);
                 continue;
             }
-            
-        
-                
         }
     }
     printf("%d errors\n", errorcount);

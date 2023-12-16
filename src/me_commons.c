@@ -19,6 +19,7 @@ void *__realloc_s_func(void *ptr, size_t size, const char *src_file, const char 
     }
     else
     {
+        
         ptr = tptr;
         return ptr;
     }
