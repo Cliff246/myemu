@@ -9,6 +9,7 @@
 #include <stdarg.h>
 #include <stdint.h>
 #include <ctype.h>
+#include <math.h>
 
 #define DEBUG 1
 #define REALLOC_SAFE_REPORTS 1

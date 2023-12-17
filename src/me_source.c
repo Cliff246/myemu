@@ -18,7 +18,7 @@ void printrange(char* range, size_t start, size_t stop,size_t size)
     }
     int instruction = range[start];
     int arglen = 0;
-    for(int i = start; i < stop; i++)
+    for(size_t i = start; i < stop; i++)
     {
         print_bin(range[i], 8, 0);
         printf(" %02d  %04d  ", i, range[i]);
@@ -72,7 +72,7 @@ void emulate(char *program, size_t size)
     #define NEXT (memory[++pc])
     #define UPDATENEXT DPRINTF("item %d at address%d\n", memory[pc],  pc)
     
-    for(int i = 0; i < 10; i++)
+    for(size_t i = 0; i < 10; i++)
     {
         
         char args[3];
@@ -261,6 +261,11 @@ void emulate(char *program, size_t size)
                 
                 pc = COMBINE(memory[(--sp)], memory[(--sp)]);
                 break;
+            case INC_A___:
+                reg_A++;
+            
+
+
             default :
                 
                 break;
@@ -308,6 +313,7 @@ int main(int argc, char *argv[])
         __STOP__,
     };
 
+
     char program4[] = 
     {
         SET_I__A, SPLITL(30),
@@ -322,15 +328,25 @@ int main(int argc, char *argv[])
         RETURN__,
     };
 
-   // FILE *fptr = fopen("EMULATOR", "");
+    char program5[] =
+    {
+        SET_I__A, 1,
+        SET_I__B, 1,
+        INC_A___,
+        ADDC_ABC,
+        
+        __STOP__,
+    };
+
+    //FILE *fptr = fopen("EMULATOR", "");
     assemble("D:/dev2/c/myemu/EMU.txt", 0);
     //emulate(program1, sizeof(program1));
-  //  printf("_______________________\n");
+    //printf("_______________________\n");
     //emulate(program2, sizeof(program2));
     //printf("_______________________\n");
     //emulate(program3, sizeof(program3));
     //printf("_______________________\n");
-
     //emulate(program4, sizeof(program4)/sizeof(*program4));
-
+    //emulate(program5, sizeof(program5));
+    //printf("______________________\n");
 }
