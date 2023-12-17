@@ -107,7 +107,7 @@ p_tok_t split_str_into_tokens(string_t inp, char sep, size_t line)
         {
             if(*cur == sep && cprev != sep)
             {
-                printf("%c\n", *cur);
+                DPRINTF("%c\n", *cur);
                 nsep+=1;   
             }
             cprev = *cur;
@@ -281,12 +281,12 @@ int get_argument_type(string_t *id_name_ary, size_t id_name_len, char *str)
        
         if(isptr == 'p')
         {
-            printf("THIS ARGUMENT IS A PTR\n");
+            DPRINT("THIS ARGUMENT IS A PTR\n");
             return LITERAL_PTR;
         }
         else
         {
-            printf("THIS ARGUMENT IS A HEX\n");
+            DPRINT("THIS ARGUMENT IS A HEX\n");
             return LITERAL_HEX;
         }
     }
@@ -309,7 +309,7 @@ int get_argument_type(string_t *id_name_ary, size_t id_name_len, char *str)
         }
         if(allow)
         {
-            printf("THIS ARGUMENT IS A INT\n");
+            DPRINT("THIS ARGUMENT IS A INT\n");
             return LITERAL_INT;
         }
         //integer is not valid
@@ -341,7 +341,7 @@ int get_argument_type(string_t *id_name_ary, size_t id_name_len, char *str)
                     bool found = false;
                     for(size_t namecheck = 0; namecheck < id_name_len; namecheck++)
                     {
-                        printf("%s\n",id_name_ary[namecheck]);
+                        DPRINTF("%s\n",id_name_ary[namecheck]);
                         bool result = cmpstrings(id_name_ary[namecheck], str);
                         if(result == true)
                         {
@@ -352,7 +352,7 @@ int get_argument_type(string_t *id_name_ary, size_t id_name_len, char *str)
                     }
                     if(found)
                     {
-                        printf("THIS ARGUMENT IS A CUSTOM TYPE\n");
+                        DPRINT("THIS ARGUMENT IS A CUSTOM TYPE\n");
                         return LITERAL_IDENTIFIER + id;
                     }
                     else
@@ -377,7 +377,7 @@ void assemble(char *dir, size_t size)
 {
     
 
-    printf("%d\n", getmin(100));
+    DPRINTF("%d\n", getmin(100));
 
     
     p_tok_t *tokens = NULL;
@@ -389,7 +389,7 @@ void assemble(char *dir, size_t size)
     char *program = (char *)malloc(1);
 
     string_t *id_name_array = (string_t *)calloc(id_name_ary_length++, sizeof(string_t));
-    printf("%d\n",(id_name_ary_length));
+    DPRINTF("%d\n",(id_name_ary_length));
 
     for(size_t iline = 0; iline < lines; iline++)
     {
@@ -423,18 +423,18 @@ void assemble(char *dir, size_t size)
                 {
                     char* psz_args[nargs];
                     int arg_types[nargs];
-                    printf("nargs == %d line has %d args\n", nargs, curline->nstr);
+                    DPRINTF("nargs == %d line has %d args\n", nargs, curline->nstr);
                     for(size_t itok = 1; itok < curline->nstr; itok++)
                     {   
                         char *argtoken = curline->p_sz_toks[itok];
                         psz_args[(itok - 1)] = argtoken;
-                        printf("    %s\n", psz_args[(itok - 1)]);
+                        DPRINTF("    %s\n", psz_args[(itok - 1)]);
                     }
 
                     for(size_t iarg = 0; iarg < nargs; iarg++)
                     {
                         arg_types[iarg] = get_argument_type(id_name_array, id_name_ary_length - 1, psz_args[iarg]);
-                        printf("    argument types %d\n",arg_types[iarg]);
+                        DPRINTF("    argument types %d\n",arg_types[iarg]);
                     }
                     continue;
 
@@ -443,7 +443,7 @@ void assemble(char *dir, size_t size)
                 else 
                 {
                     errorcount++;
-                    printf("not enough arguments (has %d and needs %d)\n", curline->nstr, nargs);
+                    DPRINTF("not enough arguments (has %d and needs %d)\n", curline->nstr, nargs);
                     continue;
                 }
                 
@@ -452,28 +452,28 @@ void assemble(char *dir, size_t size)
 
             else if(iscomment == true)
             {
-                printf("IS COMMENT\n");
+                DPRINT("IS COMMENT\n");
                 for(size_t itok = 0; itok < curline->nstr; itok++)
                 {   
                     char *argtoken = curline->p_sz_toks[itok];
-                    printf("%s ", argtoken);
+                    DPRINTF("%s ", argtoken);
                 }
-                printf("\n");
+                DPRINT("\n");
                 continue;
             }
 
             //IS IDENTIFIER
             else if(isidentifier == true)
             {   
-                printf("IS IDENTFIER\n");
-                printf("%d\n",(id_name_ary_length));
-                printf("%p\n",id_name_array);
+                DPRINT("IS IDENTFIER\n");
+                DPRINTF("%d\n",(id_name_ary_length));
+                DPRINTF("%p\n",id_name_array);
                 id_name_array = (string_t*)REALLOC_SAFE(id_name_array, (id_name_ary_length + 1) * sizeof(string_t));
                 id_name_array[id_name_ary_length - 1] = token;
-                
+
                 for(int i = 0; i < id_name_ary_length; i++)
                 {
-                    printf("%s\n", id_name_array[i]);
+                    DPRINTF("%s\n", id_name_array[i]);
                 }
                 id_name_ary_length++;
                 continue;
@@ -482,13 +482,13 @@ void assemble(char *dir, size_t size)
             else
             {
                 errorcount++;
-                printf("Unknown Instruction -> %s\n", token);
+                DPRINTF("Unknown Instruction -> %s\n", token);
                 continue;
             }
         }
     }
-    printf("%d errors\n", errorcount);
-    printf("End\n");
+    DPRINTF("%d errors\n", errorcount);
+    DPRINT("End\n");
     return;
 }
 
