@@ -4,7 +4,7 @@ LDFLAGS  := -L/usr/lib -lm
 BUILD    := ./build
 OBJ_DIR  := $(BUILD)/objects
 
-TARGET   := myemu
+TARGET   := myemu_old
 INCLUDE  := -Iinclude/
 SRC      := $(wildcard src/*.c)         \
 

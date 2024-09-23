@@ -13,7 +13,8 @@
             "windowsSdkVersion": "10.0.19041.0",
             "intelliSenseMode": "gcc-x64",
             "compilerPath": "C:/msys64/mingw64/bin/gcc.exe",
-            "configurationProvider": "ms-vscode.makefile-tools"
+            "configurationProvider": "ms-vscode.makefile-tools",
+            "cStandard": "c99"
         }
     ],
     "version": 4
