@@ -2,6 +2,6 @@ $test "hello"
 SET_I__A 1
 SET_I__B
 INC_A___
-ADDC_A BC
+ADDC_ABC
        
 __STOP__

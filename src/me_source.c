@@ -339,7 +339,7 @@ int main(int argc, char *argv[])
     };
 
     //FILE *fptr = fopen("EMULATOR", "");
-    assemble("D:/dev2/c/myemu/EMU.txt", 0);
+    assemble("EMU.txt", 0);
     //emulate(program1, sizeof(program1));
     //printf("_______________________\n");
     //emulate(program2, sizeof(program2));

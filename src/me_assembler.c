@@ -708,6 +708,7 @@ void assemble(char * dir, size_t size)
         p_tok_t curline = tokens[iline];
         LINE;
         //EMPTY LINE
+        print_p_toks_st(curline);
         if(curline->nstr == 0)
         {
             DPRINTF("%d has zero tokens\n", iline);
