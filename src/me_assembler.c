@@ -784,7 +784,7 @@ void assemble(char * dir, size_t size)
                 DPRINT("IS IDENTFIER\n");
                 if(curline->nstr == 2)
                 {
-                    char *offset = "    ";
+                    char offset[] = "    ";
                     OFFSET_DPRINTF("%d\n",(id_name_ary_length));
                     OFFSET_DPRINTF("%p\n",id_name_array);
                     bool allow = true;

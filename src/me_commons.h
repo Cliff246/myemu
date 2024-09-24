@@ -14,6 +14,8 @@
 #define DEBUG 1
 #define REALLOC_SAFE_REPORTS 1
 
+
+
 #define SETBIT(n, k) (1 | (n << k))
 #define CLRBIT(n, k) (n & ~(1 << k))
 #define GETBIT(n, k) (1 & (n >> k))
