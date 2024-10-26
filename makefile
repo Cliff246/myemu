@@ -4,13 +4,12 @@ LDFLAGS  := -L/usr/lib -lm
 BUILD    := ./build
 OBJ_DIR  := $(BUILD)/objects
 
-TARGET   := myemu_old
+TARGET   := myemu
 INCLUDE  := -Iinclude/
-SRC      := $(wildcard src/*.c)         \
+SRC      := $(wildcard src/*.c)         
 
 OBJECTS  := $(SRC:%.c=$(OBJ_DIR)/%.o)
-DEPENDENCIES \
-         := $(OBJECTS:.o=.d)
+DEPENDENCIES := $(OBJECTS:.o=.d)
 
 all: build $(TARGET)
 

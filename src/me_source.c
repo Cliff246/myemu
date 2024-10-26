@@ -338,8 +338,11 @@ int main(int argc, char *argv[])
         __STOP__,
     };
 
+    p_tok_t token = split_str_into_tokens("hello world", ' ', 0);
+    print_p_toks_st(token);
+
     //FILE *fptr = fopen("EMULATOR", "");
-    assemble("D:/dev2/c/myemu/EMU.txt", 0);
+    //assemble("D:/dev2/c/myemu/EMU.txt", 0);
     //emulate(program1, sizeof(program1));
     //printf("_______________________\n");
     //emulate(program2, sizeof(program2));

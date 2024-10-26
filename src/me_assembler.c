@@ -14,35 +14,12 @@ const char *empty = "";
 const char *error_msg_not_enough_args = "";
 
 
-typedef struct tokens
-{
-    char * *p_sz_toks;
-    size_t *p_u_col;
-    size_t nstr, line;
-}tok_t, *p_tok_t;
 
-typedef struct custom_literal
-{
-    char *value;
-    char *identifier_copy;
-    size_t id, value_len;
-    int value_type, value_pos;
-}custlit_t, *p_custlit_t;
-
-typedef struct assembler_error
-{
-    size_t line;
-    size_t column;
-    int code;
-    char *file;
-    char *msg;
-    
-}asmerr_t, *p_asmerr_t;
 
 void print_p_toks_st(p_tok_t token)
 {
 
-    DPRINTF("--- p_toks %p ---\n line_num =%d, tokenary_len = %d\n", &token, token->line, token->nstr);
+    DPRINTF("--- p_toks %p ---\n tokenary_len = %d\n", &token, token->nstr);
     
     if(token->nstr == 0)
         return;
@@ -73,7 +50,6 @@ p_tok_t malloc_p_toks_st()
         DPRINTF("big oops on calloc %s %d\n", __FILE__,__LINE__);
         exit(1);
     }
-    tok->line = 0;
     tok->nstr = 0;
     tok->p_sz_toks = NULL;
     tok->p_u_col = NULL;
@@ -208,7 +184,7 @@ void free_p_toks_st(p_tok_t tok)
 }
 
 
-void update_p_toks_st(p_tok_t ref_tok, size_t length, size_t nline)
+void update_p_toks_st(p_tok_t ref_tok, size_t length)
 {
     p_tok_t ptok = ref_tok;
     if(length == 0)
@@ -216,7 +192,6 @@ void update_p_toks_st(p_tok_t ref_tok, size_t length, size_t nline)
         ptok->p_u_col = NULL;
         ptok->p_sz_toks = NULL;
         ptok->nstr = length;
-        ptok->line = nline;
         return;
     }
     void 
@@ -225,7 +200,6 @@ void update_p_toks_st(p_tok_t ref_tok, size_t length, size_t nline)
     ptok->p_u_col = (size_t*)tmp1;
     ptok->p_sz_toks = (char **)tmp2;
     ptok->nstr = length;
-    ptok->line = nline;
     for(size_t init_elem = 0; init_elem < ptok->nstr; init_elem++)
     {
         if(ptok->p_sz_toks[init_elem] != NULL)
@@ -253,7 +227,7 @@ p_tok_t split_str_into_tokens(char * inp, char sep, size_t line)
     errno_t err1, err2, err3;
     if(inp_length == 0)
     {
-        update_p_toks_st(p_token_st, 0, line);
+        update_p_toks_st(p_token_st, 0);
         return p_token_st;    
     }
     else
@@ -268,7 +242,7 @@ p_tok_t split_str_into_tokens(char * inp, char sep, size_t line)
             cprev = *cur;
         }
     }
-    update_p_toks_st(p_token_st, nsep, line);
+    update_p_toks_st(p_token_st, nsep);
 
     size_t prev = 0, current = 1, itr = 0;
     size_t *colary = (size_t*)malloc(sizeof(size_t) * nsep);
