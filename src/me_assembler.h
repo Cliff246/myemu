@@ -3,7 +3,8 @@
 
 #include <stdlib.h>
 #include "me_commons.h"
-static size_t errorcount = 0;
+
+extern size_t errorcount;
 
 typedef struct tokens
 {
@@ -31,6 +32,10 @@ typedef struct assembler_error
 } asmerr_t, *p_asmerr_t;
 
 p_tok_t split_str_into_tokens(char *inp, char sep, size_t line);
+
+//this is to set the copy equal to NULL
+//may not be best idea
+void free_p_toks_st(p_tok_t *token);
 void print_p_toks_st(p_tok_t token);
 
 void assemble(char *dir, size_t size);

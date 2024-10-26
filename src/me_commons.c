@@ -1,3 +1,7 @@
+#include <stdlib.h>
+#include <stdint.h>
+#include <stdio.h>
+
 #include "me_commons.h"
 
 void *__realloc_s_func(void *ptr, size_t size, const char *src_file, const char *call_function, size_t line_number)

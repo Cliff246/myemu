@@ -12,14 +12,12 @@
 const char *empty = "";
 
 const char *error_msg_not_enough_args = "";
-
-
-
+size_t errorcount = 0;
 
 void print_p_toks_st(p_tok_t token)
 {
 
-    DPRINTF("--- p_toks %p ---\n tokenary_len = %d\n", &token, token->nstr);
+    DPRINTF("--- p_toks %p ---\n tokenary_len = %lld\n", (void*)&token, token->nstr);
     
     if(token->nstr == 0)
         return;
@@ -32,14 +30,14 @@ void print_p_toks_st(p_tok_t token)
                 *c = 0;
         }
 
-        DPRINTF(" token = '%s' col = %d\n", token->p_sz_toks[iter], token->p_u_col[iter]);
+        DPRINTF(" token = '%s' col = %lld\n", token->p_sz_toks[iter], token->p_u_col[iter]);
     }
 }
 
 void print_p_cuslit_st(p_custlit_t cuslit)
 {
     if(cuslit)
-        DPRINTF("custom literal -> %s | id = %d | value_len = %d value_type %d value_pos %d\n", cuslit->identifier_copy, cuslit->id, cuslit->value_len, cuslit->value_type, cuslit->value_pos);
+        DPRINTF("custom literal -> %s | id = %lld | value_len = %lld value_type %d value_pos %d\n", cuslit->identifier_copy, cuslit->id, cuslit->value_len, cuslit->value_type, cuslit->value_pos);
 }
 
 p_tok_t malloc_p_toks_st()
@@ -160,27 +158,48 @@ void update_p_custlit_st(p_custlit_t *custlit_ary, size_t custlit_ary_len, p_cus
 }
 
 
-void free_p_custlit_st(p_custlit_t lit)
+void free_p_custlit_st(p_custlit_t *ptr)
 {
+    const p_custlit_t lit = *ptr;
     if(lit != NULL)
     {
         free(lit->identifier_copy);
         free(lit); 
     }
+    else
+    {
+        free(lit);
+    }
+    *ptr = NULL;
 }
 
-void free_p_toks_st(p_tok_t tok)
+void free_p_toks_st(p_tok_t *token)
 {
+    const p_tok_t tok = *token; 
+
+    if(token == NULL)
+    {
+        DPRINTF("wtf are you doing not even deleting known data. we need to set your toks data to 0 %s:%d\n", __FILE__, __LINE__);
+        exit(1);
+    }
     if(tok != NULL)
     {
-        for(size_t i = 0; i < tok->nstr; i++)
+        for(size_t i = 0; i < (tok)->nstr; i++)
         {
             if(tok->p_sz_toks[i])
                 free(tok->p_sz_toks[i]);
         }
         free(tok->p_sz_toks);
         free(tok);
+        //I AM GOING TO TRUST THIS IS FREED CAUSE (IDOIT)
     }
+    else
+    {
+        free(tok);
+        DPRINTF("token ptr not defined, freed anyways %s:%d\n", __FILE__, __LINE__ );
+        //fuck it free it anyways
+    }
+    *token = NULL;
 }
 
 
@@ -254,7 +273,7 @@ p_tok_t split_str_into_tokens(char * inp, char sep, size_t line)
         {
             colary[itr] = prev;
             (p_token_st->p_sz_toks)[itr] = REALLOC_SAFE(p_token_st->p_sz_toks[itr], current - prev + 1);
-            err1 = memcpy_s(p_token_st->p_sz_toks[itr],current - prev + 1,  inp + prev, current - prev);
+            err1 = memcpy_s(p_token_st->p_sz_toks[itr], current - prev + 1, inp + prev, current - prev);
             if(err1 != 0)
             {
                 DPRINTF("HUGE ERROR BIG MASSIVE MEMCPY_S ERROR WE DYING %s:%d\n", __FILE__, __LINE__);
@@ -306,6 +325,10 @@ int compare_with_instructions(char * str)
             break;
         }
     }
+    if(!found)
+    {
+        DPRINTF("instruction not found %s:%d\n", __FILE__, __LINE__);
+    }
     return index;
 }
 
@@ -331,12 +354,11 @@ size_t get_tokens(p_tok_t **reftok,char * dir)
     FILE *pfile = fopen(dir, "r");
     if(pfile)
     {
-        size_t fchars = 0;
-        size_t numline = 0;
+        const size_t len_history_constant = 1000;
+        size_t fchars = 0, numline = 0, len_history = len_history_constant, i_history = 0, tokiter = 0;
         p_tok_t *tokens = (p_tok_t*)calloc(numline, sizeof(p_tok_t));
-
-        size_t len_history = 1000, i_history = 0, tokiter = 0;
-        char * history =(char*)calloc(len_history + 1, sizeof(char));
+       
+        char *history = (char *)calloc(len_history + 1, sizeof(char));
         char c = fgetc(pfile);
         bool gogo = true;
         while(gogo)
@@ -348,7 +370,9 @@ size_t get_tokens(p_tok_t **reftok,char * dir)
             if(c == '\n' || c == EOF)
             {   
                 trimr(history);
-                size_t historylen = strlen(history);
+                //size_t historylen = strlen(history);
+                
+                
                 p_tok_t tok = split_str_into_tokens(history, ' ', numline);
                 tokens = (p_tok_t *)REALLOC_SAFE(tokens, sizeof(p_tok_t) * (numline + 1));
                 tokens[tokiter++] = tok; 
@@ -378,8 +402,9 @@ size_t get_tokens(p_tok_t **reftok,char * dir)
         }
         
         free(history);
+        history = NULL;
         fclose(pfile);
-        DPRINTF("closing %s %d\n", dir, numline);
+        DPRINTF("closing %s %lld\n", dir, numline);
         *reftok = tokens;
         return numline;
     }
@@ -392,16 +417,20 @@ bool within_hex_codes(char c)
         return true;
     return false;
 }
-#define ERROR -1
-#define LITERAL_HEX 0
-#define LITERAL_INT 1
-#define LITERAL_UINT 2
-#define LITERAL_PTR 3
-#define LITERAL_STR 4
-#define LITERAL_CHAR 5 
-#define LITERAL_IDENTIFIER 6
 
-int get_argument_type(p_custlit_t *id_name_ary, size_t id_name_len, char * str)
+const typedef enum {
+    ERROR,
+    LITERAL_HEX,
+    LITERAL_INT,
+    LITERAL_UINT,
+    LITERAL_PTR,
+    LITERAL_STR,
+    LITERAL_CHAR,
+    LITERAL_IDENTIFIER,
+
+} literal_id_enum;
+
+int get_argument_type(p_custlit_t *id_name_ary, size_t id_name_len, char *str)
 {
     size_t len = strlen(str);
     
@@ -445,26 +474,56 @@ int get_argument_type(p_custlit_t *id_name_ary, size_t id_name_len, char * str)
         }
     }
     //INTEGER
-    else if (isdigit(str[0]) || str[0] == '-' || str[0] == '+')
+    else if (isdigit(str[0]) || str[0] == '-' || str[0] == '+' || str[0] == 'u' || str[0] == 'U')
     {
-        bool negative = false;
-        if(str[0] == '-' && len > 1)
-            negative = true;
-        if(str[0] == '+' && len > 1)
-            negative = false;
-        bool allow = true;
-        for(size_t intchecki = 1; intchecki < len - 1; intchecki++)
+        bool hasoffset = false;
+        bool issigned = true;
+        if((str[0] == '-' || str[0] == '+') && len > 1)
         {
-            if(!isdigit(str[intchecki]))
+            hasoffset = true;
+            issigned = true;
+        }
+        if((str[0] == 'u' || str[0] == 'U') && len > 1)
+        {
+            issigned = false;
+        }
+        bool allow = true;
+
+        if(hasoffset)
+        {   
+            for(size_t intchecki = 1; intchecki < len - 1; intchecki++)
             {
-                allow =false;
-                break;
+                if(!isdigit(str[intchecki]))
+                {
+                    allow =false;
+                    break;
+                }
             }
         }
+        else
+        {
+            for (size_t intchecki = 0; intchecki < len; intchecki++)
+            {
+                if (!isdigit(str[intchecki]))
+                {
+                    allow = false;
+                    break;
+                }
+            }
+        }
+
         if(allow)
         {
-            DPRINT("THIS ARGUMENT IS A INT\n");
-            return LITERAL_INT;
+            if(issigned)
+            {
+                DPRINT("THIS ARGUMENT IS A INT\n");
+                return LITERAL_INT;
+            }
+            else
+            {
+                DPRINT("THIS ARGUMENT IS A UINT\n");
+                return LITERAL_UINT; 
+            }
         }
         //integer is not valid
         else
@@ -517,7 +576,7 @@ int get_argument_type(p_custlit_t *id_name_ary, size_t id_name_len, char * str)
                     bool found = false;
                     for(size_t namecheck = 0; namecheck < id_name_len; namecheck++)
                     {
-                        DPRINTF("ID NAME ARY %s\n",id_name_ary[namecheck]->identifier_copy);
+                        DPRINTF("ID NAME ARY %s\n", id_name_ary[namecheck]->identifier_copy);
                         p_custlit_t current_cuslit = id_name_ary[namecheck];
                         bool result = cmpstrings(current_cuslit->identifier_copy , str);
                         if(result == true)
@@ -547,27 +606,32 @@ int get_argument_type(p_custlit_t *id_name_ary, size_t id_name_len, char * str)
             }
         }
     }
+    return ERROR;
 }
 
 size_t decode_nbytes_for_argument(int argtype, char *str)
 {
     size_t len = strlen(str);
-    if(argtype == LITERAL_INT)
-        return getmin(atol(str));
-    else if(argtype == LITERAL_HEX)
-        return len - 2;
-    else if(argtype == LITERAL_PTR)
-        return len - 3;
-    else if(argtype == LITERAL_STR)
-        return len - 2;
-    else if(argtype == LITERAL_UINT)
-        return getmin(atol(str + 1));
-    else if(argtype == LITERAL_CHAR)
-        return 1;
-    else 
-    {
-        printf("cannot get bytes from argument\n");
-        exit(1);
+
+    switch(argtype)
+    {   
+        case LITERAL_INT:
+            return getmin(atol(str));
+        case LITERAL_HEX:
+            return len - 2;
+        case LITERAL_PTR:
+            return len - 3;            
+        case LITERAL_STR:
+            return len -2;
+        case LITERAL_UINT:
+            return getmin(atol(str + 1));
+        case LITERAL_CHAR:
+            return 1;
+        default:
+            //cringe
+            printf("cannot get bytes from argument\n");
+            exit(1);
+            break;
     }
     return 0;
 }
@@ -668,14 +732,20 @@ void assemble(char * dir, size_t size)
     p_tok_t *tokens = NULL;
     size_t lines = get_tokens(&tokens,dir); 
     
-    DPRINTF("%d\n", lines);
+    DPRINTF("%lld\n", lines);
     
-    size_t memorysize = 1, id_name_ary_length = 0, asmerr_ary_len = 0;
-    char * program = (char * )malloc(1);
+    size_t memorysize = 1, id_name_ary_length = 1, asmerr_ary_len = 1;
 
-    p_custlit_t *id_name_array = (p_custlit_t *)calloc(1, sizeof(custlit_t));
-    p_asmerr_t *asmerr_array = (p_asmerr_t *)calloc(1, sizeof(asmerr_t));
-    DPRINTF("%d\n",(id_name_ary_length));
+    char *program = (char *)malloc(sizeof(char) * memorysize);
+    p_custlit_t *id_name_array = (p_custlit_t *)calloc(id_name_ary_length, sizeof(custlit_t));
+    p_asmerr_t *asmerr_array = (p_asmerr_t *)calloc(asmerr_ary_len, sizeof(asmerr_t));
+
+    asmerr_array[0] = NULL;
+    program[0] = 0;
+
+    
+    
+    DPRINTF("%lld\n",(id_name_ary_length));
 
     for(size_t iline = 0; iline < lines; iline++)
     {
@@ -684,7 +754,7 @@ void assemble(char * dir, size_t size)
         //EMPTY LINE
         if(curline->nstr == 0)
         {
-            DPRINTF("%d has zero tokens\n", iline);
+            DPRINTF("%lld has zero tokens\n", iline);
             continue;
         }
         //LINE WITH VALUES
@@ -697,7 +767,7 @@ void assemble(char * dir, size_t size)
                 iscomment = true;
             if(token[0] == '$')
                 isidentifier = true;
-            DPRINTF("%d has %-4d tokens\n", iline, curline->nstr);
+            DPRINTF("%lld has %-4lld tokens\n", iline, curline->nstr);
             cmp = compare_with_instructions(token);
             //TEST if in instruction list
             //This will test all possible states
@@ -706,7 +776,7 @@ void assemble(char * dir, size_t size)
                 size_t nargs = len_instructions[cmp];
                 //ENOUGH ARGUMENTS
                 print_p_toks_st(curline);
-                DPRINTF("nargs == %d line has %d tokens\n", nargs, curline->nstr);
+                DPRINTF("nargs == %lld line has %lld tokens\n", nargs, curline->nstr);
 
                 if(nargs <= curline->nstr)
                 {
@@ -733,7 +803,7 @@ void assemble(char * dir, size_t size)
                 else 
                 {
                     errorcount++;
-                    DPRINTF("not enough arguments (has %d and needs %d)\n", curline->nstr, nargs);
+                    DPRINTF("not enough arguments (has %lld and needs %lld)\n", curline->nstr, nargs);
                     continue;
                 }
                 
@@ -759,8 +829,8 @@ void assemble(char * dir, size_t size)
                 if(curline->nstr == 2)
                 {
                     char *offset = "    ";
-                    OFFSET_DPRINTF("%d\n",(id_name_ary_length));
-                    OFFSET_DPRINTF("%p\n",id_name_array);
+                    OFFSET_DPRINTF("%lld\n",(id_name_ary_length));
+                    OFFSET_DPRINTF("%p\n", (void *)id_name_array);
                     bool allow = true;
                     for(size_t identfiers = 0; identfiers < id_name_ary_length; identfiers++)
                     {
@@ -806,7 +876,7 @@ void assemble(char * dir, size_t size)
             
         }
     }
-    DPRINTF("%d errors\n", errorcount);
+    DPRINTF("%lld errors\n", errorcount);
     DPRINT("End\n");
     return;
 }

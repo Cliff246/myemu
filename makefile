@@ -1,5 +1,5 @@
 CXX      := -gcc
-CXXFLAGS := -pedantic-errors -Wall -std=c99
+CXXFLAGS := -Wall -std=c99
 LDFLAGS  := -L/usr/lib -lm
 BUILD    := ./build
 OBJ_DIR  := $(BUILD)/objects

@@ -11,6 +11,8 @@
 #include <ctype.h>
 #include <math.h>
 
+typedef unsigned short ushort;
+
 #define DEBUG 1
 #define REALLOC_SAFE_REPORTS 1
 
@@ -20,9 +22,9 @@
 
 #define BIT(n) (0x01 << n)
 
-#define COMBINE(a, b) (ushort)(((ushort)a) | ((ushort)b) << 8)
-#define SPLITL(a) (char)((ushort)a & 0x00ff)
-#define SPLITR(b) (char)((ushort)b & 0xff00)
+#define COMBINE(A, B) ( ((ushort)A) | ( ((ushort)B) << (ushort)0x08) )
+#define SPLITL(A) (char)((ushort)A & 0x00ff)
+#define SPLITR(B) (char)((ushort)B & 0xff00)
 #define STR(x) #x
 #define XSTR(x) STR(x)
 #define CONCAT(a, b) a##b
@@ -45,7 +47,6 @@
 #define LINE()
 #endif
 
-typedef unsigned short ushort;
 
 void *__realloc_s_func(void *ptr, size_t size, const char *src_file, const char *call_function, size_t line_number);
 void *__realloc_s_nofun(void *ptr, size_t size, const char *src_file, size_t line_number);

@@ -21,7 +21,7 @@ void printrange(char* range, size_t start, size_t stop,size_t size)
     for(size_t i = start; i < stop; i++)
     {
         print_bin(range[i], 8, 0);
-        printf(" %02d  %04d  ", i, range[i]);
+        printf(" %02lld  %04d  ", i, range[i]);
         
         print_hex(range[i], 0);
      
@@ -35,7 +35,7 @@ void printrange(char* range, size_t start, size_t stop,size_t size)
             else{
 
             
-                printf(" %s", str_instructions[range[(int)i]]);
+                printf(" %s", str_instructions[(size_t)range[(int)i]]);
                 instruction = range[i];
                 arglen = len_instructions[instruction];
             }
@@ -259,13 +259,13 @@ void emulate(char *program, size_t size)
                 break;
             case RETURN__:
                 
-                pc = COMBINE(memory[(--sp)], memory[(--sp)]);
+                pc = COMBINE((memory[--sp]), (memory[--sp]));
                 break;
             case INC_A___:
                 reg_A++;
             
 
-
+                break;
             default :
                 
                 break;
@@ -276,80 +276,105 @@ void emulate(char *program, size_t size)
     }
 }
 
+const char program1[] = {
+    SET_I__A,
+    (char)50,
+    M_SET_A_,
+    SPLITL(50),
+    SPLITR(50),
+    M_GET_AB,
+    SPLITL(50),
+    SPLITR(50),
+    MOVE_A_B,
+    ADDC_ABC,
+    MOVE_B_A,
+    CMP__A_B,
+    JMP_EQ_A,
+    SPLITL(0),
+    SPLITR(0),
+    __STOP__,
+};
 
+const char program2[] = {
+    SET_I__A,
+    (char)1,
+    SET_I__B,
+    (char)100,
+    PUSH_A__,
+    MOVE_B_A,
+    PUSH_A__,
+    POP_A___,
+    MOVE_A_B,
+    POP_A___,
+    ADDC_ABC,
+    __STOP__,
+};
 
-int main(int argc, char *argv[])
-{
-    char program1[] = {
-        SET_I__A, (char)50,
-        M_SET_A_, SPLITL(50), SPLITR(50),
-        M_GET_AB, SPLITL(50), SPLITR(50),
-        MOVE_A_B, 
-        ADDC_ABC,
-        MOVE_B_A, 
-        CMP__A_B, 
-        JMP_EQ_A, SPLITL(0), SPLITR(0),
-        __STOP__,
-    };
-    char program2[] = {
-        SET_I__A, (char)1,
-        SET_I__B, (char)100,
-        PUSH_A__,
-        MOVE_B_A,
-        PUSH_A__,
-        POP_A___,
-        MOVE_A_B,
-        POP_A___,
-        ADDC_ABC,
-        __STOP__,
-    };
+const char program3[] = {
+    SET_I__A,
+    (char)20,
+    SET_I__B,
+    (char)30,
+    PUSH_A__,
+    MOVE_A_B,
+    POP_A___,
+    __STOP__,
+};
 
-    char program3[] = {
-        SET_I__A, (char)20,
-        SET_I__B, (char)30,
-        PUSH_A__, 
-        MOVE_A_B,
-        POP_A___,
-        __STOP__,
-    };
-
-
-    char program4[] = 
+const char program4[] =
     {
-        SET_I__A, SPLITL(30),
-        SET_I__B, SPLITR(30),
+        SET_I__A,
+        SPLITL(30),
+        SET_I__B,
+        SPLITR(30),
         CALLF_AB,
-        PUSH_A__, (char)100,
-        MOVE_A_B, 
-        PUSH_A__, (char)200,
+        PUSH_A__,
+        (char)100,
+        MOVE_A_B,
+        PUSH_A__,
+        (char)200,
         ADDC_ABC,
         POP_A___,
         POP_A___,
         RETURN__,
-    };
+};
 
-    char program5[] =
+const char program5[] =
     {
-        SET_I__A, 1,
-        SET_I__B, 1,
+        SET_I__A,
+        1,
+        SET_I__B,
+        1,
         INC_A___,
         ADDC_ABC,
-        
+
         __STOP__,
-    };
+};
 
-    p_tok_t token = split_str_into_tokens("hello world", ' ', 0);
-    print_p_toks_st(token);
+int main(int argc, char *argv[])
+{
+   
+    
 
+    
+
+
+   
+
+   
+
+    //p_tok_t token = split_str_into_tokens("hello,world", ',', 0);
+    //print_p_toks_st(token);
+    //free_p_toks_st(&token);
     //FILE *fptr = fopen("EMULATOR", "");
-    //assemble("D:/dev2/c/myemu/EMU.txt", 0);
-    //emulate(program1, sizeof(program1));
+    //assemble("EMU.txt", 0);
+    emulate(program1, sizeof(program1));
     //printf("_______________________\n");
     //emulate(program2, sizeof(program2));
     //printf("_______________________\n");
     //emulate(program3, sizeof(program3));
     //printf("_______________________\n");
-    //emulate(program4, sizeof(program4)/sizeof(*program4));
+    emulate(program4, sizeof(program4)/sizeof(*program4));
     //emulate(program5, sizeof(program5));
     //printf("______________________\n");
 }
