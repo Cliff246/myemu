@@ -6,6 +6,8 @@
 
 extern size_t errorcount;
 
+
+
 typedef struct tokens
 {
     char **p_sz_toks;
@@ -13,13 +15,12 @@ typedef struct tokens
     size_t nstr;
 } tok_t, *p_tok_t;
 
-typedef struct custom_literal
+typedef struct reference
 {
-    char *value;
-    char *identifier_copy;
-    size_t id, value_len;
-    int value_type, value_pos;
-} custlit_t, *p_custlit_t;
+    size_t norgin;
+    char *p_sz_key;
+    int argtype;
+}reference_t, *p_reference_t;
 
 typedef struct assembler_error
 {
@@ -31,12 +32,28 @@ typedef struct assembler_error
 
 } asmerr_t, *p_asmerr_t;
 
+typedef struct context
+{
+    
+    p_hashtable_t p_identifier_table;
+    char *p_sz_fname;
+    size_t nlines;
+    p_tok_t *p_tokens
+}context_t, *p_context_t;
+
+typedef struct program
+{
+    char *p_program;
+    size_t n_memorysize, n_increment, n_used;
+}program_t, *p_program_t;
+
 p_tok_t split_str_into_tokens(char *inp, char sep, size_t line);
 
 //this is to set the copy equal to NULL
 //may not be best idea
 void free_p_toks_st(p_tok_t *token);
 void print_p_toks_st(p_tok_t token);
+
 
 void assemble(char *dir, size_t size);
 #endif

@@ -34,12 +34,6 @@ void print_p_toks_st(p_tok_t token)
     }
 }
 
-void print_p_cuslit_st(p_custlit_t cuslit)
-{
-    if(cuslit)
-        DPRINTF("custom literal -> %s | id = %lld | value_len = %lld value_type %d value_pos %d\n", cuslit->identifier_copy, cuslit->id, cuslit->value_len, cuslit->value_type, cuslit->value_pos);
-}
-
 p_tok_t malloc_p_toks_st()
 {
     p_tok_t tok = (p_tok_t)calloc(1, sizeof(tok_t));
@@ -54,124 +48,7 @@ p_tok_t malloc_p_toks_st()
     return tok;
 }
 
-p_custlit_t malloc_p_custlit_st(char * identfier)
-{
-    if(identfier != NULL)
-    {
-        static size_t _id = 0;
-        p_custlit_t lit = (p_custlit_t)calloc(1, sizeof(custlit_t));
-        if(!lit)
-        {
-            DPRINTF("big oops on calloc %s %d\n", __FILE__,__LINE__);
-            exit(1);
-        }
-        size_t identfier_len = strlen(identfier);
-        lit->id = _id++;
-        //I AM DECIDING TO COPY DATA TO A NEW MEMORY ADDRESS
-        //THIS WILL ALLOW FOR DATA TO BE DELETED MORE SAFELY
-        // EVEN THOUGH ITS NOT NECCESSARY ITS SAFER AND ALLOWS FOR EASIER WORK IN THE FUTURE
 
-        char * identfier_copy_tmp = (char *)calloc(identfier_len + 1, sizeof(char));
-        errno_t err = strcpy_s(identfier_copy_tmp, identfier_len + 1, identfier);
-        if(err != 0)
-        {
-            DPRINTF("HUGE STRCPY_S ERROR IN %s:%d", __FILE__, __LINE__);
-            exit(1);
-        }
-        lit->identifier_copy = identfier_copy_tmp;
-        lit->value = NULL;
-        lit->value_len = 0;
-        lit->value_type = -1;
-        lit->value_pos = 0;
-        return lit;
-    }
-    else
-    {
-        DPRINT("MALLOC P_CUSLIT_ST FAILED DUE TO IDENTFIER BEING NULL\n");
-        exit(1);
-    }
-}
-
-void update_p_custlit_st(p_custlit_t *custlit_ary, size_t custlit_ary_len, p_custlit_t custlit, int type, char *bytes, size_t nbytes)
-{
-    if(custlit_ary && custlit && custlit_ary_len > 0 )
-    {
-        if(nbytes == 0 && !bytes)
-        {
-            custlit->value = NULL;
-            custlit->value_len = 0;
-            custlit->value_pos = -1;
-            custlit->value_type = type;
-        }
-        else if(nbytes > 0 && !bytes)
-        {
-            DPRINT("ERROR CUSTOM LITERAL INPUT CONDITION MUST HAVE NBYTES > 0 AND BYTES BE A VALID PTR \n");
-            exit(1);
-        }
-        size_t offset = 0;
-        if(custlit->value != NULL)
-        {
-            DPRINT("ERROR CUSTOM LITERAL IS ALREADY SET\n");
-            exit(1);
-        }
-        char *temp = (char *)calloc(nbytes, sizeof(char));
-        if(!temp)
-        {
-            DPRINTF("big oops on calloc %s %d\n", __FILE__,__LINE__);
-            exit(1);
-        }
-        errno_t err1 = memcpy_s(temp, nbytes, bytes, nbytes);
-        if(err1 != 0)
-        {
-            DPRINTF("HUGE ERROR BIG MASSIVE MEMCPY_S ERROR WE DYING %s:%d\n", __FILE__, __LINE__);
-            exit(1);
-        }
-        bool foundme = false;
-        for(size_t iter = 0; iter < custlit_ary_len; iter++)
-        {    
-            if(custlit->id == custlit_ary[iter]->id)
-            {
-                custlit->value_type = type;
-                custlit->value = temp;
-                custlit->value_len = nbytes;
-                custlit->value_pos = offset;
-                foundme = true;
-            }
-            if(foundme)
-                custlit_ary[iter]->value_pos = offset++;
-            offset += custlit_ary[iter]->value_len;
-            
-        }
-        if(foundme == false)
-        {
-            custlit->value_type = type;
-            custlit->value = temp;
-            custlit->value_len = nbytes;
-            custlit->value_pos = offset + 1;
-        }
-    }
-    else
-    {
-        DPRINT("ERROR CUSTOM LITERAL INPUT CONDITION MUST BE ALL VALID \n");
-        exit(1);
-    }
-}
-
-
-void free_p_custlit_st(p_custlit_t *ptr)
-{
-    const p_custlit_t lit = *ptr;
-    if(lit != NULL)
-    {
-        free(lit->identifier_copy);
-        free(lit); 
-    }
-    else
-    {
-        free(lit);
-    }
-    *ptr = NULL;
-}
 
 void free_p_toks_st(p_tok_t *token)
 {
@@ -430,7 +307,7 @@ const typedef enum {
 
 } literal_id_enum;
 
-int get_argument_type(p_custlit_t *id_name_ary, size_t id_name_len, char *str)
+int get_argument_type(size_t id_name_len, char *str)
 {
     size_t len = strlen(str);
     
@@ -452,7 +329,6 @@ int get_argument_type(p_custlit_t *id_name_ary, size_t id_name_len, char *str)
                 break;
             }
         }
-        
         
         //ERROR HEX VALUE NOT VALID
         if(!allow)
@@ -536,17 +412,6 @@ int get_argument_type(p_custlit_t *id_name_ary, size_t id_name_len, char *str)
     {
         DPRINT("THIS ARGUMENT IS A STRING TYPE\n");
         return LITERAL_STR;
-        
-        
-        
-
-
-
-
-
-
-
-
     }
     
     else if(len == 3 && str[0] == 39 && str[2] == 39)
@@ -555,57 +420,7 @@ int get_argument_type(p_custlit_t *id_name_ary, size_t id_name_len, char *str)
 
     }
     //ARGUMENT CUSTOM literal
-    else
-    {
-        if(len > 0)
-        {
-            if(str[0] == '$')
-            {
-                bool allow = true;
-                for(size_t checkitr = 1; checkitr < len; checkitr++)
-                {
-                    if(!isalnum(str[checkitr]) && str[checkitr] != '_')
-                    {
-                        allow = false;
-                        break;
-                    }
-                }      
-                if(allow)
-                {
-                    int id = 0;
-                    bool found = false;
-                    for(size_t namecheck = 0; namecheck < id_name_len; namecheck++)
-                    {
-                        DPRINTF("ID NAME ARY %s\n", id_name_ary[namecheck]->identifier_copy);
-                        p_custlit_t current_cuslit = id_name_ary[namecheck];
-                        bool result = cmpstrings(current_cuslit->identifier_copy , str);
-                        if(result == true)
-                        {
-                            id = namecheck;
-                            found = true;
-                            break;
-                        }
-                    }
-                    if(found)
-                    {
-                        DPRINT("THIS ARGUMENT IS A CUSTOM TYPE\n");
-                        return LITERAL_IDENTIFIER + id;
-                    }
-                    else
-                    {
-                        errorcount++;
-                        return ERROR;
-                    }
-                }
-                else 
-                {
-                    //FIRST INDEX MUST BE int
-                    errorcount++;
-                    return ERROR;
-                }
-            }
-        }
-    }
+
     return ERROR;
 }
 
@@ -701,8 +516,6 @@ void convert_token_to_bytes(char *str, int type, char *bytes, size_t bytes_len)
             }
             return;
         }
-
-
     }
     else 
     {
@@ -710,172 +523,74 @@ void convert_token_to_bytes(char *str, int type, char *bytes, size_t bytes_len)
         exit(1);
     }
 
+}
 
+void *make_reference(char *key, size_t orgin, int argtype)
+{
+    p_reference_t refptr = (p_reference_t)malloc(sizeof(reference_t));
+    refptr->p_sz_key = key;
+    refptr->norgin = orgin;
+    refptr->argtype = argtype;
+    return (void *)refptr;
+}
 
+p_reference_t get_reference(void *ptr)
+{
+    p_reference_t refptr = (p_reference_t)ptr;
+    return refptr;
+}
 
-
-
-
-
-
+//does not free key
+void free_reference(void *ptr)
+{
+    p_reference_t ref = ptr;
+    free(ref);
 }
 
 
+void stage1(p_context_t context, p_program_t program )
+{
+    const size_t idtable_len = 10000;
+    size_t lines  = context->nlines;
+    p_tok_t *tokens = context->p_tokens;
+    p_hashtable_t identifier_table = new_hash_table(idtable_len, free_reference);
+   
+
+    
+}
+
+void stage2(p_tok_t *tokens, size_t lines)
+{
+
+}
 
 void assemble(char * dir, size_t size)
 {
     
 
-    DPRINTF("%d\n", getmin(100));
-
     
     p_tok_t *tokens = NULL;
-    size_t lines = get_tokens(&tokens,dir); 
+    size_t lines = get_tokens(&tokens, dir); 
     
     DPRINTF("%lld\n", lines);
     
-    size_t memorysize = 1, id_name_ary_length = 1, asmerr_ary_len = 1;
+    size_t asmerr_ary_len = 1;
+    const size_t increment = 1000;
 
-    char *program = (char *)malloc(sizeof(char) * memorysize);
-    p_custlit_t *id_name_array = (p_custlit_t *)calloc(id_name_ary_length, sizeof(custlit_t));
+    char *program_ptr = (char *)malloc(sizeof(char) * increment);
     p_asmerr_t *asmerr_array = (p_asmerr_t *)calloc(asmerr_ary_len, sizeof(asmerr_t));
 
+    program_t program = {.p_program = program_ptr, .n_memorysize = increment, .n_increment = increment, .n_used = 0};
+    context_t context = {.nlines = lines, .p_identifier_table = NULL, .p_sz_fname = dir, .p_tokens = tokens};
+
     asmerr_array[0] = NULL;
-    program[0] = 0;
 
     
     
-    DPRINTF("%lld\n",(id_name_ary_length));
 
-    for(size_t iline = 0; iline < lines; iline++)
-    {
-        p_tok_t curline = tokens[iline];
-        LINE;
-        //EMPTY LINE
-        if(curline->nstr == 0)
-        {
-            DPRINTF("%lld has zero tokens\n", iline);
-            continue;
-        }
-        //LINE WITH VALUES
-        else
-        {
-            bool iscomment = false, isidentifier = false;
-            int cmp = -1;
-            char * token = curline->p_sz_toks[0];
-            if(token[0] == '#')
-                iscomment = true;
-            if(token[0] == '$')
-                isidentifier = true;
-            DPRINTF("%lld has %-4lld tokens\n", iline, curline->nstr);
-            cmp = compare_with_instructions(token);
-            //TEST if in instruction list
-            //This will test all possible states
-            if(cmp >= 0)
-            {
-                size_t nargs = len_instructions[cmp];
-                //ENOUGH ARGUMENTS
-                print_p_toks_st(curline);
-                DPRINTF("nargs == %lld line has %lld tokens\n", nargs, curline->nstr);
 
-                if(nargs <= curline->nstr)
-                {
-                    char *psz_args[nargs];
-                    int arg_types[nargs];
-
-                    for(size_t itok = 1; itok < curline->nstr; itok++)
-                    {   
-                        char *argtoken = curline->p_sz_toks[itok];
-                        DPRINTF("    %p\n",  argtoken);
-                        
-                        psz_args[itok - 1] = argtoken;
-                        DPRINTF("    %s\n", psz_args[itok - 1]);
-                    }
-                    for(size_t iarg = 0; iarg < nargs; iarg++)
-                    {
-                        arg_types[iarg] = get_argument_type(id_name_array, id_name_ary_length, curline->p_sz_toks[iarg]);
-                        DPRINTF("    argument types %d\n",arg_types[iarg]);
-                    }
-                    continue;
-
-                }
-                //NOT ENOUGH ARGUMENTS ERROR
-                else 
-                {
-                    errorcount++;
-                    DPRINTF("not enough arguments (has %lld and needs %lld)\n", curline->nstr, nargs);
-                    continue;
-                }
-                
-            }
-            // IS COMMENT
-
-            else if(iscomment == true)
-            {
-                DPRINT("IS COMMENT\n");
-                for(size_t itok = 0; itok < curline->nstr; itok++)
-                {   
-                    char * argtoken = curline->p_sz_toks[itok];
-                    DPRINTF("%s ", argtoken);
-                }
-                DPRINT("\n");
-                continue;
-            }
-
-            //IS IDENTIFIER
-            else if(isidentifier == true)
-            {   
-                DPRINT("IS IDENTFIER\n");
-                if(curline->nstr == 2)
-                {
-                    char *offset = "    ";
-                    OFFSET_DPRINTF("%lld\n",(id_name_ary_length));
-                    OFFSET_DPRINTF("%p\n", (void *)id_name_array);
-                    bool allow = true;
-                    for(size_t identfiers = 0; identfiers < id_name_ary_length; identfiers++)
-                    {
-                        bool result = cmpstrings(token, id_name_array[identfiers]->identifier_copy);
-                        if(result == true)
-                        {
-                            
-                            DPRINTF("TOKEN ALLREADY EXISTS %s %s\n",token, id_name_array[identfiers]->identifier_copy);
-                            errorcount++;
-                            allow = false;
-                            break;
-                        }
-                    }
-                    if(!allow)
-                        continue;
-                    id_name_array = (p_custlit_t *)REALLOC_SAFE(id_name_array, (id_name_ary_length + 1) * sizeof(p_custlit_t));
-                    id_name_array[id_name_ary_length] = malloc_p_custlit_st(token);
-                    size_t numberofbytes = 0;
-                    char *bytes = malloc(sizeof(char) * (numberofbytes + 1));
-                    char *arg = curline->p_sz_toks[1];
-                    int argtype = get_argument_type(id_name_array, id_name_ary_length, arg);
-                    numberofbytes += decode_nbytes_for_argument(argtype, arg);
-                    bytes = (char *)REALLOC_SAFE(bytes, (numberofbytes + 1) * sizeof(char));
-                    convert_token_to_bytes(arg, argtype, bytes, numberofbytes);
-                    update_p_custlit_st(id_name_array, id_name_ary_length + 1, id_name_array[id_name_ary_length], argtype, bytes, numberofbytes);
-                    id_name_ary_length++;
-                    continue;
-                }
-                else
-                {
-                    DPRINT("NOT ENOUGH OR TOO MANY ARGUMENT\n");
-                    errorcount++;
-                    continue;
-                }
-            }
-            //TODO ERROR CHECKING
-            else
-            {
-                errorcount++;
-                DPRINTF("Unknown Instruction -> %s\n", token);
-                continue;
-            }
-            
-        }
-    }
+   
+    
     DPRINTF("%lld errors\n", errorcount);
     DPRINT("End\n");
     return;
