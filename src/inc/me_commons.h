@@ -1,15 +1,7 @@
 #ifndef __COMMONS__
 #define __COMMONS__
 
-#include <stdbool.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <errno.h>
-#include <stdarg.h>
-#include <stdint.h>
-#include <ctype.h>
-#include <math.h>
+
 
 typedef unsigned short ushort;
 
@@ -107,5 +99,7 @@ void triml(char *pc);
 void trimr(char *pc);
 
 bool cmpstrings(const char *str1, const char *str2);
+
+
 
 #endif

@@ -9,7 +9,11 @@
   "files.associations": {
     "Makefile": "makefile",
     "*.ez80": "asm-intel-x86-generic",
-    "typeinfo": "c"
+    "typeinfo": "c",
+    "cstdlib": "c",
+    "me_assembler.h": "c",
+    "me_commons.h": "c",
+    "stdlib.h": "c"
   },
   "C_Cpp_Runner.msvcBatchPath": "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Auxiliary/Build/vcvarsall.bat",
   "C_Cpp_Runner.cCompilerPath": "gcc",

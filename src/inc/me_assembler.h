@@ -3,17 +3,12 @@
 
 #include <stdlib.h>
 #include "me_commons.h"
+#include "me_lexer.h"
 
 extern size_t errorcount;
 
 
 
-typedef struct tokens
-{
-    char **p_sz_toks;
-    size_t *p_u_col;
-    size_t nstr;
-} tok_t, *p_tok_t;
 
 typedef struct reference
 {
@@ -34,11 +29,10 @@ typedef struct assembler_error
 
 typedef struct context
 {
-    
     p_hashtable_t p_identifier_table;
     char *p_sz_fname;
     size_t nlines;
-    p_tok_t *p_tokens
+    p_tok_t *p_tokens;
 }context_t, *p_context_t;
 
 typedef struct program
@@ -47,7 +41,6 @@ typedef struct program
     size_t n_memorysize, n_increment, n_used;
 }program_t, *p_program_t;
 
-p_tok_t split_str_into_tokens(char *inp, char sep, size_t line);
 
 //this is to set the copy equal to NULL
 //may not be best idea

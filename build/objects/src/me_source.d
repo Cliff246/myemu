@@ -1,2 +1,3 @@
-build/objects/src/me_source.o: src/me_source.c src/me_assembler.h \
- src/me_commons.h src/me_source.h
+build/objects/src/me_source.o: src/me_source.c src/inc/me_myemu.h \
+ src/inc/me_commons.h src/inc/me_source.h src/inc/me_lexer.h \
+ src/inc/me_assembler.h
