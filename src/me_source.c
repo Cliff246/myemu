@@ -97,7 +97,7 @@ void emulate(char *program, size_t size)
         // MEMSET
         case M_SET_A_:
 
-            memory[COMBINE(args[0], args[1])] = reg_A;
+           memory[COMBINE(args[0], args[1])] = reg_A;
             break;
         // MEMGET
         case M_GET_AB:
@@ -400,9 +400,8 @@ void freedata(void *data)
     free(data);
 }
 
-int main(int argc, char *argv[])
+void testsuite()
 {
-
     // p_hashtable_t table = new_hash_table(1000, freedata);
     //
     // addto_hash_table(table, "hello world", makedata(10));
@@ -425,8 +424,7 @@ int main(int argc, char *argv[])
     // print_p_toks_st(token);
     // free_p_toks_st(&token);
     //emulate(program6, sizeof(program6));
-    assemble("multiply.txt", 0);
-   // assemble("single.txt", 0);
+    // assemble("single.txt", 0);
     // emulate(program1, sizeof(program1));
     // printf("_______________________\n");
     // emulate(program2, sizeof(program2));
@@ -436,5 +434,77 @@ int main(int argc, char *argv[])
     // emulate(program4, sizeof(program4)/sizeof(*program4));
     // emulate(program5, sizeof(program5));
     // printf("______________________\n");
-    
+
+}
+
+
+
+void readfile(char *str)
+{
+    char* dir = str + 2;
+    char *data = NULL;
+    int size = assemble(dir, &data);
+}
+void outfile(char *out)
+{
+
+}
+void testfile(char *str)
+{
+    char *data = NULL;
+    int size =assemble("multiply.txt", &data);
+    emulate(data, size);
+}
+
+
+typedef void (*argument_handler_t)(char *);
+
+const argument_handler_t handler[3] = {
+    readfile, outfile, testfile       
+};
+
+const char *arguments[] = {
+    "-R",
+    "-O",
+    "-T",
+};
+
+
+int main(int argc, char *argv[])
+{
+    if(argc == 0 || argc == 1)
+    {
+        printf("NO arguments provided\n");
+    }
+    else
+    {
+        char *program = argv[0];
+            
+        const int numargs = argc;
+        for(int i = 1; i < numargs; i++)
+        {
+            const int strsize = strlen(argv[i]); 
+            if(strsize < 2)
+            {
+                printf("argument not understood %s\n", argv[i]);
+            }
+            char firstbytes[3] = {argv[i][0], argv[i][1], 0};
+            
+            for(int options = 0; options < sizeof(arguments)/sizeof(arguments[0]); options++)
+            {
+                
+                if(cmpstrings(firstbytes, arguments[options]))
+                {
+                    handler[options](argv[i]);
+                }  
+
+            }
+        
+        }    
+                
+        
+        
+    }
+
+       
 }

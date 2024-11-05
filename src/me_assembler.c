@@ -639,11 +639,11 @@ void stage1(p_context_t context, p_program_t program)
 
     for(int isec = 0; isec < sections_count; isec++)
     {
-        //p_section_t temp = sections[isec];
-        //free_section(sections[isec]);
+        p_section_t temp = sections[isec];
+        free_section(sections[isec]);
     }
 
-    //free(sections);
+    free(sections);
 }
 
 void stage2(p_context_t context, p_program_t program, p_section_t *sections , int len)
@@ -794,12 +794,17 @@ void stage2(p_context_t context, p_program_t program, p_section_t *sections , in
     }
 }
 
-void assemble(char *dir, size_t size)
+int assemble(char *dir, char **bytes)
 {
 
     p_tok_t *tokens = NULL;
     size_t lines = get_tokens(&tokens, dir);
-
+    if(lines == 0)
+    {
+        DPRINTF("file not found %s\n", dir);
+        exit(1);
+    }
+        
     DPRINTF("%lld\n", lines);
 
     size_t asmerr_ary_len = 1;
@@ -815,8 +820,8 @@ void assemble(char *dir, size_t size)
     free_hash_table(context.p_identifier_table);
     //DPRINTF("%lld errors\n", errorcount);
     //DPRINT("End\n");
-    LINE;
+   
+    *bytes = program.p_program;
     //printrange(program.p_program, 0, 64, program.n_memorysize);
-    emulate(program.p_program, program.n_used);
-    return;
+    return program.n_used;
 }

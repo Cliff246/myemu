@@ -84,8 +84,9 @@ void *make_reference();
 p_memseg_t make_memsegment(char *bytes, size_t start, size_t end);
 p_reference_t get_reference(void *ptr);
 // does not free key
+int assemble(char *dir, char **bytes);
 void free_reference(void *ptr);
-void assemble(char *dir, size_t size);
+//void assemble(char *dir, size_t size);
 void stage1(p_context_t context, p_program_t program);
 void stage2(p_context_t context, p_program_t program, p_section_t *sections, int len);
 

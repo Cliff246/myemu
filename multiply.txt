@@ -1,3 +1,7 @@
+
+
+
+
 backtrack:
     NOTHING_
     MOVE_C_A
@@ -32,15 +36,27 @@ multiply_:
     POP_A___
     JMP____I multiply_helper
     
-
+;takes two numbers multiplyies them and multiply by two agin then subtract
 main:
     NOTHING_
-    SET_I__A 0x04
+    SET_I__A 0x02
     PUSH_A__
-    SET_I__A 0x12
+    SET_I__A 0x10
     PUSH_A__
     SET_I__A 0x00
     CALLF_II multiply_
+    PUSH_A__
+    SET_I__A 0x02
+    PUSH_A__
+    SET_I__A 0x00
+    CALLF_II multiply_
+    MOVE_A_C
+    SET_I__A 0x01
+    MOVE_A_B
+    MOVE_C_A
+    SUBC_ABC
+    MOVE_C_A
+    OUTPUT_A
     __STOP__
 
 

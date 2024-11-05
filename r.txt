@@ -1,0 +1,9 @@
+;test
+
+main:
+    NOTHING_
+    SET_A__I 0x00
+    PUSH_A__
+    OUTPUT_A
+START:
+    JMP____I main 
