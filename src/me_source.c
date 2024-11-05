@@ -57,8 +57,8 @@ void emulate(char *program, size_t size)
 #define NEXT (memory[++pc])
 #define UPDATENEXT DPRINTF("item %u at address %d\n", memory[pc], pc)
     printrange(memory, 0, 80, 1024);
-    int inst[100];
-    for (size_t i = 0; i < 100; i++)
+    int inst[1000];
+    for (size_t i = 0; i < 1000; i++)
     {
 
         char args[3];
@@ -66,15 +66,17 @@ void emulate(char *program, size_t size)
         int opcode = startpc[memory],
             oplen = len_instructions[opcode];
         //DPRINTF("%d %d\n", opcode, oplen);
-        
+
+#ifdef DEBUG        
         DPRINTF("pc ->%d sp->%d\n", pc, sp);
         DPRINTF("A= %d, B= %d, C= %d X=%d Y=%d\n", reg_A, reg_B, reg_C, reg_X, reg_Y);
         //printrange(memory, 1024 - 100, 1024-90, 1024);
 
-        DPRINTF("opcode ->%s oplen ->%d\n", str_instructions[opcode], oplen);
+        DPRINTF("opcode ->%s oplen ->%d\n\n", str_instructions[opcode], oplen);
+#endif
         if (oplen >= 3)
         {
-            DPRINT("break\n");
+            DPRINT("break\n\n");
             break;
         }
         for (int i = 0; i < oplen; i++)
@@ -84,7 +86,7 @@ void emulate(char *program, size_t size)
         }
         if(oplen == 2)
         {
-            DPRINTF("ARG COMBINED = %d\n", COMBINE(args[0], args[1]));
+            DPRINTF("ARG COMBINED = %d\n\n", COMBINE(args[0], args[1]));
         }
         
         inst[i] = opcode;
@@ -150,7 +152,7 @@ void emulate(char *program, size_t size)
             reg_A = reg_C;
             break;
         case MOVE_C_B:
-            reg_B = reg_A;
+            reg_B = reg_C;
             break;
         case MOVE_X_Y:
             reg_Y = reg_X;
@@ -275,7 +277,6 @@ void emulate(char *program, size_t size)
             break;
         case INC_A___:
             reg_A++;
-
             break;
         case DEC_X___:
             reg_X --;
@@ -284,7 +285,7 @@ void emulate(char *program, size_t size)
             reg_Y--;
             break;
         case OUTPUT_A:
-            DPRINTF("-------OUTPUT_A------------%d\n", reg_A);
+            printf("-------OUTPUT_A------------%d\n", reg_A);
             break;
         default:
 
@@ -424,7 +425,7 @@ int main(int argc, char *argv[])
     // print_p_toks_st(token);
     // free_p_toks_st(&token);
     //emulate(program6, sizeof(program6));
-    assemble("EMU.txt", 0);
+    assemble("multiply.txt", 0);
    // assemble("single.txt", 0);
     // emulate(program1, sizeof(program1));
     // printf("_______________________\n");

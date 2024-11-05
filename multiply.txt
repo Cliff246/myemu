@@ -1,5 +1,7 @@
 backtrack:
     NOTHING_
+    MOVE_C_A
+    OUTPUT_A
     RETURN__
 
 
@@ -9,6 +11,7 @@ multiply_helper:
     PUSH_A__
     MOVE_B_C
     MOVE_X_A
+    SET_I__B 0x00
     CMP__A_B
     MOVE_A_X
     JMP_EQ_I backtrack
@@ -17,17 +20,9 @@ multiply_helper:
     ADDC_ABC
     MOVE_C_B
     DEC_X___
+    
     JMP____I multiply_helper
-    NOTHING_ 
-    NOTHING_ 
-    NOTHING_ 
-    NOTHING_ 
-    NOTHING_ 
-    NOTHING_ 
-    NOTHING_ 
-    NOTHING_ 
-    NOTHING_ 
-    NOTHING_ 
+
 
 
 multiply_:
@@ -35,18 +30,18 @@ multiply_:
     POP_A___
     MOVE_A_X
     POP_A___
-    MOVE_A_B
     JMP____I multiply_helper
     
 
 main:
     NOTHING_
-    SET_I__A 0x10
+    SET_I__A 0x04
     PUSH_A__
-    SET_I__A 0x20
+    SET_I__A 0x12
     PUSH_A__
+    SET_I__A 0x00
     CALLF_II multiply_
-
+    __STOP__
 
 
 START:

@@ -38,7 +38,7 @@ typedef unsigned short ushort;
 #define OFFSET_DPRINTF(f, ...) printf()
 #define DPRINT(f)
 #define DPRINTF(f, ...)
-#define LINE()
+#define LINE
 #endif
 
 
