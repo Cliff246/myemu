@@ -16,6 +16,8 @@ void print_p_toks_st(p_tok_t token);
 p_tok_t malloc_p_toks_st();
 void free_p_toks_st(p_tok_t *token);
 void update_p_toks_st(p_tok_t ref_tok, size_t length);
-p_tok_t split_str_into_tokens(char *inp, char sep, size_t line);
+p_tok_t split_str_into_tokens(char *inp, char sep);
+void print_p_toks_string(p_tok_t token, bool offset);
+p_tok_t copy_p_toks_st(p_tok_t ref);
 
 #endif

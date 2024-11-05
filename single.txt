@@ -1,0 +1,14 @@
+function1:
+    NOTHING_ 
+    PUSH_A__
+    CMP__A_B
+    MOVE_A_X
+    POP_A___
+    ADDC_ABC
+    MOVE_C_B
+    DEC_X___
+    JMP____I multiply_helper
+    NOTHING_
+
+START:
+    JMP____I function1

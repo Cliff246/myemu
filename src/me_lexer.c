@@ -1,4 +1,5 @@
 #include "inc/me_myemu.h"
+#include "inc/me_lexer.h"
 
 void print_p_toks_st(p_tok_t token)
 {
@@ -20,12 +21,62 @@ void print_p_toks_st(p_tok_t token)
     }
 }
 
+void print_p_toks_string(p_tok_t token, bool offset)
+{
+    //DPRINTF("LINE %s:%d\n", __FILE__, __LINE__);
+
+    if(token == NULL)
+    {
+        DPRINTF("failed token%p\n", token);
+        return;
+    }
+    else if (token->nstr == 0)
+    {
+        //DPRINTF("LINE %s:%d\n", __FILE__, __LINE__);
+
+        return;
+    }
+    else
+    {
+        //DPRINTF("LINE %s:%d\n", __FILE__, __LINE__);
+
+      //  DPRINTF("%d\n", token->nstr);
+
+        size_t last = 0;
+        for (int iter = 0; iter < token->nstr; iter++)
+        {
+            if(offset)
+            {
+                for(size_t col = last; col < token->p_u_col[iter]; col++)
+                {
+                    DPRINT(" ");
+                }
+            }
+            else
+            {
+                DPRINT(" ");
+            }
+            last = token->p_u_col[iter];
+
+            for (char *c = token->p_sz_toks[iter]; *c != 0; c++)
+            {
+                if (*c == '\n')
+                    *c = 0;
+                DPRINTF("%c", *c);
+                last++;
+                
+            }
+        }
+    }
+    DPRINT("\n");
+}
+
 p_tok_t malloc_p_toks_st()
 {
     p_tok_t tok = (p_tok_t)calloc(1, sizeof(tok_t));
     if (!tok)
     {
-        DPRINTF("big oops on calloc %s %d\n", __FILE__, __LINE__);
+        DPRINTF("MALLOC ERROR %s:%d\n", __FILE__, __LINE__);
         exit(1);
     }
     tok->nstr = 0;
@@ -52,6 +103,7 @@ void free_p_toks_st(p_tok_t *token)
         }
         free(tok->p_sz_toks);
         free(tok);
+       DPRINTF("freed token %p\n", token);
         // I AM GOING TO TRUST THIS IS FREED CAUSE (IDOIT)
     }
     else
@@ -61,6 +113,75 @@ void free_p_toks_st(p_tok_t *token)
         // fuck it free it anyways
     }
     *token = NULL;
+}
+
+p_tok_t copy_p_toks_st(p_tok_t ref)
+{
+    if(ref == NULL)
+    {
+        DPRINT("failed\n");
+        exit(1);
+    }
+    p_tok_t new = malloc_p_toks_st();
+    if(new)
+    {
+        size_t len = ref->nstr;
+
+        if (len == 0)
+        {
+           // DPRINT("len == 0\n");
+            new->p_u_col = NULL;
+            new->p_sz_toks = NULL;
+            new->nstr = 0;
+            return new;
+        }
+        else
+        {
+            size_t *column_copy = (size_t *)calloc(len, sizeof(size_t));
+            char **str_copy = (char **)calloc(len, sizeof(char *));
+            
+            if(!str_copy || !column_copy)
+            {
+                DPRINTF("MALLOC ERROR %s:%d\n", __FILE__, __LINE__);
+                exit(1);
+            }
+            
+
+            for (size_t init_elem = 0; init_elem < len; init_elem++)
+            {
+                char *source = ref->p_sz_toks[init_elem];
+                int sl = strlen(source) + 1;
+                char *copy = (char *)calloc(sl, sizeof(char));
+
+                if(!copy)
+                {
+                    DPRINTF("MALLOC ERROR %s:%d\n", __FILE__, __LINE__);
+                    exit(1);
+                }
+
+                strcpy(copy, source);
+               // DPRINTF("|%s| %d\n", source, sl);
+                //DPRINTF("|%s| %d\n", copy, strlen(copy) + 1);
+
+                str_copy[init_elem] = copy;
+                //DPRINTF("%d:%s\n", init_elem, str_copy[init_elem]);
+                column_copy[init_elem] = ref->p_u_col[init_elem];
+            }
+
+
+            new->p_u_col = column_copy;
+            new->p_sz_toks = str_copy;
+            new->nstr = len;
+            //DPRINT("new\n");
+           // print_p_toks_string(new, false);
+            return new;
+        }
+    }
+    else
+    {
+        DPRINT("EXIT 1");
+        exit(1);
+    }
 }
 
 void update_p_toks_st(p_tok_t ref_tok, size_t length)
@@ -76,6 +197,10 @@ void update_p_toks_st(p_tok_t ref_tok, size_t length)
     void
         *tmp1 = calloc(length, sizeof(size_t)),
         *tmp2 = calloc(length, sizeof(char *));
+    if(!tmp1 || !tmp2)
+    {
+        exit(1);
+    }
     ptok->p_u_col = (size_t *)tmp1;
     ptok->p_sz_toks = (char **)tmp2;
     ptok->nstr = length;
@@ -94,7 +219,7 @@ void update_p_toks_st(p_tok_t ref_tok, size_t length)
     return;
 }
 
-p_tok_t split_str_into_tokens(char *inp, char sep, size_t line)
+p_tok_t split_str_into_tokens(char *inp, char sep)
 {
     if (inp == NULL)
         return NULL;
@@ -115,7 +240,10 @@ p_tok_t split_str_into_tokens(char *inp, char sep, size_t line)
 
     size_t prev = 0, current = 1, itr = 0;
     size_t *colary = (size_t *)malloc(sizeof(size_t) * nsep);
-
+    if(!colary)
+    {
+        exit(1);
+    }
     char pchar = inp[0];
     for (char *n = inp + 1; *n != 0; n++, current++)
     {

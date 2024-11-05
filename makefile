@@ -1,6 +1,6 @@
 CXX      := -gcc
 CXXFLAGS := -Wall -std=c99
-LDFLAGS  := -L/usr/lib -lm
+LDFLAGS  := -L/usr/lib -lm 
 BUILD    := ./build
 OBJ_DIR  := $(BUILD)/objects
 

@@ -7,15 +7,31 @@
 
 extern size_t errorcount;
 
-
-
-
-typedef struct reference
+typedef enum
 {
-    size_t norgin;
-    char *p_sz_key;
-    int argtype;
-}reference_t, *p_reference_t;
+    function,
+    constant,
+    none,
+} section_type_t;
+
+typedef enum 
+{
+    e_ptr,
+    e_uint,
+    e_sint,
+    e_hex,
+    e_char,
+    e_error,
+}argument_type_t;
+
+typedef struct memorysegment
+{
+    size_t memstart, memstop;
+    char *mem_bytes;
+}memseg_t, *p_memseg_t;
+
+
+
 
 typedef struct assembler_error
 {
@@ -41,12 +57,36 @@ typedef struct program
     size_t n_memorysize, n_increment, n_used;
 }program_t, *p_program_t;
 
+typedef struct
+{
+    size_t len, allocd;
+    section_type_t sectype;
+    int initalized;
+    int id;
+    p_memseg_t sector;
+    p_tok_t *toks;
+} section_t, *p_section_t;
+
+typedef struct reference
+{
+    p_section_t sect;
+} reference_t, *p_reference_t;
 
 //this is to set the copy equal to NULL
 //may not be best idea
-void free_p_toks_st(p_tok_t *token);
-void print_p_toks_st(p_tok_t token);
 
+p_section_t new_section(section_type_t type);
+void update_section(p_section_t section, p_tok_t tok);
+void free_section(p_section_t section);
 
+void free_memsegment(p_memseg_t memseg);
+void *make_reference();
+p_memseg_t make_memsegment(char *bytes, size_t start, size_t end);
+p_reference_t get_reference(void *ptr);
+// does not free key
+void free_reference(void *ptr);
 void assemble(char *dir, size_t size);
+void stage1(p_context_t context, p_program_t program);
+void stage2(p_context_t context, p_program_t program, p_section_t *sections, int len);
+
 #endif

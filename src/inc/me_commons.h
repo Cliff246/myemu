@@ -30,7 +30,7 @@ typedef unsigned short ushort;
 #if DEBUG == 1
 #define OFFSET_DPRINTF(f, ...) \
     DPRINTF("%s", offset);     \
-    DPRINTF(f, __VA_ARGS__)
+    DPRINTF(f, __VA_ARGS__)    
 #define DPRINTF(f, ...) printf(f, __VA_ARGS__)
 #define DPRINT(f) printf(f)
 #define LINE printf("\n------%s:%d-------\n", __FILE__, __LINE__)
@@ -73,7 +73,6 @@ void print_str_hex(char *str, bool newline);
 
 
 
-
 int64_t hash(const char *key);
 p_hashtable_t new_hash_table(size_t size, free_hashtable_data_ptr freedata);
 void free_hash_table(p_hashtable_t table);
@@ -97,6 +96,7 @@ void print_hash_elem(p_hashelem_t elem);
 void reverse(char *ary);
 void triml(char *pc);
 void trimr(char *pc);
+char last_char(char *ptr);
 
 bool cmpstrings(const char *str1, const char *str2);
 

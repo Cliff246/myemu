@@ -1,2 +1,53 @@
-$test "hello"
-chest
+backtrack:
+    NOTHING_
+    RETURN__
+
+
+multiply_helper:
+    NOTHING_ 
+
+    PUSH_A__
+    MOVE_B_C
+    MOVE_X_A
+    CMP__A_B
+    MOVE_A_X
+    JMP_EQ_I backtrack
+    MOVE_C_B
+    POP_A___
+    ADDC_ABC
+    MOVE_C_B
+    DEC_X___
+    JMP____I multiply_helper
+    NOTHING_ 
+    NOTHING_ 
+    NOTHING_ 
+    NOTHING_ 
+    NOTHING_ 
+    NOTHING_ 
+    NOTHING_ 
+    NOTHING_ 
+    NOTHING_ 
+    NOTHING_ 
+
+
+multiply_:
+    NOTHING_
+    POP_A___
+    MOVE_A_X
+    POP_A___
+    MOVE_A_B
+    JMP____I multiply_helper
+    
+
+main:
+    NOTHING_
+    SET_I__A 0x10
+    PUSH_A__
+    SET_I__A 0x20
+    PUSH_A__
+    CALLF_II multiply_
+
+
+
+START:
+    JMP____I main

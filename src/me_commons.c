@@ -4,10 +4,18 @@
 
 #include "inc/me_myemu.h"
 
+
 size_t hash_to_position(int64_t hash, size_t pos)
 {
     size_t ret = hash % pos;
     return ret;
+}
+
+char last_char(char *ptr)
+{
+    char *last = ptr;
+    for(; *(last + 1) != 0x00 ; last++);
+    return *last;
 }
 
 void *__realloc_s_func(void *ptr, size_t size, const char *src_file, const char *call_function, size_t line_number)
@@ -216,7 +224,7 @@ bool cmpstrings(const char *str1, const char *str2)
 
 p_hashtable_t new_hash_table(size_t size, free_hashtable_data_ptr freedata)
 {
-    p_hashtable_t table = (p_hashtable_t) malloc(sizeof(hashtable_t));
+    p_hashtable_t table = (p_hashtable_t) calloc(1, sizeof(hashtable_t));
     if(table)
     {
         p_hashelem_t *list = (p_hashelem_t *)calloc(size, sizeof(p_hashelem_t));
@@ -251,19 +259,19 @@ void free_hash_table(p_hashtable_t table)
         {
             p_hashelem_t cur = ary[iter];
             //holy fuck this seems dangerous
-
+            if(cur == NULL)
+            {
+                continue;
+            }
             while(cur) 
             {
-                
                 cur = free_hash_element(cur, table->freedata);
             }
             if(cur)
                 free_hash_element(cur, table->freedata);
-            free(table->p_tablelist);
-            free(table);
         }
-
-
+        free(table->p_tablelist);
+        free(table);
     }
 
 }
@@ -468,7 +476,7 @@ p_hashelem_t get_from_hash_table(p_hashtable_t table, const char *key)
     }
     else
     {
-        DPRINTF("PARAMATER IS NULL %s:%d", __FILE__, __LINE__);
+        DPRINTF("PARAMATER IS NULL %s:%d\n", __FILE__, __LINE__);
         exit(1);
     }
 }
@@ -478,13 +486,14 @@ void *getdata_from_hash_table(p_hashtable_t table, const char *key)
     p_hashelem_t elem = get_from_hash_table(table, key);
     if(elem)
     {
-        printf("%s\n", elem->p_key);
+        //printf("%s\n", elem->p_key);
         return elem->p_data;
     }
     else
     {
-        DPRINTF("key not in table%s:%d", __FILE__, __LINE__);
-        exit(1);
+        //DPRINTF("key not in table%s:%d\n", __FILE__, __LINE__);
+        //exit(1);
+        return NULL;
     }
 }
 
