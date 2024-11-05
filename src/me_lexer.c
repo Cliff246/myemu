@@ -225,7 +225,6 @@ p_tok_t split_str_into_tokens(char *inp, char sep)
         return NULL;
     p_tok_t p_token_st = malloc_p_toks_st();
     size_t nsep = 1;
-    errno_t err1, err2, err3;
     
         for (char *cur = inp + 1, cprev = *inp; *cur != 0; cur++)
         {
@@ -251,12 +250,7 @@ p_tok_t split_str_into_tokens(char *inp, char sep)
         {
             colary[itr] = prev;
             (p_token_st->p_sz_toks)[itr] = REALLOC_SAFE(p_token_st->p_sz_toks[itr], current - prev + 1);
-            err1 = memcpy_s(p_token_st->p_sz_toks[itr], current - prev + 1, inp + prev, current - prev);
-            if (err1 != 0)
-            {
-                DPRINTF("HUGE ERROR BIG MASSIVE MEMCPY_S ERROR WE DYING %s:%d\n", __FILE__, __LINE__);
-                exit(1);
-            }
+            memcpy(p_token_st->p_sz_toks[itr], inp + prev, current - prev);
 
             p_token_st->p_sz_toks[itr][current - prev] = 0;
             itr++;
@@ -268,19 +262,10 @@ p_tok_t split_str_into_tokens(char *inp, char sep)
     colary[nsep - 1] = prev;
     p_token_st->p_sz_toks[itr] = REALLOC_SAFE(p_token_st->p_sz_toks[itr], (current + prev + 1) * sizeof(char));
 
-    err2 = memcpy_s(p_token_st->p_u_col, nsep * sizeof(size_t), colary, nsep * sizeof(size_t));
-    if (err2 != 0)
-    {
-        DPRINTF("HUGE ERROR BIG MASSIVE MEMCPY_S ERROR WE DYING %s:%d\n", __FILE__, __LINE__);
-        exit(1);
-    }
-    err3 = memcpy_s(p_token_st->p_sz_toks[itr], current - prev + 1, inp + prev, current - prev);
-    if (err3 != 0)
-    {
-        DPRINTF("HUGE ERROR BIG MASSIVE MEMCPY_S ERROR WE DYING %s:%d\n", __FILE__, __LINE__);
-        exit(1);
-    }
+    memcpy(p_token_st->p_u_col, colary, nsep * sizeof(size_t));
+    memcpy(p_token_st->p_sz_toks[itr], inp + prev, current - prev);
     p_token_st->p_sz_toks[itr][current - prev] = 0;
+
     return p_token_st;
 }
 
