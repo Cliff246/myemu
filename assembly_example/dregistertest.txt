@@ -1,0 +1,14 @@
+$str
+    u10 u20
+
+dregtest_:
+    NOTHING_
+    SET_I__D 0xffff
+    MV_D_AB_
+    MV_D_XY_
+    
+    __STOP__
+
+
+START:
+    JMP____I dregtest_

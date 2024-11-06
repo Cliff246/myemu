@@ -5,8 +5,8 @@
 
 typedef unsigned short ushort;
 
-#define DEBUG 1
-#define REALLOC_SAFE_REPORTS 1
+#define DEBUG 0
+#define REALLOC_SAFE_REPORTS 0
 #define HASHTABLE_LENGTH 10000
 
 
@@ -15,6 +15,8 @@ typedef unsigned short ushort;
 #define GETBIT(n, k) (1 & (n >> k))
 
 #define BIT(n) (0x01 << n)
+#define SETBYTE(n, v, k) (unsigned char)(((ushort)n & ~(0xFF << ((k) * 8))) | ((v & 0xFF) << ((k) * 8)))
+#define GETBYTE(n, k) (unsigned char)(((ushort)n >> ((k) * 8)) & 0xFF)
 
 #define COMBINE(A, B) ( ((ushort)A) | ( ((ushort)B) << (ushort)0x08) )
 #define SPLITL(A) (char)((ushort)A & 0x00ff)

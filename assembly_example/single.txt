@@ -1,0 +1,7 @@
+function1:
+    SET_A__I -10
+    PUSH_A__
+    __STOP__
+
+START:
+    JMP____I function1

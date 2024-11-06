@@ -112,11 +112,16 @@ void print_str_hex(char *str, bool newline)
 //Maybe return new length
 void reverse(char *ary)
 {
+    errno_t err1, err2;
     size_t len = strlen(ary);
     char tstr[len + 1];
     memset(tstr, 0, len + 1);
-    strcpy(tstr, ary);
-
+    err1 = strcpy_s(tstr,len * sizeof(char) + 1 , ary);
+    if(err1 != 0)
+    {
+        DPRINTF("HUGE STRCPY_S ERROR IN %s:%d", __FILE__, __LINE__);
+        exit(1);
+    }
     int initial = 0, end = len - 1;
     for (int i = initial; i < end; i++) 
     {
@@ -125,13 +130,19 @@ void reverse(char *ary)
         tstr[end] = temp;
         end--;
     }  
-    strcpy(ary, tstr);
+    err2 = strcpy_s(ary,len * sizeof(char) + 1 , tstr);
+    if(err2 != 0)
+    {
+        DPRINTF("HUGE STRCPY_S ERROR IN %s:%d", __FILE__, __LINE__);
+        exit(1);
+    }
 
 }
 
 //Maybe return new length
 void trimr(char *pc)
 {
+    errno_t err1;
     size_t len = strlen(pc);
     char strip[len + 1];
     memset(strip, 0, len + 1);
@@ -143,7 +154,6 @@ void trimr(char *pc)
     while(*op++) 
     {
         if(stoptrim == true)
-
         {
             strip[index++] = *op;
         }
@@ -155,12 +165,18 @@ void trimr(char *pc)
 
     }
     reverse(strip);
-    strcpy(pc, strip);
+    err1 = strcpy_s(pc, len * sizeof(char) + 1, strip);
+    if(err1 != 0)
+    {
+        DPRINTF("HUGE STRCPY_S ERROR IN %s:%d", __FILE__, __LINE__);
+        exit(1);
+    }
 }
 
 
 void triml(char *pc)
 {    
+    errno_t err1;
     size_t len = strlen(pc);
     char strip[len + 1];
     memset(strip, 0, len + 1);
@@ -181,14 +197,18 @@ void triml(char *pc)
         }
         op++;
     }
-    strcpy(pc, strip);
+    err1 = strcpy_s(pc, len * sizeof(char) + 1, strip);
+    if(err1 != 0)
+    {
+        DPRINTF("HUGE STRCPY_S ERROR IN %s:%d", __FILE__, __LINE__);
+        exit(1);
+    }
 }
 
 bool cmpstrings(const char *str1, const char *str2)
-
 {
-    size_t l1 = strlen(str1);
-    size_t l2 = strlen(str2);
+    size_t l1 = strnlen(str1, 1000);
+    size_t l2 = strnlen(str2, 1000);
 
     for (size_t i1 = 0; i1 < MAX(l1,l2); i1++)
     {

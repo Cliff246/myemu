@@ -1,6 +1,5 @@
-
-
-
+$data 
+     'h' 'e' 'l' 'l' 'o' 0
 
 backtrack:
     NOTHING_
@@ -39,19 +38,14 @@ multiply_:
 ;takes two numbers multiplyies them and multiply by two agin then subtract
 main:
     NOTHING_
-    SET_I__A 0x02
+    SET_I__A u2
     PUSH_A__
-    SET_I__A 0x10
-    PUSH_A__
-    SET_I__A 0x00
-    CALLF_II multiply_
-    PUSH_A__
-    SET_I__A 0x02
+    SET_I__A u10
     PUSH_A__
     SET_I__A 0x00
     CALLF_II multiply_
     MOVE_A_C
-    SET_I__A 0x01
+    SET_I__A u5
     MOVE_A_B
     MOVE_C_A
     SUBC_ABC

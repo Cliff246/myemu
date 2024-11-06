@@ -1,0 +1,36 @@
+$string
+    'h' 'e' 'l' 'l' 'o' 0x00
+
+back:
+    NOTHING_
+    RETURN__
+
+print_and_inc:
+    NOTHING_
+    MV_A_X__
+    SET_I_AB string
+    
+    MV_A_C__
+    
+    MV_X_A__
+    M_GET_AB
+
+    PRINTC_A
+    MV_X_A__
+    INC_A___
+    JMP____I print_and_inc
+
+main:
+    NOTHING_
+    SET_I__A u7
+    MV_A_X__
+    MV_X_Y__
+    SET_I__A u0
+    MV_A_X__
+    CALLF_II print_and_inc
+    __STOP__
+    
+
+
+START:
+    JMP____I main

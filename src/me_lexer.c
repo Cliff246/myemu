@@ -85,9 +85,9 @@ p_tok_t malloc_p_toks_st()
     return tok;
 }
 
-void free_p_toks_st(p_tok_t *token)
+void free_p_toks_st(p_tok_t token)
 {
-    const p_tok_t tok = *token;
+    const p_tok_t tok = token;
 
     if (token == NULL)
     {
@@ -103,16 +103,15 @@ void free_p_toks_st(p_tok_t *token)
         }
         free(tok->p_sz_toks);
         free(tok);
-       DPRINTF("freed token %p\n", token);
+        //DPRINTF("freed token %p\n", token);
         // I AM GOING TO TRUST THIS IS FREED CAUSE (IDOIT)
     }
     else
     {
         free(tok);
-        DPRINTF("token ptr not defined, freed anyways %s:%d\n", __FILE__, __LINE__);
+        //DPRINTF("token ptr not defined, freed anyways %s:%d\n", __FILE__, __LINE__);
         // fuck it free it anyways
     }
-    *token = NULL;
 }
 
 p_tok_t copy_p_toks_st(p_tok_t ref)
@@ -230,7 +229,7 @@ p_tok_t split_str_into_tokens(char *inp, char sep)
         {
             if (*cur == sep && cprev != sep)
             {
-                DPRINTF("%c\n", *cur);
+                //DPRINTF("%c\n", *cur);
                 nsep += 1;
             }
             cprev = *cur;
@@ -239,6 +238,7 @@ p_tok_t split_str_into_tokens(char *inp, char sep)
 
     size_t prev = 0, current = 1, itr = 0;
     size_t *colary = (size_t *)malloc(sizeof(size_t) * nsep);
+    size_t allocatedsize = sizeof(size_t) * nsep;
     if(!colary)
     {
         exit(1);
@@ -249,6 +249,7 @@ p_tok_t split_str_into_tokens(char *inp, char sep)
         if (*n == sep && pchar != sep)
         {
             colary[itr] = prev;
+            //DPRINTF("current - prev + 1 %d\n", current - prev + 1);
             (p_token_st->p_sz_toks)[itr] = REALLOC_SAFE(p_token_st->p_sz_toks[itr], current - prev + 1);
             memcpy(p_token_st->p_sz_toks[itr], inp + prev, current - prev);
 
@@ -260,7 +261,7 @@ p_tok_t split_str_into_tokens(char *inp, char sep)
         pchar = *n;
     }
     colary[nsep - 1] = prev;
-    p_token_st->p_sz_toks[itr] = REALLOC_SAFE(p_token_st->p_sz_toks[itr], (current + prev + 1) * sizeof(char));
+    p_token_st->p_sz_toks[itr] = REALLOC_SAFE(p_token_st->p_sz_toks[itr], current + prev + 1);
 
     memcpy(p_token_st->p_u_col, colary, nsep * sizeof(size_t));
     memcpy(p_token_st->p_sz_toks[itr], inp + prev, current - prev);

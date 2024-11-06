@@ -2,7 +2,7 @@
 
 main:
     NOTHING_
-    SET_A__I 0x00
+    SET_I__A u25
     PUSH_A__
     OUTPUT_A
 START:

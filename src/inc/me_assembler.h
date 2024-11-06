@@ -9,9 +9,9 @@ extern size_t errorcount;
 
 typedef enum
 {
+    none,
     function,
     constant,
-    none,
 } section_type_t;
 
 typedef enum 
