@@ -238,7 +238,6 @@ p_tok_t split_str_into_tokens(char *inp, char sep)
 
     size_t prev = 0, current = 1, itr = 0;
     size_t *colary = (size_t *)malloc(sizeof(size_t) * nsep);
-    size_t allocatedsize = sizeof(size_t) * nsep;
     if(!colary)
     {
         exit(1);

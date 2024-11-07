@@ -5,7 +5,7 @@
 
 typedef unsigned short ushort;
 
-#define DEBUG 0
+#define DEBUG 1
 #define REALLOC_SAFE_REPORTS 0
 #define HASHTABLE_LENGTH 10000
 
@@ -72,8 +72,7 @@ void *__realloc_s_nofun(void *ptr, size_t size, const char *src_file, size_t lin
 void print_bin(long bin, char len, bool newline);
 void print_hex(char hex, bool newline);
 void print_str_hex(char *str, bool newline);
-
-
+void print_range(char *range, size_t start, size_t stop, size_t size);
 
 int64_t hash(const char *key);
 p_hashtable_t new_hash_table(size_t size, free_hashtable_data_ptr freedata);

@@ -1,29 +1,35 @@
-$data 
-     'h' 'e' 'l' 'l' 'o' 0
+
+$num1
+    u25
+$num2
+    u25
+
 
 backtrack:
     NOTHING_
-    MOVE_C_A
+    MV_DL_A_
     OUTPUT_A
+    MV_DH_A_
+    OUTPUT_A
+    OUTPUT_D
     RETURN__
 
 
 multiply_helper:
     NOTHING_ 
-
     PUSH_A__
-    MOVE_B_C
-    MOVE_X_A
+    MV_B_C__
+    MV_X_A__
     SET_I__B 0x00
     CMP__A_B
-    MOVE_A_X
+    MV_A_X__
     JMP_EQ_I backtrack
-    MOVE_C_B
+    MV_C_B__
     POP_A___
+    ADD_AB_D
     ADDC_ABC
-    MOVE_C_B
+    MV_C_B__
     DEC_X___
-    
     JMP____I multiply_helper
 
 
@@ -31,26 +37,19 @@ multiply_helper:
 multiply_:
     NOTHING_
     POP_A___
-    MOVE_A_X
+    MV_A_X__
     POP_A___
     JMP____I multiply_helper
     
 ;takes two numbers multiplyies them and multiply by two agin then subtract
 main:
     NOTHING_
-    SET_I__A u2
+    M_GET_II num1
     PUSH_A__
-    SET_I__A u10
+    M_GET_II num2
     PUSH_A__
-    SET_I__A 0x00
+    SET_I__A u0
     CALLF_II multiply_
-    MOVE_A_C
-    SET_I__A u5
-    MOVE_A_B
-    MOVE_C_A
-    SUBC_ABC
-    MOVE_C_A
-    OUTPUT_A
     __STOP__
 
 

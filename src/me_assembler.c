@@ -323,11 +323,11 @@ size_t convert_token_to_bytes(char *str, argument_type_t type, char *bytes, size
         }
         if (type == e_char)
         {
-            //DPRINTF("%s\n", str);
+            // DPRINTF("%s\n", str);
 
             if (str[0] == 0x27 && str[2] == 0x27 && bytes_len == 1 && len == 3)
             {
-                //DPRINTF("%c\n", str[1]);
+                // DPRINTF("%c\n", str[1]);
 
                 bytes[0] = str[1];
             }
@@ -450,7 +450,7 @@ void free_memsegment(p_memseg_t memseg)
     memseg = NULL;
 }
 
-p_section_t new_section(section_type_t type)
+p_section_t new_section(section_type_t type, char *key)
 {
     static int id = 1;
     const int initlen = 0, initalloc = 10;
@@ -464,6 +464,7 @@ p_section_t new_section(section_type_t type)
         sect->sectype = type;
         sect->initalized = 0;
         sect->id = id++;
+        sect->keystr = key;
         return sect;
     }
 }
@@ -503,6 +504,7 @@ void free_section(p_section_t section)
         // print_p_toks_st(section->toks[i]);
         free_p_toks_st(section->toks[i]);
     }
+    free(section->keystr);
     free(section->toks);
     free(section);
 }
@@ -534,10 +536,10 @@ void add_to_program(p_program_t program, p_memseg_t segment)
             if (program->n_used + (segment->memstop - segment->memstart) >= program->n_memorysize)
             {
                 program->p_program = REALLOC_SAFE(program->p_program, program->n_memorysize + program->n_increment);
-                //DPRINTF("TEST %d\n", program->n_memorysize);
-                memset(program->p_program + program->n_memorysize, 0, program->n_increment );
+                // DPRINTF("TEST %d\n", program->n_memorysize);
+                memset(program->p_program + program->n_memorysize, 0, program->n_increment);
                 program->n_memorysize += program->n_increment;
-            } 
+            }
             else
             {
                 going = false;
@@ -547,7 +549,7 @@ void add_to_program(p_program_t program, p_memseg_t segment)
         {
 
             program->p_program[program->n_used++] = segment->mem_bytes[i];
-            //printf("used=%d byte=%x\n", program->n_used, segment->mem_bytes[i]);
+            // printf("used=%d byte=%x\n", program->n_used, segment->mem_bytes[i]);
         }
     }
 }
@@ -587,9 +589,7 @@ void stage1(p_context_t context, p_program_t program)
             key = first;
             iscurrent = true;
             section_current_start = iter_line;
-            p_section_t current = new_section(function);
-
-            sections[sections_count++] = current;
+            
 
             size_t firstlength = strlen(first);
             char *tempkey = (char *)calloc((firstlength - 1), sizeof(char));
@@ -605,8 +605,10 @@ void stage1(p_context_t context, p_program_t program)
                 exit(1);
             }
             memcpy(tempkey, first, tocopy_count);
+            p_section_t current = new_section(function, tempkey);
 
-            //DPRINT("new function\n");
+            sections[sections_count++] = current;
+            // DPRINT("new function\n");
             void *ref = make_reference(current);
 
             if (cmpstrings(tempkey, "START"))
@@ -615,16 +617,13 @@ void stage1(p_context_t context, p_program_t program)
             }
 
             addto_hash_table(identifier_table, tempkey, ref);
-            free(tempkey);
         }
         else if (firstchar == '$')
         {
             key = first;
             iscurrent = true;
             section_current_start = iter_line;
-            p_section_t current = new_section(constant);
-
-            sections[sections_count++] = current;
+           
 
             size_t firstlength = strlen(first);
             char *tempkey = (char *)calloc((firstlength - 1), sizeof(char));
@@ -638,12 +637,13 @@ void stage1(p_context_t context, p_program_t program)
             {
             }
             memcpy(tempkey, first + 1, tocopy_count);
+            p_section_t current = new_section(constant, tempkey);
 
+            sections[sections_count++] = current;
             DPRINT("new data\n");
             printf("%s\n", tempkey);
             void *ref = make_reference(current);
             addto_hash_table(identifier_table, tempkey, ref);
-            free(tempkey);
         }
         else if (line->p_u_col[0] > 0)
         {
@@ -657,7 +657,7 @@ void stage1(p_context_t context, p_program_t program)
             update_section(sections[sections_count - 1], line);
             print_section(sections[sections_count - 1]);
         }
-        //print_p_toks_string(line);
+        // print_p_toks_string(line);
     }
     if (iscurrent)
     {
@@ -703,8 +703,8 @@ void stage2(p_context_t context, p_program_t program, p_section_t *sections, int
         }
 
         // DPRINTF("___________%d__________\n", temp->id);
-        // LINE; 
-        //print_section(temp);
+        // LINE;
+        // print_section(temp);
 
         for (int i = 0; i < temp->len; i++)
         {
@@ -724,19 +724,19 @@ void stage2(p_context_t context, p_program_t program, p_section_t *sections, int
 
                 if (temp->sectype == function)
                 {
-                    //DPRINT("function ");
+                    // DPRINT("function ");
                     if (iter_token == 0)
                     {
 
                         instruction = compare_with_instructions(p_sz_tok);
 
-                        if(instruction > sizeof(str_instructions) / sizeof(*str_instructions) || instruction < 0)
+                        if (instruction > sizeof(str_instructions) / sizeof(*str_instructions) || instruction < 0)
                         {
                             DPRINTF("%s UNKNOWN INST\n", p_sz_tok);
                             exit(1);
                         }
                         nargs = len_instructions[instruction];
-                        //DPRINTF("inst->%d nargs->%d\n", instruction, nargs);
+                        // DPRINTF("inst->%d nargs->%d\n", instruction, nargs);
                         bytestack[stacklen++] = instruction;
                         continue;
                     }
@@ -748,7 +748,7 @@ void stage2(p_context_t context, p_program_t program, p_section_t *sections, int
                         if (data != NULL)
                         {
                             p_reference_t ref = get_reference(data);
-                            DPRINTF("REFERENCE %p\n", &ref );
+                            DPRINTF("REFERENCE %p\n", &ref);
                             type = e_ptr;
                             if (ref->sect->initalized == true)
                             {
@@ -774,51 +774,51 @@ void stage2(p_context_t context, p_program_t program, p_section_t *sections, int
                                 exit(1);
                             }
 
-                            continue;
+
                         }
                         else
                         {
                             type = get_argument_type(p_sz_tok);
-                        }
-                        print_argumenttype(type);
 
-                        int size = decode_nbytes_for_argument(type, p_sz_tok);
-                        char bytes[size];
-                        // DPRINTF("argument size: %d\n", size);
-                        
-                        size_t setcount = convert_token_to_bytes(p_sz_tok, type, bytes, size);
-                        if (nargs != setcount)
-                        {
-                            LINE;
-                            DPRINTF("TOO MANY ARGUMENTS %d %d\n", nargs, setcount);
-                            DPRINTF("%s\n", p_sz_tok);
-                            exit(1);
-                        }
+                            print_argumenttype(type);
 
-                        for (int byteiter = 0; byteiter < setcount; byteiter++)
-                        {
-                            // DPRINTF("0x%02x\n", (unsigned char)bytes[byteiter]);
-                            bytestack[stacklen++] = (unsigned char)bytes[byteiter];
+                            int size = decode_nbytes_for_argument(type, p_sz_tok);
+                            char bytes[size];
+                            // DPRINTF("argument size: %d\n", size);
+
+                            size_t setcount = convert_token_to_bytes(p_sz_tok, type, bytes, size);
+                            if (nargs != setcount)
+                            {
+                                LINE;
+                                DPRINTF("TOO MANY ARGUMENTS %d %d\n", nargs, setcount);
+                                DPRINTF("%s\n", p_sz_tok);
+                                exit(1);
+                            }
+
+                            for (int byteiter = 0; byteiter < setcount; byteiter++)
+                            {
+                                // DPRINTF("0x%02x\n", (unsigned char)bytes[byteiter]);
+                                bytestack[stacklen++] = (unsigned char)bytes[byteiter];
+                            }
                         }
-                       
                     }
                 }
-                else if(temp->sectype == constant)
+                else if (temp->sectype == constant)
                 {
-                    //DPRINT("constant ");
+                    // DPRINT("constant ");
                     argument_type_t type = e_error;
 
                     type = get_argument_type(p_sz_tok);
-                    //print_argumenttype(type);
+                    // print_argumenttype(type);
 
                     int size = decode_nbytes_for_argument(type, p_sz_tok);
                     char bytes[size];
-                    //DPRINTF("argument size: %d\n", size);
+                    // DPRINTF("argument size: %d\n", size);
 
                     size_t setcount = convert_token_to_bytes(p_sz_tok, type, bytes, size);
                     for (int byteiter = 0; byteiter < setcount; byteiter++)
                     {
-                        //DPRINTF("0x%02x\n", (unsigned char)bytes[byteiter]);
+                        // DPRINTF("0x%02x\n", (unsigned char)bytes[byteiter]);
                         bytestack[stacklen++] = (unsigned char)bytes[byteiter];
                     }
                 }
@@ -826,18 +826,18 @@ void stage2(p_context_t context, p_program_t program, p_section_t *sections, int
                 // line behavior
             }
         }
-        //DPRINTF("%d %d\n", bytecurrent, stacklen);
-        
+        // DPRINTF("%d %d\n", bytecurrent, stacklen);
+
         p_memseg_t segment = make_memsegment(bytestack, bytecurrent, bytecurrent + stacklen);
-         //print_memsegment(segment);
+        // print_memsegment(segment);
         // DPRINTF("section initalized = true %p\n", temp);
         temp->initalized = true;
         temp->sector = segment;
         segments[isec] = segment;
         free(bytestack);
         bytecurrent += stacklen;
-        //print_section(sections[isec]);
-        //print_memsegment(sections[isec]->sector);
+        // print_section(sections[isec]);
+        // print_memsegment(sections[isec]->sector);
     }
 
     // print_memsegment(segments[startsegment_iter]);
@@ -849,12 +849,12 @@ void stage2(p_context_t context, p_program_t program, p_section_t *sections, int
             continue;
         add_to_program(program, segments[i]);
 
-        //print_memsegment(segments[i]);
+        // print_memsegment(segments[i]);
     }
-    //printf("%d %d %d\n",program->n_increment, program->n_used, program->n_memorysize );
+    // printf("%d %d %d\n",program->n_increment, program->n_used, program->n_memorysize );
 }
 
-int assemble(char *dir, char **bytes)
+int assemble(const char *dir, char **bytes)
 {
 
     p_tok_t *tokens = NULL;
@@ -885,6 +885,6 @@ int assemble(char *dir, char **bytes)
 
     *bytes = program.p_program;
     LINE;
-    printrange(program.p_program, 0, 64, program.n_memorysize);
+    print_range(program.p_program, 0, 64, program.n_memorysize);
     return program.n_used;
 }

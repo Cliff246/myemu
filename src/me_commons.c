@@ -112,16 +112,10 @@ void print_str_hex(char *str, bool newline)
 //Maybe return new length
 void reverse(char *ary)
 {
-    errno_t err1, err2;
     size_t len = strlen(ary);
     char tstr[len + 1];
     memset(tstr, 0, len + 1);
-    err1 = strcpy_s(tstr,len * sizeof(char) + 1 , ary);
-    if(err1 != 0)
-    {
-        DPRINTF("HUGE STRCPY_S ERROR IN %s:%d", __FILE__, __LINE__);
-        exit(1);
-    }
+    strcpy(tstr, ary);
     int initial = 0, end = len - 1;
     for (int i = initial; i < end; i++) 
     {
@@ -130,19 +124,13 @@ void reverse(char *ary)
         tstr[end] = temp;
         end--;
     }  
-    err2 = strcpy_s(ary,len * sizeof(char) + 1 , tstr);
-    if(err2 != 0)
-    {
-        DPRINTF("HUGE STRCPY_S ERROR IN %s:%d", __FILE__, __LINE__);
-        exit(1);
-    }
-
+    strcpy(ary, tstr);
+   
 }
 
 //Maybe return new length
 void trimr(char *pc)
 {
-    errno_t err1;
     size_t len = strlen(pc);
     char strip[len + 1];
     memset(strip, 0, len + 1);
@@ -165,18 +153,12 @@ void trimr(char *pc)
 
     }
     reverse(strip);
-    err1 = strcpy_s(pc, len * sizeof(char) + 1, strip);
-    if(err1 != 0)
-    {
-        DPRINTF("HUGE STRCPY_S ERROR IN %s:%d", __FILE__, __LINE__);
-        exit(1);
-    }
+    strcpy(pc, strip);
 }
 
 
 void triml(char *pc)
 {    
-    errno_t err1;
     size_t len = strlen(pc);
     char strip[len + 1];
     memset(strip, 0, len + 1);
@@ -197,12 +179,7 @@ void triml(char *pc)
         }
         op++;
     }
-    err1 = strcpy_s(pc, len * sizeof(char) + 1, strip);
-    if(err1 != 0)
-    {
-        DPRINTF("HUGE STRCPY_S ERROR IN %s:%d", __FILE__, __LINE__);
-        exit(1);
-    }
+    strcpy(pc, strip);
 }
 
 bool cmpstrings(const char *str1, const char *str2)
@@ -533,4 +510,37 @@ void print_hash_table(p_hashtable_t table)
     }
 
 
+}
+
+void print_range(char *range, size_t start, size_t stop, size_t size)
+{
+    if (size < stop)
+    {
+        return;
+    }
+    int instruction = range[start];
+    int arglen = 0;
+    for (size_t i = start; i < stop; i++)
+    {
+        print_bin(range[i], 8, 0);
+        printf(" %02lld  %04d ", i, range[i]);
+
+        print_hex(range[i], 0);
+        printf(" ");
+        if (isprint(range[i]))
+        {
+            printf("|%c| ", range[i]);
+        }
+        else
+        {
+            printf("____");
+        }
+
+        if (range[i] >= 0 && range[i] < sizeof(str_instructions) / sizeof(*str_instructions))
+        {
+            printf(" %s", str_instructions[(size_t)range[(int)i]]);
+            instruction = range[i];
+        }
+        printf("\n");
+    }
 }

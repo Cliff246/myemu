@@ -65,6 +65,7 @@ typedef struct
     int id;
     p_memseg_t sector;
     p_tok_t *toks;
+    char *keystr;
 } section_t, *p_section_t;
 
 typedef struct reference
@@ -75,7 +76,7 @@ typedef struct reference
 //this is to set the copy equal to NULL
 //may not be best idea
 
-p_section_t new_section(section_type_t type);
+p_section_t new_section(section_type_t type, char *key);
 void update_section(p_section_t section, p_tok_t tok);
 void free_section(p_section_t section);
 
@@ -84,7 +85,7 @@ void *make_reference();
 p_memseg_t make_memsegment(char *bytes, size_t start, size_t end);
 p_reference_t get_reference(void *ptr);
 // does not free key
-int assemble(char *dir, char **bytes);
+int assemble(const char *dir, char **bytes);
 void free_reference(void *ptr);
 //void assemble(char *dir, size_t size);
 void stage1(p_context_t context, p_program_t program);
