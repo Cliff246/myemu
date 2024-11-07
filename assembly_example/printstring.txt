@@ -7,14 +7,15 @@ back:
 
 print_and_inc:
     NOTHING_
+; 
     MV_A_X__
     SET_I_AB string
-    
+;
     MV_A_C__
-    
+;    
     MV_X_A__
     M_GET_AB
-
+;
     PRINTC_A
     MV_X_A__
     INC_A___
