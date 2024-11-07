@@ -2,10 +2,10 @@
 #define __COMMONS__
 
 
-
+typedef unsigned char uchar;
 typedef unsigned short ushort;
 
-#define DEBUG 1
+#define DEBUG 0
 #define REALLOC_SAFE_REPORTS 0
 #define HASHTABLE_LENGTH 10000
 

@@ -1,7 +1,50 @@
 #ifndef __ME_CPU__
 #define __ME_CPU__
 
+#include "me_commons.h"
+
 #define CYCLES 1000
+
+typedef struct byteset
+{
+    uchar num;
+    char bytes[];
+}byteset_t, *p_byteset_t;
+
+typedef void(*set_register)(p_byteset_t);
+
+#define REGISTER_IDENTIFIER_SIZE 4
+typedef enum vcpu_register_type
+{
+    single;
+    multiple;
+}vreg_type_t;
+
+typedef struct vcpu_register
+{
+
+    char vreg_identifier[REGISTER_IDENTIFIER_SIZE];
+    vreg_type_t vreg_type;
+
+}vreg_t, *p_vreg_t;
+
+typedef struct instruction_set
+{
+
+}instset_t, *p_instset_t;
+
+typedef struct virtual_procesor
+{
+    size_t vcpu_mem_size;
+    size_t vcpu_mem_width;
+    size_t vcpu_mem_alloc;
+    char *vcpu_memory_ptr;
+    p_instset_t vcpu_instructions_set;     
+    size_t vcpu_register_count;
+
+    p_byteset_t 
+    
+}vproc_t, *p_vproc_t;
 
 #define FOREACH_INST(INST)        \
     INST(NOTHING_, 0)             \
