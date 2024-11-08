@@ -1,0 +1,4 @@
+function: ; test
+    SET_I__A 0x00 ; test2
+   ;NOTHING_
+   ;OUTPUT_A

@@ -5,7 +5,7 @@
 typedef unsigned char uchar;
 typedef unsigned short ushort;
 
-#define DEBUG 0
+#define DEBUG 1
 #define REALLOC_SAFE_REPORTS 0
 #define HASHTABLE_LENGTH 10000
 
@@ -98,9 +98,10 @@ void reverse(char *ary);
 void triml(char *pc);
 void trimr(char *pc);
 char last_char(char *ptr);
+size_t getstr_with_cut_chars(char *buffer, size_t buffer_size, const char *p_sz_ref, const char *p_sz_tocut);
+int64_t str_contains(const char *p_sz_ref, char check);
+
 
 bool cmpstrings(const char *str1, const char *str2);
-
-
 
 #endif

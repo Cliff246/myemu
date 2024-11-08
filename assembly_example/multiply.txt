@@ -41,7 +41,7 @@ multiply_:
     POP_A___
     JMP____I multiply_helper
     
-;takes two numbers multiplyies them and multiply by two agin then subtract
+; takes two numbers multiplyies them and multiply by two agin then subtract
 main:
     NOTHING_
     M_GET_II num1

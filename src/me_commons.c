@@ -253,6 +253,8 @@ void free_hash_table(p_hashtable_t table)
 
 }
 
+
+
 p_hashelem_t remove_from_hash_table(p_hashtable_t table, const char *key)
 {
     if(table)
@@ -487,7 +489,7 @@ int64_t hash(const char *key)
 
 void print_hash_elem(p_hashelem_t elem)
 {
-    printf("element: data:%p key:%s next:%p\n", elem->p_data, elem->p_key, elem->p_next);
+    printf("element: data:|%p| key:|%s| next:|%p|\n", elem->p_data, elem->p_key, elem->p_next);
 }
 
 void print_hash_table(p_hashtable_t table)
@@ -543,4 +545,54 @@ void print_range(char *range, size_t start, size_t stop, size_t size)
         }
         printf("\n");
     }
+}
+
+size_t getstr_with_cut_chars(char *buffer, size_t buffer_size, const char *p_sz_ref, const char *p_sz_tocut)
+{
+    const size_t nref_len = strlen(p_sz_ref), ntocut_len = strlen(p_sz_tocut);
+    size_t buffer_iter = 0;
+    if (p_sz_ref && p_sz_tocut && buffer)
+    {
+        for (size_t iter_ref = 0; iter_ref < nref_len; iter_ref++)
+        {
+            if (buffer_iter >= buffer_size)
+            {
+                DPRINTF("buffer overflow %s:%d\n", __FILE__, __LINE__);
+                exit(1);
+            }
+
+            char ref_cur = p_sz_ref[iter_ref];
+            bool addtobuf = true;
+            for (size_t iter_tocut = 0; iter_tocut < ntocut_len; iter_tocut++)
+            {
+                char tocut_cur = p_sz_tocut[iter_tocut];
+                if (ref_cur == tocut_cur)
+                {
+                    addtobuf = false;
+                    break;
+                }
+            }
+            if (addtobuf)
+            {
+                buffer[buffer_iter++] = ref_cur;
+            }
+        }
+        return buffer_iter;
+    }
+    else
+    {
+        DPRINTF("paramters are null %s:%d\n", __FILE__, __LINE__);
+        exit(1);
+    }
+}
+
+int64_t str_contains(const char *p_sz_ref, char check)
+{
+    size_t count = 0;
+    for(char *c = p_sz_ref; *c != 0; c++, count++)
+    {
+        if(*c == check)
+            return count;          
+    }
+    return -1;
 }

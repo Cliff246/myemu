@@ -433,10 +433,10 @@ void print_memsegment(p_memseg_t memseg)
     int size = memseg->memstop - memseg->memstart;
     if (size < 0)
     {
-        DPRINTF("memsegment size failure %s:%d\n", __FILE__, __LINE__);
+        printf("memsegment size failure %s:%d\n", __FILE__, __LINE__);
         exit(1);
     }
-    DPRINTF("start:%llu stop:%llu\n", memseg->memstart, memseg->memstop);
+    printf("start:%llu stop:%llu\n", memseg->memstart, memseg->memstop);
     for (int i = 0; i < size; i++)
     {
         print_hex(memseg->mem_bytes[i], true);
@@ -467,6 +467,7 @@ p_section_t new_section(section_type_t type, char *key)
         sect->keystr = key;
         return sect;
     }
+    return NULL;
 }
 // copies data
 void update_section(p_section_t section, p_tok_t tok)
@@ -477,7 +478,6 @@ void update_section(p_section_t section, p_tok_t tok)
         if (section->len >= section->allocd - 1)
         {
             section->allocd *= 2;
-
             section->toks = REALLOC_SAFE(section->toks, section->allocd * sizeof(p_tok_t));
         }
         // LINE;
@@ -516,11 +516,12 @@ void print_section(p_section_t section)
         DPRINTF("section failed %p\n", section);
     }
     // LINE;
-    DPRINTF("SECTION ptr:%p |len:%d | type:%d\n", section, section->len, section->sectype);
+    printf("SECTION ptr:%p |len:%d | type:%d\n", section, section->len, section->sectype);
+    printf("    keystr:|%s| id:|%d|\n", section->keystr, section->id);
     for (int ilen = 0; ilen < section->len; ilen++)
     {
-        DPRINTF("%5d    ", ilen);
-        print_p_toks_string(section->toks[ilen], false);
+        printf("%5d    ", ilen);
+        print_p_toks_string(section->toks[ilen], true);
     }
     // print_memsegment(section->sector);
     // LINE;
@@ -554,6 +555,30 @@ void add_to_program(p_program_t program, p_memseg_t segment)
     }
 }
 
+
+
+
+p_section_t get_section_and_assign_to_idtable(p_context_t context, char *ref_key, section_type_t type)
+{
+    if(!ref_key)
+    {
+        DPRINTF("ref key empty%s:%d\n", __FILE__, __LINE__);
+        exit(1);
+    }
+    const size_t keylength = strlen(ref_key);
+    char *alloc_key = (char *)calloc(keylength + 1, sizeof(char));
+    if (!alloc_key)
+    {
+        DPRINTF("MALLOC FAILED %s:%d\n", __FILE__, __LINE__);
+        exit(1);
+    }
+    memcpy(alloc_key, ref_key, keylength);
+    p_section_t section = new_section(type, alloc_key);
+    void *ref = make_reference(section);
+    addto_hash_table(context->p_identifier_table, ref_key, ref);
+    return section;
+}
+
 void stage1(p_context_t context, p_program_t program)
 {
     const size_t max_sections = HASHTABLE_LEN;
@@ -565,87 +590,88 @@ void stage1(p_context_t context, p_program_t program)
     p_tok_t *tokens = context->p_tokens;
     p_hashtable_t identifier_table = new_hash_table(HASHTABLE_LEN, free_reference);
     p_section_t *sections = (p_section_t *)calloc(max_sections, sizeof(p_section_t));
+    context->p_identifier_table = identifier_table;
+
+    size_t ntok_buffer_used = 0;
+    size_t ntok_buffer_alloc = 1000;
+    
+    char *tok_buffer = (char *)calloc(ntok_buffer_alloc + 1, sizeof(char));
+
     for (size_t iter_line = 0; iter_line < lines; iter_line++)
     {
         // LINE;
-        p_tok_t line = tokens[iter_line];
-        // print_p_toks_st(line);
-        // print_p_toks_string(line, true);
-
-        if (line->nstr == 0)
-        {
+        p_tok_t p_tok_line = tokens[iter_line];
+        const size_t nstr_line = p_tok_line->nstr;
+        if (p_tok_line->nstr == 0)
             continue;
-        }
-        char *first = line->p_sz_toks[0];
-        char lastchar = last_char(first), firstchar = first[0];
 
-        if (firstchar == ';')
+        bool has_comment = false;
+        size_t comment_split_at = nstr_line;
+        for(size_t iter_p_sz_tok = 0; iter_p_sz_tok < p_tok_line->nstr; iter_p_sz_tok++)
         {
+            
+            int64_t pos = str_contains(p_tok_line->p_sz_toks[iter_p_sz_tok], ';');
+            if(pos != -1)
+            {
+                has_comment = true;
+                comment_split_at = iter_p_sz_tok;
+                break;
+            }
+        }
+        //DPRINTF("%d\n", comment_split_at);
+        //print_p_toks_st(line);
+        //print_p_toks_string(p_tok_line, false);
+
+        char *p_sz_first = p_tok_line->p_sz_toks[0];
+        char lastchar = last_char(p_sz_first), firstchar = p_sz_first[0];
+        const size_t ntok_first_len = strlen(p_sz_first);
+        const size_t nafter_size = nstr_line - comment_split_at,
+            nbefore_size = nstr_line - nafter_size;
+        
+        p_tok_t p_tok_before = cut_p_toks_st(p_tok_line, 0, nbefore_size), 
+            p_tok_after = split_p_toks_st(p_tok_line, comment_split_at);
+        //DPRINTF("%d\n", p_tok_line->nstr);
+        //print_p_toks_string(p_tok_before, true);
+        //DPRINTF("%d\n", p_tok_before->nstr);
+        //print_p_toks_string(p_tok_after, true);
+        //DPRINTF("%d\n", p_tok_after->nstr);
+        if(p_tok_before->nstr == 0)
+        {
+            //print_p_toks_string(p_tok_line, true);
+
+            //printf("Is comment\n");
             continue;
         }
         if (lastchar == ':')
         {
 
-            key = first;
+            const char torem[] = ":";
             iscurrent = true;
             section_current_start = iter_line;
-            
+            ntok_buffer_used = getstr_with_cut_chars(tok_buffer, ntok_buffer_alloc, p_sz_first, torem);
+            //DPRINTF("function %s\n",tok_buffer);
+            p_section_t current = get_section_and_assign_to_idtable(context, tok_buffer, function);
 
-            size_t firstlength = strlen(first);
-            char *tempkey = (char *)calloc((firstlength - 1), sizeof(char));
-            if (!tempkey)
-            {
-                DPRINTF("MALLOC FAILED %s:%d\n", __FILE__, __LINE__);
-                exit(1);
-            }
-            const int tocopy_count = (firstlength - 1);
-            if (tocopy_count < 0)
-            {
-                DPRINTF("MALLOC FAILED %s:%d\n", __FILE__, __LINE__);
-                exit(1);
-            }
-            memcpy(tempkey, first, tocopy_count);
-            p_section_t current = new_section(function, tempkey);
-
-            sections[sections_count++] = current;
-            // DPRINT("new function\n");
-            void *ref = make_reference(current);
-
-            if (cmpstrings(tempkey, "START"))
+            if (cmpstrings(current->keystr, "START"))
             {
                 current->id = 0;
+                //print_section(current);
             }
-
-            addto_hash_table(identifier_table, tempkey, ref);
+            sections[sections_count++] = current;
+            
         }
         else if (firstchar == '$')
         {
-            key = first;
+            
+            const char torem[] = "$";
             iscurrent = true;
             section_current_start = iter_line;
-           
-
-            size_t firstlength = strlen(first);
-            char *tempkey = (char *)calloc((firstlength - 1), sizeof(char));
-            if (!tempkey)
-            {
-                DPRINTF("MALLOC FAILED %s:%d\n", __FILE__, __LINE__);
-                exit(1);
-            }
-            const int tocopy_count = (firstlength - 1);
-            if (tocopy_count < 0)
-            {
-            }
-            memcpy(tempkey, first + 1, tocopy_count);
-            p_section_t current = new_section(constant, tempkey);
-
+            ntok_buffer_used = getstr_with_cut_chars(tok_buffer, ntok_buffer_alloc, p_sz_first, torem);
+            //DPRINTF("constant %s\n", tok_buffer);
+            p_section_t current = get_section_and_assign_to_idtable(context, tok_buffer, constant);
             sections[sections_count++] = current;
-            DPRINT("new data\n");
-            printf("%s\n", tempkey);
-            void *ref = make_reference(current);
-            addto_hash_table(identifier_table, tempkey, ref);
         }
-        else if (line->p_u_col[0] > 0)
+        else if (p_tok_line->p_u_col[0] > 0)
         {
 
             // DPRINTF("inside: %s \n", key);
@@ -654,19 +680,23 @@ void stage1(p_context_t context, p_program_t program)
                 DPRINTF("failed at %s:%d\n", __FILE__, __LINE__);
                 exit(1);
             }
-            update_section(sections[sections_count - 1], line);
-            print_section(sections[sections_count - 1]);
+            //print_p_toks_st(p_tok_before);
+            update_section(sections[sections_count - 1], p_tok_before);
+            //print_section(sections[sections_count - 1]);
         }
         // print_p_toks_string(line);
+        memset(tok_buffer, 0, ntok_buffer_alloc);
+        free_p_toks_st(p_tok_after);
+        free_p_toks_st(p_tok_before);
     }
     if (iscurrent)
     {
         // addto_hash_table(identifier_table, key, make_reference());
     }
-    context->p_identifier_table = identifier_table;
-    print_hash_table(context->p_identifier_table);
-
-    stage2(context, program, sections, sections_count);
+    //print_hash_table(context->p_identifier_table);
+    context->p_sections = sections;
+    context->n_sections = sections_count; 
+    stage2(context, program);
 
     for (int isec = 0; isec < sections_count; isec++)
     {
@@ -677,14 +707,15 @@ void stage1(p_context_t context, p_program_t program)
     free(sections);
 }
 
-void stage2(p_context_t context, p_program_t program, p_section_t *sections, int len)
+void stage2(p_context_t context, p_program_t program)
 {
     // LINE;
     // DPRINT("STAGE2\n");
 
     p_hashtable_t table = context->p_identifier_table;
     // print_hash_table(context->p_identifier_table);
-
+    p_section_t *sections = context->p_sections;
+    int len = context->n_sections;
     p_memseg_t *segments = (p_memseg_t *)calloc(len, sizeof(p_memseg_t));
     int bytecurrent = 3;
     int startsegment_iter = 0;
@@ -696,7 +727,7 @@ void stage2(p_context_t context, p_program_t program, p_section_t *sections, int
         char *bytestack = (char *)calloc(stackalloc, sizeof(char));
 
         p_section_t temp = sections[isec];
-        print_section(temp);
+        //print_section(temp);
         if (temp->id == 0)
         {
             startsegment_iter = isec;
@@ -720,7 +751,7 @@ void stage2(p_context_t context, p_program_t program, p_section_t *sections, int
             for (int iter_token = 0; iter_token < scroll->nstr; iter_token++)
             {
                 char *p_sz_tok = scroll->p_sz_toks[iter_token];
-                DPRINTF("%s\n", p_sz_tok);
+                //DPRINTF("%s\n", p_sz_tok);
 
                 if (temp->sectype == function)
                 {
@@ -748,14 +779,14 @@ void stage2(p_context_t context, p_program_t program, p_section_t *sections, int
                         if (data != NULL)
                         {
                             p_reference_t ref = get_reference(data);
-                            DPRINTF("REFERENCE %p\n", &ref);
+                            //DPRINTF("REFERENCE %p\n", &ref);
                             type = e_ptr;
                             if (ref->sect->initalized == true)
                             {
-                                DPRINT("defined section \n");
+                                //DPRINT("defined section \n");
                                 unsigned int start = ref->sect->sector->memstart;
 
-                                DPRINTF("PTR = %d\n", start);
+                                //DPRINTF("PTR = %d\n", start);
 
                                 bytestack[stacklen++] = (unsigned char)start & 0xff;
                                 bytestack[stacklen++] = (unsigned char)start >> 8;
@@ -780,7 +811,7 @@ void stage2(p_context_t context, p_program_t program, p_section_t *sections, int
                         {
                             type = get_argument_type(p_sz_tok);
 
-                            print_argumenttype(type);
+                            //print_argumenttype(type);
 
                             int size = decode_nbytes_for_argument(type, p_sz_tok);
                             char bytes[size];
@@ -827,7 +858,7 @@ void stage2(p_context_t context, p_program_t program, p_section_t *sections, int
             }
         }
         // DPRINTF("%d %d\n", bytecurrent, stacklen);
-
+        
         p_memseg_t segment = make_memsegment(bytestack, bytecurrent, bytecurrent + stacklen);
         // print_memsegment(segment);
         // DPRINTF("section initalized = true %p\n", temp);
@@ -876,7 +907,14 @@ int assemble(const char *dir, char **bytes)
     p_asmerr_t *asmerr_array = (p_asmerr_t *)calloc(asmerr_ary_len, sizeof(asmerr_t));
 
     program_t program = {.p_program = program_ptr, .n_memorysize = increment, .n_increment = increment, .n_used = 0};
-    context_t context = {.nlines = lines, .p_identifier_table = NULL, .p_sz_fname = dir, .p_tokens = tokens};
+    context_t context = {
+        .nlines = lines,
+        .p_identifier_table = NULL,
+        .p_sz_fname = dir,
+        .p_tokens = tokens,
+        .p_sections = NULL,
+        .n_sections = 0
+    };
     stage1(&context, &program);
     asmerr_array[0] = NULL;
     free_hash_table(context.p_identifier_table);
@@ -884,7 +922,7 @@ int assemble(const char *dir, char **bytes)
     // DPRINT("End\n");
 
     *bytes = program.p_program;
-    LINE;
+   // LINE;
     print_range(program.p_program, 0, 64, program.n_memorysize);
     return program.n_used;
 }

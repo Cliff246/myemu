@@ -43,20 +43,6 @@ typedef struct assembler_error
 
 } asmerr_t, *p_asmerr_t;
 
-typedef struct context
-{
-    p_hashtable_t p_identifier_table;
-    char *p_sz_fname;
-    size_t nlines;
-    p_tok_t *p_tokens;
-}context_t, *p_context_t;
-
-typedef struct program
-{
-    char *p_program;
-    size_t n_memorysize, n_increment, n_used;
-}program_t, *p_program_t;
-
 typedef struct
 {
     size_t len, allocd;
@@ -72,6 +58,24 @@ typedef struct reference
 {
     p_section_t sect;
 } reference_t, *p_reference_t;
+
+typedef struct context
+{
+    p_hashtable_t p_identifier_table;
+    char *p_sz_fname;
+    size_t nlines;
+    p_tok_t *p_tokens;
+    size_t n_sections;
+    p_section_t *p_sections;
+}context_t, *p_context_t;
+
+typedef struct program
+{
+    char *p_program;
+    size_t n_memorysize, n_increment, n_used;
+}program_t, *p_program_t;
+
+
 
 //this is to set the copy equal to NULL
 //may not be best idea
@@ -89,6 +93,6 @@ int assemble(const char *dir, char **bytes);
 void free_reference(void *ptr);
 //void assemble(char *dir, size_t size);
 void stage1(p_context_t context, p_program_t program);
-void stage2(p_context_t context, p_program_t program, p_section_t *sections, int len);
+void stage2(p_context_t context, p_program_t program);
 
 #endif

@@ -19,7 +19,7 @@
             "cppStandard": "${default}",
             "browse": {
                 "path": [
-                    "${workspaceFolder}/src/inc"
+                    "${workspaceFolder}/**"
                 ]
             }
         }

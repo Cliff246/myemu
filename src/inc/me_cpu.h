@@ -16,8 +16,8 @@ typedef void(*set_register)(p_byteset_t);
 #define REGISTER_IDENTIFIER_SIZE 4
 typedef enum vcpu_register_type
 {
-    single;
-    multiple;
+    single, 
+    multiple,
 }vreg_type_t;
 
 typedef struct vcpu_register

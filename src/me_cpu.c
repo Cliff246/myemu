@@ -4,13 +4,6 @@
 
 void emulate(char *program, size_t size, int cycles)
 {
-#define EMULATOR_RAM 1024
-    unsigned char memory[EMULATOR_RAM];
-    ushort pc = 0, sp = 1024 - 100, rp = 0;
-    ushort reg_D = 0;
-    unsigned char reg_A = 0, reg_B = 0, reg_C = 0, reg_X = 0, reg_Y = 0, reg_flg = 0;
-    memset(memory, 0, EMULATOR_RAM * sizeof(*memory));
-    memcpy(memory, program, sizeof(program) * size);
 #define GET_CONDITON_FLAG ((char)reg_flg & 3)
 #define SET_CONDITON_FLAG(x) (reg_flg += ((char)x & 3))
 #define A_NOT_EQUAL__B 0
@@ -19,13 +12,22 @@ void emulate(char *program, size_t size, int cycles)
 #define A_IS_SMALLER_B 3
 #define NEXT (memory[++pc])
 #define UPDATENEXT DPRINTF("item %u at address %d\n", memory[pc], pc)
+#define EMULATOR_RAM 1024
+    unsigned char memory[EMULATOR_RAM];
+    ushort pc = 0, sp = 1024 - 100, rp = 0;
+    ushort reg_D = 0;
+    unsigned char reg_A = 0, reg_B = 0, reg_C = 0, reg_X = 0, reg_Y = 0, reg_flg = 0;
+    memset(memory, 0, EMULATOR_RAM * sizeof(*memory));
+    memcpy(memory, program, sizeof(program) * size);
+
     print_range(memory, 0, 80, 1024);
     char inst[CYCLES];
     memset(inst, 0, CYCLES);
-    int con = 1;
+    bool con = true;
     size_t i = 0;
     while(con)
     {
+
         if(i >= cycles && cycles != -1)
         {
             break;
@@ -35,7 +37,6 @@ void emulate(char *program, size_t size, int cycles)
         int opcode = startpc[memory],
             oplen = len_instructions[opcode];
         // DPRINTF("%d %d\n", opcode, oplen);
-
 #ifdef DEBUG
         DPRINTF("pc ->%d sp->%d\n", pc, sp);
         DPRINTF("A= %d, B= %d, C= %d X=%d Y=%d\n", reg_A, reg_B, reg_C, reg_X, reg_Y);
@@ -43,24 +44,27 @@ void emulate(char *program, size_t size, int cycles)
         // printrange(memory, 1024 - 100, 1024-90, 1024);
 
         DPRINTF("opcode ->%s oplen ->%d\n\n", str_instructions[opcode], oplen);
-#endif
+        // print_bin(reg_flg, 8, 1);
+        if (oplen == 2)
+        {
+            DPRINTF("ARG COMBINED = %d\n\n", (ushort)COMBINE(args[0], args[1]));
+        }
         if (oplen >= 3)
         {
             DPRINT("break\n\n");
             break;
         }
+#endif
+
+       
         for (int i = 0; i < oplen; i++)
         {
             args[i] = NEXT;
             UPDATENEXT;
         }
-        if (oplen == 2)
-        {
-            DPRINTF("ARG COMBINED = %d\n\n", (ushort)COMBINE(args[0], args[1]));
-        }
+        
 
         inst[i] = opcode;
-        // print_bin(reg_flg, 8, 1);
         switch (opcode)
         {
 
