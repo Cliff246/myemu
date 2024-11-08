@@ -1,9 +1,9 @@
-#ifndef __COMMONS__
-#define __COMMONS__
+#ifndef __ME_COMMONS__
+#define __ME_COMMONS__
+
+#include "me_myemu.h"
 
 
-typedef unsigned char uchar;
-typedef unsigned short ushort;
 
 #define DEBUG 1
 #define REALLOC_SAFE_REPORTS 0
@@ -15,12 +15,12 @@ typedef unsigned short ushort;
 #define GETBIT(n, k) (1 & (n >> k))
 
 #define BIT(n) (0x01 << n)
-#define SETBYTE(n, v, k) (unsigned char)(((ushort)n & ~(0xFF << ((k) * 8))) | ((v & 0xFF) << ((k) * 8)))
-#define GETBYTE(n, k) (unsigned char)(((ushort)n >> ((k) * 8)) & 0xFF)
+#define SETBYTE(n, v, k) (unsigned char)(((unsigned short)n & ~(0xFF << ((k) * 8))) | ((v & 0xFF) << ((k) * 8)))
+#define GETBYTE(n, k) (unsigned char)(((unsigned short)n >> ((k) * 8)) & 0xFF)
 
-#define COMBINE(A, B) ( ((ushort)A) | ( ((ushort)B) << (ushort)0x08) )
-#define SPLITL(A) (char)((ushort)A & 0x00ff)
-#define SPLITR(B) (char)((ushort)B & 0xff00)
+#define COMBINE(A, B) ( ((unsigned short)A) | ( ((unsigned short)B) << (unsigned short)0x08) )
+#define SPLITL(A) (char)((unsigned short)A & 0x00ff)
+#define SPLITR(B) (char)((unsigned short)B & 0xff00)
 #define STR(x) #x
 #define XSTR(x) STR(x)
 #define CONCAT(a, b) a##b

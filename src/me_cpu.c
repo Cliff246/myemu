@@ -1,6 +1,6 @@
-#include "inc/me_myemu.h"
-#include "inc/me_cpu.h"
-#include "inc/me_commons.h"
+#include "me_myemu.h"
+#include "me_cpu.h"
+#include "me_commons.h"
 
 void emulate(char *program, size_t size, int cycles)
 {
@@ -14,8 +14,8 @@ void emulate(char *program, size_t size, int cycles)
 #define UPDATENEXT DPRINTF("item %u at address %d\n", memory[pc], pc)
 #define EMULATOR_RAM 1024
     unsigned char memory[EMULATOR_RAM];
-    ushort pc = 0, sp = 1024 - 100, rp = 0;
-    ushort reg_D = 0;
+    unsigned short pc = 0, sp = 1024 - 100, rp = 0;
+    unsigned short reg_D = 0;
     unsigned char reg_A = 0, reg_B = 0, reg_C = 0, reg_X = 0, reg_Y = 0, reg_flg = 0;
     memset(memory, 0, EMULATOR_RAM * sizeof(*memory));
     memcpy(memory, program, sizeof(program) * size);
@@ -33,7 +33,7 @@ void emulate(char *program, size_t size, int cycles)
             break;
         }
         unsigned char args[3];
-        ushort startpc = pc;
+        unsigned short startpc = pc;
         int opcode = startpc[memory],
             oplen = len_instructions[opcode];
         // DPRINTF("%d %d\n", opcode, oplen);
@@ -47,7 +47,7 @@ void emulate(char *program, size_t size, int cycles)
         // print_bin(reg_flg, 8, 1);
         if (oplen == 2)
         {
-            DPRINTF("ARG COMBINED = %d\n\n", (ushort)COMBINE(args[0], args[1]));
+            DPRINTF("ARG COMBINED = %d\n\n", (unsigned short)COMBINE(args[0], args[1]));
         }
         if (oplen >= 3)
         {

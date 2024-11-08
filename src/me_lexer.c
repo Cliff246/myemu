@@ -1,5 +1,5 @@
-#include "inc/me_myemu.h"
-#include "inc/me_lexer.h"
+#include "me_myemu.h"
+#include "me_lexer.h"
 
 #include <string.h>
 

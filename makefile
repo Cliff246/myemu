@@ -1,27 +1,32 @@
 CXX      := -gcc
-CXXFLAGS := -Wall -std=c99
-LDFLAGS  := -L/usr/lib -lm 
 BUILD    := ./build
-OBJ_DIR  := $(BUILD)/objects
+OBJ_DIR  := $(BUILD)
 
-TARGET   := myemu
-INCLUDE  := -Iinclude/
-SRC      := $(wildcard src/*.c)         
 
+TARGET  := myemu
+INC_DIR := inc
+SRC_DIR := src src/runtime
+
+SRC := $(foreach DIR, $(SRC_DIR), $(wildcard $(DIR)/*.c))
 OBJECTS  := $(SRC:%.c=$(OBJ_DIR)/%.o)
-DEPENDENCIES := $(OBJECTS:.o=.d)
+DEPENDENCIES := $(OBJECTS:.o=.d) 
+
+CXXFLAGS := -std=c99 -MMD $(addprefix -I,$(INC_DIR))
+LDFLAGS  := -L/usr/lib -lm 
 
 all: build $(TARGET)
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(@D)
-	$(CXX) $(CXXFLAGS) $(INCLUDE) -c $< -MMD -o $@
+	$(CXX) $(CXXFLAGS)  -c $<  -o $@
 
 $(TARGET): $(OBJECTS)
 	@mkdir -p $(@D)
 	$(CXX) $(CXXFLAGS) -o $(TARGET) $^ $(LDFLAGS)
 
--include $(DEPENDENCIES)
+-include $(DEPENDENCIES) 
+
+
 
 .PHONY: all build debug release info clean
 
@@ -38,7 +43,6 @@ debug: all
 
 release: CXXFLAGS += -O2
 release: all
-
 
 
 info:

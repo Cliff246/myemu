@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include <string.h>
 
-#include "inc/me_myemu.h"
+#include "me_myemu.h"
 
 #define MAX_FILE_SIZE 1024
 #define MAX_LINE_SIZE 1024

@@ -1,13 +1,14 @@
 #ifndef __ME_CPU__
 #define __ME_CPU__
 
+#include "me_myemu.h"
 #include "me_commons.h"
 
 #define CYCLES 1000
 
 typedef struct byteset
 {
-    uchar num;
+    unsigned char num;
     char bytes[];
 }byteset_t, *p_byteset_t;
 
@@ -30,7 +31,7 @@ typedef struct vcpu_register
 
 typedef struct instruction_set
 {
-
+    size_t size;
 }instset_t, *p_instset_t;
 
 typedef struct virtual_procesor

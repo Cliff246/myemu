@@ -18,7 +18,9 @@
     "compare": "c",
     "limits": "c",
     "new": "c",
-    "type_traits": "c"
+    "type_traits": "c",
+    "me_test.h": "c",
+    "me_lexer.h": "c"
   },
   "C_Cpp_Runner.msvcBatchPath": "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Auxiliary/Build/vcvarsall.bat",
   "C_Cpp_Runner.cCompilerPath": "gcc",

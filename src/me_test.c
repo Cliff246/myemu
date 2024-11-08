@@ -1,5 +1,5 @@
-#include "inc/me_myemu.h"
-#include "inc/me_test.h"
+#include "me_myemu.h"
+#include "me_test.h"
 
 
 void test1()
@@ -19,8 +19,7 @@ void test2()
 
 void testsuite()
 {
-    char *testprogram = (char *)program1;
-    emulate(testprogram, sizeof(program1) / sizeof(*program1), CYCLES);
+
     p_tok_t token = split_str_into_tokens("hello world ghost ghost", ' ');
     print_p_toks_st(token);
     // p_hashtable_t table = new_hash_table(1000, freedata);

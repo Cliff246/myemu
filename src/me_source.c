@@ -3,9 +3,9 @@
 #include <string.h>
 #include <stdarg.h>
 
-#include "inc/me_myemu.h"
-#include "inc/me_constants.h"
-#include "inc/me_test.h"
+#include "me_myemu.h"
+#include "me_constants.h"
+#include "me_test.h"
 
 
 int getdata(void *ptr)
