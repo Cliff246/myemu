@@ -1,3 +1,4 @@
-build/src/me_cpu.o: src/me_cpu.c inc/me_myemu.h inc/me_commons.h \
- inc/me_myemu.h inc/me_cpu.h inc/me_source.h inc/me_lexer.h \
- inc/me_assembler.h inc/me_constants.h inc/me_cpu.h inc/me_commons.h
+build/src/me_cpu.o: src/me_cpu.c include/me_myemu.h include/me_commons.h \
+ include/me_myemu.h include/me_cpu.h include/me_source.h \
+ include/me_lexer.h include/me_assembler.h include/me_constants.h \
+ include/me_cpu.h include/me_commons.h

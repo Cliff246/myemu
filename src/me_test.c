@@ -1,14 +1,52 @@
 #include "me_myemu.h"
+#include "me_commons.h"
+#include "me_lexer.h"
 #include "me_test.h"
 
+int getdata(void *ptr)
+{
+    int *iptr = (int *)ptr;
+    return *iptr;
+}
+
+void *makedata(int x)
+{
+    int *ptr = (int *)malloc(sizeof(int));
+    *ptr = x;
+    return (void *)ptr;
+}
+
+void freedata(void *data)
+{
+    free(data);
+}
 
 void test1()
 {
-    p_tok_t token = split_str_into_tokens("hello world game", ' ');
+
+
+    const char *exclude = "l*f";
+    p_tok_t token = split_str_into_tokens("***hello*****world*game*o**********", exclude);
+    p_tok_t token2 = split_str_into_tokens("test", exclude);
+    p_tok_t token3 = split_str_into_tokens("*", exclude);
+    p_tok_t token4 = split_str_into_tokens("", exclude);
+    p_tok_t token5 = split_str_into_tokens("*saf*", exclude);
+    print_p_toks_st(token3);
+    print_p_toks_st(token5);
+
     print_p_toks_st(token);
     p_tok_t split = split_p_toks_st(token, 1);
     print_p_toks_st(split);
+    p_tok_t cutout = cut_substr_p_tok_t(token, "*");
+    p_tok_t cutout2 = cut_substr_p_tok_t(cutout, "l");
+    free(cutout);
+    print_p_toks_st(cutout2);
+    print_p_toks_st(token2);
+
+    update_p_toks_st(token2, 10);
+    print_p_toks_st(token2);
 }
+
 
 void test2()
 {
@@ -20,7 +58,7 @@ void test2()
 void testsuite()
 {
 
-    p_tok_t token = split_str_into_tokens("hello world ghost ghost", ' ');
+    p_tok_t token = split_str_into_tokens("hello world ghost ghost", " ");
     print_p_toks_st(token);
     // p_hashtable_t table = new_hash_table(1000, freedata);
     //

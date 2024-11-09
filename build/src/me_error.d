@@ -1,3 +1,4 @@
-build/src/me_error.o: src/me_error.c inc/me_error.h inc/me_myemu.h \
- inc/me_commons.h inc/me_cpu.h inc/me_source.h inc/me_lexer.h \
- inc/me_assembler.h inc/me_constants.h
+build/src/me_error.o: src/me_error.c include/me_error.h \
+ include/me_myemu.h include/me_commons.h include/me_cpu.h \
+ include/me_source.h include/me_lexer.h include/me_assembler.h \
+ include/me_constants.h

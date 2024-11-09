@@ -1,9 +1,25 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
 
 #include "me_myemu.h"
 
+bool char_exist(char ref, char *p_sz_cmp)
+{   
+
+    for(char *scroll = p_sz_cmp; *scroll != 0; scroll++)
+    {
+        if(*scroll == ref)
+        {
+            //printf("|%c| |%c| \n", ref, *scroll);
+
+            return true;
+        }
+    }
+    return false;
+}
 
 size_t hash_to_position(int64_t hash, size_t pos)
 {

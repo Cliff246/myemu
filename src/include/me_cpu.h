@@ -43,7 +43,7 @@ typedef struct virtual_procesor
     p_instset_t vcpu_instructions_set;     
     size_t vcpu_register_count;
 
-    p_byteset_t 
+    p_byteset_t *vcpu_registers;
     
 }vproc_t, *p_vproc_t;
 

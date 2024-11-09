@@ -4,6 +4,7 @@
 #include <string.h>
 
 #include "me_myemu.h"
+#include "me_lexer.h"
 
 #define MAX_FILE_SIZE 1024
 #define MAX_LINE_SIZE 1024
@@ -37,7 +38,7 @@ size_t get_tokens(p_tok_t **reftok, char *dir)
                 trimr(history);
                 // size_t historylen = strlen(history);
 
-                p_tok_t tok = split_str_into_tokens(history, ' ');
+                p_tok_t tok = split_str_into_tokens(history, " ");
                 // print_p_toks_st(tok);
                 if (numline + 1 >= tokenalloca)
                 {
@@ -619,8 +620,8 @@ void stage1(p_context_t context, p_program_t program)
             }
         }
         //DPRINTF("%d\n", comment_split_at);
-        //print_p_toks_st(line);
-        //print_p_toks_string(p_tok_line, false);
+        print_p_toks_st(p_tok_line);
+        print_p_toks_string(p_tok_line, false);
 
         char *p_sz_first = p_tok_line->p_sz_toks[0];
         char lastchar = last_char(p_sz_first), firstchar = p_sz_first[0];
@@ -630,16 +631,16 @@ void stage1(p_context_t context, p_program_t program)
         
         p_tok_t p_tok_before = cut_p_toks_st(p_tok_line, 0, nbefore_size), 
             p_tok_after = split_p_toks_st(p_tok_line, comment_split_at);
-        //DPRINTF("%d\n", p_tok_line->nstr);
-        //print_p_toks_string(p_tok_before, true);
-        //DPRINTF("%d\n", p_tok_before->nstr);
-        //print_p_toks_string(p_tok_after, true);
-        //DPRINTF("%d\n", p_tok_after->nstr);
+        DPRINTF("%d\n", p_tok_line->nstr);
+        print_p_toks_string(p_tok_before, true);
+        DPRINTF("%d\n", p_tok_before->nstr);
+        print_p_toks_string(p_tok_after, true);
+        DPRINTF("%d\n", p_tok_after->nstr);
         if(p_tok_before->nstr == 0)
         {
-            //print_p_toks_string(p_tok_line, true);
+            print_p_toks_string(p_tok_line, true);
 
-            //printf("Is comment\n");
+            printf("Is comment\n");
             continue;
         }
         if (lastchar == ':')
@@ -681,7 +682,10 @@ void stage1(p_context_t context, p_program_t program)
                 exit(1);
             }
             //print_p_toks_st(p_tok_before);
-            update_section(sections[sections_count - 1], p_tok_before);
+
+            p_tok_t cutout = cut_substr_p_tok_t(p_tok_before, " ");
+            update_section(sections[sections_count - 1], cutout);
+            free_p_toks_st(cutout);
             //print_section(sections[sections_count - 1]);
         }
         // print_p_toks_string(line);
@@ -735,7 +739,7 @@ void stage2(p_context_t context, p_program_t program)
 
         // DPRINTF("___________%d__________\n", temp->id);
         // LINE;
-        // print_section(temp);
+        print_section(temp);
 
         for (int i = 0; i < temp->len; i++)
         {
@@ -751,7 +755,8 @@ void stage2(p_context_t context, p_program_t program)
             for (int iter_token = 0; iter_token < scroll->nstr; iter_token++)
             {
                 char *p_sz_tok = scroll->p_sz_toks[iter_token];
-                //DPRINTF("%s\n", p_sz_tok);
+                print_p_toks_st(scroll);
+                DPRINTF("token->%s\n", p_sz_tok);
 
                 if (temp->sectype == function)
                 {
@@ -811,7 +816,7 @@ void stage2(p_context_t context, p_program_t program)
                         {
                             type = get_argument_type(p_sz_tok);
 
-                            //print_argumenttype(type);
+                            print_argumenttype(type);
 
                             int size = decode_nbytes_for_argument(type, p_sz_tok);
                             char bytes[size];
@@ -836,11 +841,11 @@ void stage2(p_context_t context, p_program_t program)
                 }
                 else if (temp->sectype == constant)
                 {
-                    // DPRINT("constant ");
+                    DPRINT("constant ");
                     argument_type_t type = e_error;
 
                     type = get_argument_type(p_sz_tok);
-                    // print_argumenttype(type);
+                    print_argumenttype(type);
 
                     int size = decode_nbytes_for_argument(type, p_sz_tok);
                     char bytes[size];

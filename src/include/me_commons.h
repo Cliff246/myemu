@@ -1,6 +1,16 @@
 #ifndef __ME_COMMONS__
 #define __ME_COMMONS__
 
+#include <stdbool.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <errno.h>
+#include <stdarg.h>
+#include <stdint.h>
+#include <ctype.h>
+#include <math.h>
+
 #include "me_myemu.h"
 
 
@@ -100,7 +110,7 @@ void trimr(char *pc);
 char last_char(char *ptr);
 size_t getstr_with_cut_chars(char *buffer, size_t buffer_size, const char *p_sz_ref, const char *p_sz_tocut);
 int64_t str_contains(const char *p_sz_ref, char check);
-
+bool char_exist(char ref, char *p_sz_cmp);
 
 bool cmpstrings(const char *str1, const char *str2);
 

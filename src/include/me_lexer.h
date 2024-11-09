@@ -16,11 +16,12 @@ void print_p_toks_st(p_tok_t token);
 p_tok_t malloc_p_toks_st();
 void free_p_toks_st(p_tok_t token);
 void update_p_toks_st(p_tok_t ref_tok, size_t length);
-p_tok_t split_str_into_tokens(char *inp, char sep);
+p_tok_t split_str_into_tokens(char *inp, const char *sep);
+
 void print_p_toks_string(p_tok_t token, bool offset);
 p_tok_t copy_p_toks_st(p_tok_t ref);
 p_tok_t split_p_toks_st(p_tok_t ref, size_t nsplit);
 p_tok_t cut_p_toks_st(p_tok_t ref, size_t nstart, size_t nstop);
 char *alloc_p_toks_string(p_tok_t ref, bool offset);
-
+p_tok_t cut_substr_p_tok_t(p_tok_t ref, const char *substr);
 #endif

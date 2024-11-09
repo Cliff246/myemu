@@ -4,28 +4,9 @@
 #include <stdarg.h>
 
 #include "me_myemu.h"
+#include "me_commons.h"
 #include "me_constants.h"
 #include "me_test.h"
-
-
-int getdata(void *ptr)
-{
-    int *iptr = (int *)ptr;
-    return *iptr;
-}
-
-void *makedata(int x)
-{
-    int *ptr = (int *)malloc(sizeof(int));
-    *ptr = x;
-    return (void *)ptr;
-}
-
-void freedata(void *data)
-{
-    free(data);
-}
-
 
 
 
@@ -98,7 +79,8 @@ int runtime(int argc, char* argv[])
 int main(int argc, char *argv[])
 {
     
-    test_asm();
+    test1();
+    //test_asm();
     //runtime(argc, argv);
        
 }
