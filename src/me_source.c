@@ -79,8 +79,8 @@ int runtime(int argc, char* argv[])
 int main(int argc, char *argv[])
 {
     
-    test1();
+    //test1();
     //test_asm();
-    //runtime(argc, argv);
+    runtime(argc, argv);
        
 }

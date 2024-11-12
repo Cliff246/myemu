@@ -5,6 +5,8 @@
 #include <stdbool.h>
 
 #include "me_myemu.h"
+#include "me_commons.h"
+#include "me_instruction.h"
 
 bool char_exist(char ref, char *p_sz_cmp)
 {   

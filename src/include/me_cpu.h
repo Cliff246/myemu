@@ -4,160 +4,132 @@
 #include "me_myemu.h"
 #include "me_commons.h"
 
+
 #define CYCLES 1000
 
-typedef struct byteset
-{
-    unsigned char num;
-    char bytes[];
-}byteset_t, *p_byteset_t;
+// two bytes for each instruction
+#define INSTRUCTION_BYTESIZE 2
+// mv add sub syscall
+#define ASMINST_MNMONIC_STR_SIZE 10
+// paramters define what the instruction affect and take in for type and registers
+//  mnmonic param0, param1, param2, ... , param8, param9 arg0 arg2 arg3 arg4
+// for immedate values #byte, #word, #dword, #qword, #ptr, #float, #double, #byte'L #byte'H splits args into low and high
+// for single register %a %b %c %d %pc %sp %b %dl %dh
+// for offset [%a + %b + num2 * num2]
+// expected paramaters and what they do are decided by the mnmonic
+// its supposed to go mnmonic {params} args
+// for inst ADD_ABC:     add %a,%b,%c
+// for INST_ADD_ABA:     add %a,%b,%a
+// for inst ADD_AB_D:    add %a,%b,%d
+// for inst ADD_AI_C:    add %a, #byte, %c $num
+// for inst ADD_AI_A:    add %a, #byte, %a $num
+// for inst MV_A_DL:     move %a, %dl
+// for inst SET_A_I:     move %a, #byte $0xff
+// for inst PUSH_A :     push %a
+// for inst PUSH_B :     push %b
+// for inst PUSH_AB:     push %a, %b
+// for INST PUSH_I:      push #byte $0x10
+// for inst CALLF_I:     call #ptr @ref
+// for inst CALLF_D:     call %d
+// for inst CALLFAB:     call %a, %b
+// for inst JMP_LE_I:    jump&lt #ptr @ref
+// for inst JMP_AB:      jump %a,%b
+// for inst JMP_AI:      jump %a, #ptr !@referene
+#define ASMINST_MAX_PARAMATERS 10
+#define ASMINST_MAX_ARGUMENTS 10
 
-typedef void(*set_register)(p_byteset_t);
+typedef enum {
+    _endian_litte, 
+    _endian_big,
+    _endian_undefined,
+}endian_type_t;
+
+#define ASMINST_MNMONIC_STR_SIZE 10
 
 #define REGISTER_IDENTIFIER_SIZE 4
-typedef enum vcpu_register_type
+
+typedef struct instruction
 {
-    single, 
-    multiple,
-}vreg_type_t;
+    char instref[10];
+    int nargs;
+    int param_reg[ASMINST_MAX_PARAMATERS];
+    int result_dest;
 
-typedef struct vcpu_register
+} vcpuinst_t, *p_vcpuinst_t;
+
+typedef struct virtual_register
 {
+    char *vreg_str;
+    int vreg_regid;
 
-    char vreg_identifier[REGISTER_IDENTIFIER_SIZE];
-    vreg_type_t vreg_type;
-
+    int vreg_ncontent;
+    char *vreg_content;
+    
+        
 }vreg_t, *p_vreg_t;
 
-typedef struct instruction_set
+typedef struct procesor_descriptor
 {
-    size_t size;
-}instset_t, *p_instset_t;
+    char *file_srcdir;
+
+}vcpu_desc_t, *p_vcpu_desc_t;
+
+typedef struct virtual_object
+{
+    int id;
+    char *desc;
+}vobj_t, *p_vobj_t;
+
+typedef struct processor_emulator
+{
+    
+}vcpu_emu_t, p_vcpu_emu_t;
+
+typedef struct virtual_processors_debug
+{
+
+}vcpu_debug_t, *p_vcpu_debug_t;
+
 
 typedef struct virtual_procesor
 {
-    size_t vcpu_mem_size;
-    size_t vcpu_mem_width;
-    size_t vcpu_mem_alloc;
-    char *vcpu_memory_ptr;
-    p_instset_t vcpu_instructions_set;     
-    size_t vcpu_register_count;
+    vcpu_desc_t vcpu_description;
+    vcpu_emu_t vcpu_emulator;
 
-    p_byteset_t *vcpu_registers;
+    int vcpu_nregisters;
+
+    vreg_t *vcpu_registers;
+
+    int vcpu_memory_size;
+    char *vcpu_memory;
+
+    int vcpu_address_bus_size;
+    char *vcpu_address_bus;
+
+
+    int vcpu_data_bus_size;
+    char *vcpu_data_bus;
+
+    int vcpu_instructions_size;
+    vcpuinst_t *vcpu_instructions;
     
+
 }vproc_t, *p_vproc_t;
 
-#define FOREACH_INST(INST)        \
-    INST(NOTHING_, 0)             \
-    /*Memory access and manip*/   \
-    INST(M_GET_AB, 0)             \
-    INST(M_GET_II, 2)             \
-    INST(M_GET_D_, 0)             \
-    INST(M_SET_A_, 3)             \
-    /*Adding with carry */        \
-    INST(ADDC_ABC, 0)             \
-    INST(ADDC_AIC, 1)             \
-    INST(ADDC_IIC, 2)             \
-    INST(ADD_AB_D, 0)             \
-    /* Subtracting with carry*/   \
-    INST(SUBC_ABC, 0)             \
-    INST(SUBC_AIC, 1)             \
-    INST(SUBC_IIC, 2)             \
-    INST(SUB_AB_D, 0)             \
-    /*Set registers immedatly*/   \
-    INST(SET_I__A, 1)             \
-    INST(SET_I__B, 1)             \
-    INST(SET_I_AB, 2)             \
-    INST(SET_I__D, 2)             \
-    INST(SET_I_DH, 1)             \
-    INST(SET_I_DL, 1)             \
-    /*move around register data*/ \
-    INST(MV_B_A__, 0)             \
-    INST(MV_A_B__, 0)             \
-    INST(MV_C_A__, 0)             \
-    INST(MV_C_B__, 0)             \
-    INST(MV_B_C__, 0)             \
-    INST(MV_A_C__, 0)             \
-    INST(MV_X_Y__, 0)             \
-    INST(MV_Y_X__, 0)             \
-    INST(MV_A_X__, 0)             \
-    INST(MV_X_A__, 0)             \
-    /*D register moves  */        \
-    INST(MV_DL_A_, 0)             \
-    INST(MV_DH_A_, 0)             \
-    INST(MV_DL_B_, 0)             \
-    INST(MV_DH_B_, 0)             \
-    INST(MV_DL_C_, 0)             \
-    INST(MV_DH_C_, 0)             \
-    INST(MV_A_DL_, 0)             \
-    INST(MV_A_DH_, 0)             \
-    INST(MV_B_DL_, 0)             \
-    INST(MV_B_DH_, 0)             \
-    INST(MV_C_DL_, 0)             \
-    INST(MV_C_DH_, 0)             \
-    INST(MV_AB_D_, 0)             \
-    INST(MV_XY_D_, 0)             \
-    INST(MV_D_AB_, 0)             \
-    INST(MV_D_XY_, 0)             \
-    INST(MV_DL_X_, 0)             \
-    INST(MV_DH_Y_, 0)             \
-    /*Jmp with no conditions*/    \
-    INST(JMP____I, 2)             \
-    INST(JMP___AB, 0)             \
-    INST(JMP_PC_I, 1)             \
-    INST(JMP____D, 0)             \
-                                  \
-    /*Compare Between data*/      \
-    INST(CMP__A_B, 0)             \
-    INST(CMP__I_A, 1)             \
-    INST(CMP__I_I, 2)             \
-    /*JMP WITH Condition*/        \
-    INST(JMP_NE_I, 2)             \
-    INST(JMP_EQ_I, 2)             \
-    INST(JMP_LT_I, 2)             \
-    INST(JMP_GT_I, 2)             \
-    /*INC_A and DEC_B*/           \
-    INST(INC_A___, 0)             \
-    INST(DEC_A___, 0)             \
-    INST(INC_X___, 0)             \
-    INST(INC_Y___, 0)             \
-    INST(DEC_X___, 0)             \
-    INST(DEC_Y___, 0)             \
-    /*Stack Stuff*/               \
-    INST(PUSH_I__, 1)             \
-    INST(PUSH_A__, 0)             \
-    INST(POP_A___, 0)             \
-    INST(PEAK_A__, 0)             \
-    INST(PUSH_RP_, 0)             \
-    INST(POP_RP__, 0)             \
-    /*Stop Computer*/             \
-    INST(__STOP__, 0)             \
-    /*Function implementation*/   \
-    INST(CALLF_II, 2)             \
-    INST(CALLF_AB, 0)             \
-    INST(CALLF_D_, 0)             \
-    /*Return from call*/          \
-    INST(RETURN__, 0)             \
-    INST(OUTPUT_A, 0)             \
-    INST(PRINTC_A, 0)             \
-    INST(OUTPUT_D, 0)             \
-
-//cycles = -1 means forever
-void emulate(char *program, size_t size, int cycles);
-
-#define GENERATE_INSTRUCTION_ENUM(ENUM, LEN) ENUM,
-#define GENERATE_INSTRUCTION_STRING(STRING, LEN) #STRING,
-#define GENERATE_INSTRUCTION_LEN(STRING, LEN) LEN,
-
-
-typedef enum enum_instructions
+typedef struct virtual_systree
 {
-    FOREACH_INST(GENERATE_INSTRUCTION_ENUM)
-} op;
+    int n_in_nodes;
+    p_vobj_t *in_nodes;
+    int n_out_nodes;
+    p_vobj_t *out_nodes;
+}vsystree_t, *p_vsystree_t;
 
-static const char *str_instructions[] = {
-    FOREACH_INST(GENERATE_INSTRUCTION_STRING)};
-static const int len_instructions[] = {
-    FOREACH_INST(GENERATE_INSTRUCTION_LEN)};
+typedef struct virtual_computer
+{
+    vproc_t vcom_processor;
+
+} vcomputer_t, *p_vcomputer_t;
+
+void emulate(char *program, size_t size, int cycles);
 
 #endif

@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <string.h>
 
+#include "me_constants.h"
 #include "me_myemu.h"
 #include "me_lexer.h"
 
@@ -620,8 +621,8 @@ void stage1(p_context_t context, p_program_t program)
             }
         }
         //DPRINTF("%d\n", comment_split_at);
-        print_p_toks_st(p_tok_line);
-        print_p_toks_string(p_tok_line, false);
+        //print_p_toks_st(p_tok_line);
+        //print_p_toks_string(p_tok_line, false);
 
         char *p_sz_first = p_tok_line->p_sz_toks[0];
         char lastchar = last_char(p_sz_first), firstchar = p_sz_first[0];
@@ -631,11 +632,11 @@ void stage1(p_context_t context, p_program_t program)
         
         p_tok_t p_tok_before = cut_p_toks_st(p_tok_line, 0, nbefore_size), 
             p_tok_after = split_p_toks_st(p_tok_line, comment_split_at);
-        DPRINTF("%d\n", p_tok_line->nstr);
-        print_p_toks_string(p_tok_before, true);
-        DPRINTF("%d\n", p_tok_before->nstr);
-        print_p_toks_string(p_tok_after, true);
-        DPRINTF("%d\n", p_tok_after->nstr);
+        //DPRINTF("%d\n", p_tok_line->nstr);
+        //print_p_toks_string(p_tok_before, true);
+        //DPRINTF("%d\n", p_tok_before->nstr);
+        //print_p_toks_string(p_tok_after, true);
+        //DPRINTF("%d\n", p_tok_after->nstr);
         if(p_tok_before->nstr == 0)
         {
             print_p_toks_string(p_tok_line, true);
@@ -672,7 +673,7 @@ void stage1(p_context_t context, p_program_t program)
             p_section_t current = get_section_and_assign_to_idtable(context, tok_buffer, constant);
             sections[sections_count++] = current;
         }
-        else if (p_tok_line->p_u_col[0] > 0)
+        else
         {
 
             // DPRINTF("inside: %s \n", key);
@@ -684,6 +685,8 @@ void stage1(p_context_t context, p_program_t program)
             //print_p_toks_st(p_tok_before);
 
             p_tok_t cutout = cut_substr_p_tok_t(p_tok_before, " ");
+            print_p_toks_st(cutout);
+
             update_section(sections[sections_count - 1], cutout);
             free_p_toks_st(cutout);
             //print_section(sections[sections_count - 1]);
@@ -895,14 +898,10 @@ int assemble(const char *dir, char **bytes)
 
     p_tok_t *tokens = NULL;
     size_t lines = get_tokens(&tokens, dir);
-    if (lines == 0)
-    {
-        DPRINTF("file not found %s\n", dir);
-        exit(1);
-    }
+
     // exit(1);
     // DPRINTF("%lld\n", lines);
-
+   
     size_t asmerr_ary_len = 1;
     const size_t increment = 1024;
 
@@ -922,12 +921,12 @@ int assemble(const char *dir, char **bytes)
     };
     stage1(&context, &program);
     asmerr_array[0] = NULL;
-    free_hash_table(context.p_identifier_table);
+    //free_hash_table(context.p_identifier_table);
     // DPRINTF("%lld errors\n", errorcount);
     // DPRINT("End\n");
 
     *bytes = program.p_program;
    // LINE;
-    print_range(program.p_program, 0, 64, program.n_memorysize);
+    //print_range(program.p_program, 0, 64, program.n_memorysize);
     return program.n_used;
 }

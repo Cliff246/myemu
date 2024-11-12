@@ -53,7 +53,7 @@
 #define LINE
 #endif
 
-
+typedef char *pstr_t;
 typedef void (*free_hashtable_data_ptr)(void *);
 
 typedef struct hash_element

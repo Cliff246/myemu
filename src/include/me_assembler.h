@@ -7,6 +7,7 @@
 
 extern size_t errorcount;
 
+
 typedef enum
 {
     none,
@@ -29,8 +30,6 @@ typedef struct memorysegment
     size_t memstart, memstop;
     char *mem_bytes;
 }memseg_t, *p_memseg_t;
-
-
 
 
 typedef struct assembler_error
@@ -59,6 +58,8 @@ typedef struct reference
     p_section_t sect;
 } reference_t, *p_reference_t;
 
+
+
 typedef struct context
 {
     p_hashtable_t p_identifier_table;
@@ -74,7 +75,6 @@ typedef struct program
     char *p_program;
     size_t n_memorysize, n_increment, n_used;
 }program_t, *p_program_t;
-
 
 
 //this is to set the copy equal to NULL

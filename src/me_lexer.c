@@ -351,7 +351,7 @@ p_tok_t cut_substr_p_tok_t(p_tok_t ref, const char *substr)
     {
         if (!cmpstrings(ref->p_sz_toks[i], substr))
         {
-            DPRINTF("toks |%s| substr |%s|\n", ref->p_sz_toks[i], substr);
+            //DPRINTF("toks |%s| substr |%s|\n", ref->p_sz_toks[i], substr);
             newlen++;
             toremove_ary[i] = false;
         }
@@ -445,7 +445,7 @@ p_tok_t split_str_into_tokens(char *inp, const char *sep)
         //DPRINTF("|%c| %d %d\n", *n, is_sep, prev_is_sep);
         // DPRINTF("%s\n", n);
 
-        DPRINTF("%d %d %d |%c| |%c|\n", is_sep, prev_is_sep, nsep, last_sep, this_sep);
+        //DPRINTF("%d %d %d |%c| |%c|\n", is_sep, prev_is_sep, nsep, last_sep, this_sep);
         if (is_sep && prev_is_sep && last_sep != this_sep)
         {
             // DPRINTF("set %d\n",itr);
@@ -492,7 +492,7 @@ p_tok_t split_str_into_tokens(char *inp, const char *sep)
     }
     if (char_exist(last_sep, sep))
     {
-        DPRINTF("%c\n", last_sep);
+        //DPRINTF("%c\n", last_sep);
         colary[itr] = prev;
         (p_token_st->p_sz_toks)[itr] = REALLOC_SAFE(p_token_st->p_sz_toks[itr], 2 * sizeof(char));
         p_token_st->p_sz_toks[itr][0] = last_sep;
@@ -512,7 +512,7 @@ p_tok_t split_str_into_tokens(char *inp, const char *sep)
     //DPRINTF("|%s|\n", inp + prev);
     }
     memcpy(p_token_st->p_u_col, colary, sizeof(size_t) * (ntok));
-   //print_p_toks_st(p_token_st);
+    print_p_toks_st(p_token_st);
     
     free(colary);
 
