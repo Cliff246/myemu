@@ -1,5 +1,5 @@
-#ifndef __ME_COMMONS__
-#define __ME_COMMONS__
+#ifndef __COMMONS__
+#define __COMMONS__
 
 #include <stdbool.h>
 #include <stdlib.h>
@@ -11,7 +11,6 @@
 #include <ctype.h>
 #include <math.h>
 
-#include "me_myemu.h"
 
 
 

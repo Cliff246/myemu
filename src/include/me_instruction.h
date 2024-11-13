@@ -4,7 +4,7 @@
 #include "me_myemu.h"
 
 #include "me_constants.h"
-#include "me_lexer.h"
+#include "lexer.h"
 
 
 #include "me_cpu.h"

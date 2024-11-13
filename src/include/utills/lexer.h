@@ -1,7 +1,7 @@
-#ifndef __ME_LEXER__
-#define __ME_LEXER__
+#ifndef __LEXER__
+#define __LEXER__
 
-#include "me_commons.h"
+#include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -24,4 +24,5 @@ p_tok_t split_p_toks_st(p_tok_t ref, size_t nsplit);
 p_tok_t cut_p_toks_st(p_tok_t ref, size_t nstart, size_t nstop);
 char *alloc_p_toks_string(p_tok_t ref, bool offset);
 p_tok_t cut_substr_p_tok_t(p_tok_t ref, const char *substr);
+
 #endif

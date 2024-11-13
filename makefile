@@ -1,50 +1,57 @@
 CXX      := -gcc
-CXXFLAGS := -Wall -std=c99
+CXXFLAGS := -Wall -std=c99 
 LDFLAGS  := -L/usr/lib -lm 
 BUILD    := ./build
-OBJ_DIR  := $(BUILD)/objects
-
 TARGET   := myemu
-INC_DIR	 := src/include 
+OBJ_DIR  := $(BUILD)/objects
+INC_DIR	 := src/include src/include/utills src/include/scripting
+SRC_DIR  := src src/runtime src/scripting src/utills
 
 
-INC      := $(wildcard $(INC_DIR)/*.h)
-SRC      := $(wildcard src/*.c)         
 
+
+
+SRC_LIST := $(foreach SRC_DIR_ITER,$(SRC_DIR) ,$(SRC_DIR_ITER)/ )
+
+#$(info $(INC_LIST))
+
+
+INC      := $(foreach INC_DIR_ITER, $(INC_DIR) , $(wildcard $(INC_DIR_ITER)/ ))
+SRC      := $(foreach SRC_ITER ,$(SRC_LIST) ,$(wildcard $(SRC_ITER)*.c))    
 HEADERS  := $(foreach header, $(INC), $(addprefix -I,$(INC)))
-INCLUDE  = -I$(INC)
+
+#$(info $(INC))
+
+#$(info $(HEADERS))
+all: build $(TARGET)
+
+
 OBJECTS  := $(SRC:%.c=$(OBJ_DIR)/%.o)
 DEPENDENCIES := $(OBJECTS:.o=.d)
 
-all: build $(TARGET)
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(@D)
-	$(CXX) $(CXXFLAGS) $(INCLUDE) -c $< -MMD -o $@
+	$(CXX) $(CXXFLAGS) $(HEADERS) -c $< -MMD -o $@
 
 $(TARGET): $(OBJECTS)
 	@mkdir -p $(@D)
 	$(CXX) $(CXXFLAGS) -o $(TARGET) $^ $(LDFLAGS)
 
--include $(DEPENDENCIES) $(INCLUDE)
+-include $(DEPENDENCIES) $(HEADERS)
 
 .PHONY: all build debug release info clean
+
 
 build:
 	@mkdir -p $(OBJ_DIR)
 
 clean:
-	@rm $(OBJECTS) $(DEPENDENCIES)
+	@rm $(OBJECTS) $(DEPENDENCIES) 
+	
 debug: clean
 debug: CXXFLAGS += -DDEBUG -g
 debug: all
-
-
-
-release: CXXFLAGS += -O2
-release: all
-
-
 
 info:
 	@echo "[*] Includes 		${INC}		   "
@@ -53,3 +60,8 @@ info:
 	@echo "[*] Sources:         ${SRC}         "
 	@echo "[*] Objects:         ${OBJECTS}     "
 	@echo "[*] Dependencies:    ${DEPENDENCIES}"
+
+release: CXXFLAGS += -O2
+release: all
+
+

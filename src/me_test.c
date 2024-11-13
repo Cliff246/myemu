@@ -1,6 +1,6 @@
 #include "me_myemu.h"
-#include "me_commons.h"
-#include "me_lexer.h"
+#include "commons.h"
+#include "lexer.h"
 #include "me_test.h"
 
 int getdata(void *ptr)

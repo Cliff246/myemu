@@ -1,14 +1,12 @@
 #ifndef __ME_ASSEMBLER__
 #define __ME_ASSEMBLER__
 
-#include <stdlib.h>
-#include "me_commons.h"
-#include "me_lexer.h"
+#include "me_myemu.h"
+#include "commons.h"
+#include "lexer.h"
+#include "utill_io.h"
 
-extern size_t errorcount;
-
-
-typedef enum
+typedef enum section_type
 {
     none,
     function,

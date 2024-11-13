@@ -1,7 +1,7 @@
 #include "me_myemu.h"
 #include "me_cpu.h"
 #include "me_instruction.h"
-#include "me_commons.h"
+#include "commons.h"
 
 void emulate(char *program, size_t size, int cycles)
 {
