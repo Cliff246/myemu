@@ -10,7 +10,6 @@ SRC_DIR  := src src/runtime src/scripting src/utills
 
 
 
-
 SRC_LIST := $(foreach SRC_DIR_ITER,$(SRC_DIR) ,$(SRC_DIR_ITER)/ )
 
 #$(info $(INC_LIST))
@@ -38,6 +37,7 @@ $(TARGET): $(OBJECTS)
 	@mkdir -p $(@D)
 	$(CXX) $(CXXFLAGS) -o $(TARGET) $^ $(LDFLAGS)
 
+
 -include $(DEPENDENCIES) $(HEADERS)
 
 .PHONY: all build debug release info clean
@@ -48,7 +48,7 @@ build:
 
 clean:
 	@rm $(OBJECTS) $(DEPENDENCIES) 
-	
+
 debug: clean
 debug: CXXFLAGS += -DDEBUG -g
 debug: all
