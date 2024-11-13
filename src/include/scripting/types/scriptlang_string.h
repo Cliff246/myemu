@@ -1,0 +1,4 @@
+#ifndef __SCRIPTLANG_TYPE_STRING__
+#define __SCRIPTLANG_TYPE_STRING__
+
+#endif

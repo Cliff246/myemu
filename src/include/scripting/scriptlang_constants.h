@@ -1,0 +1,4 @@
+#ifndef __SCRIPTLANG_CONSTANTS__
+#define __SCRIPTLANG_CONSTANTS__
+
+#endif
