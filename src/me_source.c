@@ -9,6 +9,10 @@
 #include "me_test.h"
 
 
+void readdir(char *dir)
+{
+
+}
 
 void readfile(char *str)
 {
@@ -82,5 +86,5 @@ int main(int argc, char *argv[])
     //test1();
     //test_asm();
     runtime(argc, argv);
-       
+           
 }

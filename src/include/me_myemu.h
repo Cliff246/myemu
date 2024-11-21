@@ -11,6 +11,8 @@
 #include <ctype.h>
 #include <math.h>
 
+#define DEBUG 1
+
 #include "commons.h"
 #include "utill_io.h"
 #include "lexer.h"

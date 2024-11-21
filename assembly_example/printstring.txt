@@ -12,6 +12,7 @@ print_and_inc:
     SET_I_AB string
 ;
     MV_A_C__
+    CMP__A_B
 ;    
     MV_X_A__
     M_GET_AB

@@ -14,7 +14,6 @@
 
 
 
-#define DEBUG 1
 #define REALLOC_SAFE_REPORTS 0
 #define HASHTABLE_LENGTH 10000
 

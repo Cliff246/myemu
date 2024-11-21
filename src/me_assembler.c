@@ -579,7 +579,7 @@ void stage1(p_context_t context, p_program_t program)
         //DPRINTF("%d\n", p_tok_after->nstr);
         if(p_tok_before->nstr == 0)
         {
-            print_p_toks_string(p_tok_line, true);
+          //  print_p_toks_string(p_tok_line, true);
 
             printf("Is comment\n");
             continue;
@@ -625,7 +625,7 @@ void stage1(p_context_t context, p_program_t program)
             //print_p_toks_st(p_tok_before);
 
             p_tok_t cutout = cut_substr_p_tok_t(p_tok_before, " ");
-            print_p_toks_st(cutout);
+            //print_p_toks_st(cutout);
 
             update_section(sections[sections_count - 1], cutout);
             free_p_toks_st(cutout);
@@ -682,7 +682,7 @@ void stage2(p_context_t context, p_program_t program)
 
         // DPRINTF("___________%d__________\n", temp->id);
         // LINE;
-        print_section(temp);
+        //print_section(temp);
 
         for (int i = 0; i < temp->len; i++)
         {
@@ -698,8 +698,8 @@ void stage2(p_context_t context, p_program_t program)
             for (int iter_token = 0; iter_token < scroll->nstr; iter_token++)
             {
                 char *p_sz_tok = scroll->p_sz_toks[iter_token];
-                print_p_toks_st(scroll);
-                DPRINTF("token->%s\n", p_sz_tok);
+                //print_p_toks_st(scroll);
+                //DPRINTF("token->%s\n", p_sz_tok);
 
                 if (temp->sectype == function)
                 {
@@ -759,7 +759,7 @@ void stage2(p_context_t context, p_program_t program)
                         {
                             type = get_argument_type(p_sz_tok);
 
-                            print_argumenttype(type);
+                            //print_argumenttype(type);
 
                             int size = decode_nbytes_for_argument(type, p_sz_tok);
                             char bytes[size];
@@ -784,11 +784,11 @@ void stage2(p_context_t context, p_program_t program)
                 }
                 else if (temp->sectype == constant)
                 {
-                    DPRINT("constant ");
+                    //DPRINT("constant ");
                     argument_type_t type = e_error;
 
                     type = get_argument_type(p_sz_tok);
-                    print_argumenttype(type);
+                    //print_argumenttype(type);
 
                     int size = decode_nbytes_for_argument(type, p_sz_tok);
                     char bytes[size];

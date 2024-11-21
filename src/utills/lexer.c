@@ -512,7 +512,7 @@ p_tok_t split_str_into_tokens(char *inp, const char *sep)
     //DPRINTF("|%s|\n", inp + prev);
     }
     memcpy(p_token_st->p_u_col, colary, sizeof(size_t) * (ntok));
-    print_p_toks_st(p_token_st);
+    //print_p_toks_st(p_token_st);
     
     free(colary);
 

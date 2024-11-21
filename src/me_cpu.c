@@ -356,7 +356,7 @@ void emulate(char *program, size_t size, int cycles)
             printf("-------OUTPUT_A------------%d\n", reg_A);
             break;
         case PRINTC_A:
-            printf("-------PRINT_A------------%c\n", reg_A);
+            printf("%c", reg_A);
             break;
         case OUTPUT_D:
             printf("-------OUTPUT_D------------%d\n", reg_D);

@@ -1,33 +1,30 @@
 CXX      := -gcc
 CXXFLAGS := -Wall -std=c99 
 LDFLAGS  := -L/usr/lib -lm 
-BUILD    := ./build
+BUILD    := build
 TARGET   := myemu
 OBJ_DIR  := $(BUILD)/objects
-INC_DIR	 := src/include src/include/utills src/include/scripting
-SRC_DIR  := src src/runtime src/scripting src/utills
+INC_DIR = src/include src/include/utills src/include/scripting
+SRC_DIR = src src/runtime src/scripting src/utills
 
 
 
 
-SRC_LIST := $(foreach SRC_DIR_ITER,$(SRC_DIR) ,$(SRC_DIR_ITER)/ )
-
-#$(info $(INC_LIST))
 
 
 INC      := $(foreach INC_DIR_ITER, $(INC_DIR) , $(wildcard $(INC_DIR_ITER)/ ))
-SRC      := $(foreach SRC_ITER ,$(SRC_LIST) ,$(wildcard $(SRC_ITER)*.c))    
+SRC      := $(foreach SRC_DIR_ITER, $(SRC_DIR) , $(wildcard $(SRC_DIR_ITER)/*.c ))    
 HEADERS  := $(foreach header, $(INC), $(addprefix -I,$(INC)))
 
-#$(info $(INC))
-
-#$(info $(HEADERS))
+$(info $(SRC))
 all: build $(TARGET)
 
 
 OBJECTS  := $(SRC:%.c=$(OBJ_DIR)/%.o)
-DEPENDENCIES := $(OBJECTS:.o=.d)
 
+DEPENDENCIES := $(OBJECTS:.o=.d)
+$(info $(DEPENDENCIES)) 
+#$(info $(OBJECTS))
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(@D)
@@ -47,8 +44,7 @@ build:
 	@mkdir -p $(OBJ_DIR)
 
 clean:
-	@rm $(OBJECTS) $(DEPENDENCIES) 
-
+	@rm $(OBJECTS) $(DEPENDENCIES)
 debug: clean
 debug: CXXFLAGS += -DDEBUG -g
 debug: all
