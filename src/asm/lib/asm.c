@@ -540,6 +540,7 @@ void stage1(p_context_t context, p_program_t program)
     size_t ntok_buffer_alloc = 1000;
 
     char *tok_buffer = (char *)calloc(ntok_buffer_alloc + 1, sizeof(char));
+	LINE;
 
     for (size_t iter_line = 0; iter_line < lines; iter_line++)
     {
@@ -840,17 +841,24 @@ int assemble(const char *dir, char **bytes)
 
     p_tok_t *tokens = NULL;
     size_t lines = get_tokens(&tokens, dir);
+	for(int i = 0; i < lines; i++)
+	{
+		print_p_toks_st(tokens[i]);
 
+	}
     // exit(1);
-    // DPRINTF("%lld\n", lines);
+    DPRINTF("%lld\n", lines);
 
     size_t asmerr_ary_len = 1;
     const size_t increment = 1024;
-
+	LINE;
     char *program_ptr = (char *)malloc(sizeof(char) * increment);
     memset(program_ptr, 0, increment);
+	LINE;
 
+	LINE;
     p_asmerr_t *asmerr_array = (p_asmerr_t *)calloc(asmerr_ary_len, sizeof(asmerr_t));
+	LINE;
 
     program_t program = {.p_program = program_ptr, .n_memorysize = increment, .n_increment = increment, .n_used = 0};
     context_t context = {
@@ -861,7 +869,11 @@ int assemble(const char *dir, char **bytes)
         .p_sections = NULL,
         .n_sections = 0
     };
+	LINE;
+
     stage1(&context, &program);
+	LINE;
+
     asmerr_array[0] = NULL;
     //free_hash_table(context.p_identifier_table);
     // DPRINTF("%lld errors\n", errorcount);

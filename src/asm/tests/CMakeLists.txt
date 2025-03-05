@@ -5,4 +5,4 @@ set(SRC_TESTS_ASM ${SRC_TESTS_ASM}
 )
 add_executable(myemu_asm_tests ${SRC_TESTS_ASM})
 target_link_libraries(myemu_asm_tests PRIVATE myemu_utils myemu_asm_lib)
-target_include_directories(myemu_asm_tests PRIVATE ../utils)
+target_include_directories(myemu_asm_tests PRIVATE  myemu_utils myemu_asm_lib ../utils)

@@ -5,4 +5,4 @@ set(SRC_ASM ${SRC_ASM}
 )
 add_executable(myemu_asm ${SRC_ASM})
 target_link_libraries(myemu_asm PRIVATE myemu_utils myemu_asm_lib)
-target_include_directories(myemu_asm PRIVATE ../utils)
+target_include_directories(myemu_asm PRIVATE ../utils ../lib)

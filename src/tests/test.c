@@ -97,7 +97,8 @@ void testsuite()
 
 void test_asm()
 {
-    const char *dir = "assembly_example/multiply.txt";
+	const char *dir = "multiply.txt";
     char *data = NULL;
+	printf("\n");
     int size = assemble(dir, &data);
 }

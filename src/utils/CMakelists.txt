@@ -23,3 +23,13 @@ set(UTILS_HEADERS ${UTILS_HEADERS}
 
 add_library(myemu_utils ${UTILS_SRC} ${UTILS_HEADERS})
 
+target_sources(myemu_utils
+  PRIVATE
+    ${UTILS_SRC}
+  PUBLIC
+    ${UTILS_HEADERS}
+  )
+target_include_directories(myemu_utils
+  PUBLIC
+	${CMAKE_CURRENT_SOURCE_DIR}
+)

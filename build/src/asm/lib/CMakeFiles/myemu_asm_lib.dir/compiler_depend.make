@@ -107,17 +107,15 @@ src/asm/lib/CMakeFiles/myemu_asm_lib.dir/asm.c.o: /Users/heathfortin/programs/my
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include/stdarg.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include/stdbool.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include/stdint.h \
+  /Users/heathfortin/programs/myemu/src/asm/lib/asm.h \
   /Users/heathfortin/programs/myemu/src/utils/commons.h \
   /Users/heathfortin/programs/myemu/src/utils/constants.h \
   /Users/heathfortin/programs/myemu/src/utils/cpu.h \
   /Users/heathfortin/programs/myemu/src/utils/inst.h \
   /Users/heathfortin/programs/myemu/src/utils/lexer.h \
   /Users/heathfortin/programs/myemu/src/utils/myemu.h \
-  /Users/heathfortin/programs/myemu/src/utils/utill_io.h \
-  /Users/heathfortin/programs/myemu/src/asm/lib/asm.h
+  /Users/heathfortin/programs/myemu/src/utils/utill_io.h
 
-
-/Users/heathfortin/programs/myemu/src/asm/lib/asm.h:
 
 /Users/heathfortin/programs/myemu/src/utils/myemu.h:
 
@@ -126,6 +124,8 @@ src/asm/lib/CMakeFiles/myemu_asm_lib.dir/asm.c.o: /Users/heathfortin/programs/my
 /Users/heathfortin/programs/myemu/src/utils/inst.h:
 
 /Users/heathfortin/programs/myemu/src/utils/commons.h:
+
+/Users/heathfortin/programs/myemu/src/asm/lib/asm.h:
 
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include/stdbool.h:
 

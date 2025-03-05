@@ -7,4 +7,8 @@ set(SRC_EMU ${SRC_EMU}
 
 add_executable(emu ${SRC_EMU})
 target_link_libraries(emu PRIVATE
-	 myemu_utils)
+	 myemu_utils
+	${CMAKE_SOURCE_DIR}/src/utils
+)
+target_include_directories(emu PRIVATE ${CMAKE_SOURCE_DIR}/src/utils)
+
