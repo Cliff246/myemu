@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 3.10)
+
+set(SRC_EMU ${SRC_EMU}
+    ${CMAKE_CURRENT_SOURCE_DIR}/main.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/emu.c
+)
+
+add_executable(emu ${SRC_EMU})
+target_link_libraries(emu PRIVATE
+	 myemu_utils)

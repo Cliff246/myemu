@@ -1,0 +1,25 @@
+cmake_minimum_required(VERSION 3.10)
+
+set(UTILS_SRC ${UTILS_SRC}
+    ${CMAKE_CURRENT_SOURCE_DIR}/commons.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/lexer.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/cpu.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/utill_io.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/error.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/constants.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/inst.c
+
+)
+
+set(UTILS_HEADERS ${UTILS_HEADERS}
+	${CMAKE_CURRENT_SOURCE_DIR}/lexer.h
+	${CMAKE_CURRENT_SOURCE_DIR}/cpu.h
+	${CMAKE_CURRENT_SOURCE_DIR}/commons.h
+	${CMAKE_CURRENT_SOURCE_DIR}/myemu.h
+	${CMAKE_CURRENT_SOURCE_DIR}/inst.h
+
+	${CMAKE_CURRENT_SOURCE_DIR}/inst.h
+)
+
+add_library(myemu_utils ${UTILS_SRC} ${UTILS_HEADERS})
+
