@@ -57,10 +57,10 @@ RM = /opt/homebrew/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/heathfortin/programs/myemu
+CMAKE_SOURCE_DIR = /Users/heathfortin/programing/myemu
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/heathfortin/programs/myemu/build
+CMAKE_BINARY_DIR = /Users/heathfortin/programing/myemu/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/heathfortin/programs/myemu/build/CMakeFiles /Users/heathfortin/programs/myemu/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/heathfortin/programing/myemu/build/CMakeFiles /Users/heathfortin/programing/myemu/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/heathfortin/programs/myemu/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/heathfortin/programing/myemu/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -117,17 +117,30 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named emu
+# Target rules for targets named emu_lib
 
 # Build rule for target.
-emu: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 emu
-.PHONY : emu
+emu_lib: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 emu_lib
+.PHONY : emu_lib
 
 # fast build rule for target.
-emu/fast:
-	$(MAKE) $(MAKESILENT) -f src/emu/CMakeFiles/emu.dir/build.make src/emu/CMakeFiles/emu.dir/build
-.PHONY : emu/fast
+emu_lib/fast:
+	$(MAKE) $(MAKESILENT) -f src/emu/lib/CMakeFiles/emu_lib.dir/build.make src/emu/lib/CMakeFiles/emu_lib.dir/build
+.PHONY : emu_lib/fast
+
+#=============================================================================
+# Target rules for targets named myemu
+
+# Build rule for target.
+myemu: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 myemu
+.PHONY : myemu
+
+# fast build rule for target.
+myemu/fast:
+	$(MAKE) $(MAKESILENT) -f src/emu/executable/CMakeFiles/myemu.dir/build.make src/emu/executable/CMakeFiles/myemu.dir/build
+.PHONY : myemu/fast
 
 #=============================================================================
 # Target rules for targets named myemu_asm
@@ -202,7 +215,8 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... emu"
+	@echo "... emu_lib"
+	@echo "... myemu"
 	@echo "... myemu_asm"
 	@echo "... myemu_asm_lib"
 	@echo "... myemu_asm_tests"

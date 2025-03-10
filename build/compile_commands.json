@@ -1,0 +1,86 @@
+[
+{
+  "directory": "/Users/heathfortin/programing/myemu/build/src/emu/lib",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  -I/Users/heathfortin/programing/myemu/src/utils  -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -o CMakeFiles/emu_lib.dir/emu.c.o -c /Users/heathfortin/programing/myemu/src/emu/lib/emu.c",
+  "file": "/Users/heathfortin/programing/myemu/src/emu/lib/emu.c",
+  "output": "src/emu/lib/CMakeFiles/emu_lib.dir/emu.c.o"
+},
+{
+  "directory": "/Users/heathfortin/programing/myemu/build/src/emu/executable",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  -I/Users/heathfortin/programing/myemu/src/utils  -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -o CMakeFiles/myemu.dir/main.c.o -c /Users/heathfortin/programing/myemu/src/emu/executable/main.c",
+  "file": "/Users/heathfortin/programing/myemu/src/emu/executable/main.c",
+  "output": "src/emu/executable/CMakeFiles/myemu.dir/main.c.o"
+},
+{
+  "directory": "/Users/heathfortin/programing/myemu/build/src/asm/executable",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  -I/Users/heathfortin/programing/myemu/src/utils -I/Users/heathfortin/programing/myemu/src/asm/lib  -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -o CMakeFiles/myemu_asm.dir/main.c.o -c /Users/heathfortin/programing/myemu/src/asm/executable/main.c",
+  "file": "/Users/heathfortin/programing/myemu/src/asm/executable/main.c",
+  "output": "src/asm/executable/CMakeFiles/myemu_asm.dir/main.c.o"
+},
+{
+  "directory": "/Users/heathfortin/programing/myemu/build/src/asm/tests",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  -I/Users/heathfortin/programing/myemu/src/asm/tests/myemu_utils -I/Users/heathfortin/programing/myemu/src/asm/tests/myemu_asm_lib -I/Users/heathfortin/programing/myemu/src/asm/tests/../utils -I/Users/heathfortin/programing/myemu/src/utils  -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -o CMakeFiles/myemu_asm_tests.dir/asm_tests.c.o -c /Users/heathfortin/programing/myemu/src/asm/tests/asm_tests.c",
+  "file": "/Users/heathfortin/programing/myemu/src/asm/tests/asm_tests.c",
+  "output": "src/asm/tests/CMakeFiles/myemu_asm_tests.dir/asm_tests.c.o"
+},
+{
+  "directory": "/Users/heathfortin/programing/myemu/build/src/asm/lib",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  -I/Users/heathfortin/programing/myemu/src/utils  -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -o CMakeFiles/myemu_asm_lib.dir/asm.c.o -c /Users/heathfortin/programing/myemu/src/asm/lib/asm.c",
+  "file": "/Users/heathfortin/programing/myemu/src/asm/lib/asm.c",
+  "output": "src/asm/lib/CMakeFiles/myemu_asm_lib.dir/asm.c.o"
+},
+{
+  "directory": "/Users/heathfortin/programing/myemu/build/src/tests",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  -I/Users/heathfortin/programing/myemu/src/tests/myemu_utils -I/Users/heathfortin/programing/myemu/src/tests/myemu_asm_lib -I/Users/heathfortin/programing/myemu/src/tests/../utils -I/Users/heathfortin/programing/myemu/src/tests/../asm/lib -I/Users/heathfortin/programing/myemu/src/utils  -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -o CMakeFiles/tests.dir/test.c.o -c /Users/heathfortin/programing/myemu/src/tests/test.c",
+  "file": "/Users/heathfortin/programing/myemu/src/tests/test.c",
+  "output": "src/tests/CMakeFiles/tests.dir/test.c.o"
+},
+{
+  "directory": "/Users/heathfortin/programing/myemu/build/src/tests",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  -I/Users/heathfortin/programing/myemu/src/tests/myemu_utils -I/Users/heathfortin/programing/myemu/src/tests/myemu_asm_lib -I/Users/heathfortin/programing/myemu/src/tests/../utils -I/Users/heathfortin/programing/myemu/src/tests/../asm/lib -I/Users/heathfortin/programing/myemu/src/utils  -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -o CMakeFiles/tests.dir/main.c.o -c /Users/heathfortin/programing/myemu/src/tests/main.c",
+  "file": "/Users/heathfortin/programing/myemu/src/tests/main.c",
+  "output": "src/tests/CMakeFiles/tests.dir/main.c.o"
+},
+{
+  "directory": "/Users/heathfortin/programing/myemu/build/src/utils",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  -I/Users/heathfortin/programing/myemu/src/utils  -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -o CMakeFiles/myemu_utils.dir/commons.c.o -c /Users/heathfortin/programing/myemu/src/utils/commons.c",
+  "file": "/Users/heathfortin/programing/myemu/src/utils/commons.c",
+  "output": "src/utils/CMakeFiles/myemu_utils.dir/commons.c.o"
+},
+{
+  "directory": "/Users/heathfortin/programing/myemu/build/src/utils",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  -I/Users/heathfortin/programing/myemu/src/utils  -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -o CMakeFiles/myemu_utils.dir/lexer.c.o -c /Users/heathfortin/programing/myemu/src/utils/lexer.c",
+  "file": "/Users/heathfortin/programing/myemu/src/utils/lexer.c",
+  "output": "src/utils/CMakeFiles/myemu_utils.dir/lexer.c.o"
+},
+{
+  "directory": "/Users/heathfortin/programing/myemu/build/src/utils",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  -I/Users/heathfortin/programing/myemu/src/utils  -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -o CMakeFiles/myemu_utils.dir/cpu.c.o -c /Users/heathfortin/programing/myemu/src/utils/cpu.c",
+  "file": "/Users/heathfortin/programing/myemu/src/utils/cpu.c",
+  "output": "src/utils/CMakeFiles/myemu_utils.dir/cpu.c.o"
+},
+{
+  "directory": "/Users/heathfortin/programing/myemu/build/src/utils",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  -I/Users/heathfortin/programing/myemu/src/utils  -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -o CMakeFiles/myemu_utils.dir/utill_io.c.o -c /Users/heathfortin/programing/myemu/src/utils/utill_io.c",
+  "file": "/Users/heathfortin/programing/myemu/src/utils/utill_io.c",
+  "output": "src/utils/CMakeFiles/myemu_utils.dir/utill_io.c.o"
+},
+{
+  "directory": "/Users/heathfortin/programing/myemu/build/src/utils",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  -I/Users/heathfortin/programing/myemu/src/utils  -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -o CMakeFiles/myemu_utils.dir/error.c.o -c /Users/heathfortin/programing/myemu/src/utils/error.c",
+  "file": "/Users/heathfortin/programing/myemu/src/utils/error.c",
+  "output": "src/utils/CMakeFiles/myemu_utils.dir/error.c.o"
+},
+{
+  "directory": "/Users/heathfortin/programing/myemu/build/src/utils",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  -I/Users/heathfortin/programing/myemu/src/utils  -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -o CMakeFiles/myemu_utils.dir/constants.c.o -c /Users/heathfortin/programing/myemu/src/utils/constants.c",
+  "file": "/Users/heathfortin/programing/myemu/src/utils/constants.c",
+  "output": "src/utils/CMakeFiles/myemu_utils.dir/constants.c.o"
+},
+{
+  "directory": "/Users/heathfortin/programing/myemu/build/src/utils",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  -I/Users/heathfortin/programing/myemu/src/utils  -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -o CMakeFiles/myemu_utils.dir/inst.c.o -c /Users/heathfortin/programing/myemu/src/utils/inst.c",
+  "file": "/Users/heathfortin/programing/myemu/src/utils/inst.c",
+  "output": "src/utils/CMakeFiles/myemu_utils.dir/inst.c.o"
+}
+]

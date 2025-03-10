@@ -57,10 +57,10 @@ RM = /opt/homebrew/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/heathfortin/programs/myemu
+CMAKE_SOURCE_DIR = /Users/heathfortin/programing/myemu
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/heathfortin/programs/myemu/build
+CMAKE_BINARY_DIR = /Users/heathfortin/programing/myemu/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,14 +87,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /Users/heathfortin/programs/myemu/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/heathfortin/programs/myemu/build/CMakeFiles /Users/heathfortin/programs/myemu/build/src/asm/executable//CMakeFiles/progress.marks
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/asm/executable/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/heathfortin/programs/myemu/build/CMakeFiles 0
+	cd /Users/heathfortin/programing/myemu/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/heathfortin/programing/myemu/build/CMakeFiles /Users/heathfortin/programing/myemu/build/src/asm/executable//CMakeFiles/progress.marks
+	cd /Users/heathfortin/programing/myemu/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/asm/executable/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/heathfortin/programing/myemu/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/asm/executable/clean
+	cd /Users/heathfortin/programing/myemu/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/asm/executable/clean
 .PHONY : clean
 
 # The main clean target
@@ -103,22 +103,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/asm/executable/preinstall
+	cd /Users/heathfortin/programing/myemu/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/asm/executable/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/asm/executable/preinstall
+	cd /Users/heathfortin/programing/myemu/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/asm/executable/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /Users/heathfortin/programs/myemu/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /Users/heathfortin/programing/myemu/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 src/asm/executable/CMakeFiles/myemu_asm.dir/rule:
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/asm/executable/CMakeFiles/myemu_asm.dir/rule
+	cd /Users/heathfortin/programing/myemu/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/asm/executable/CMakeFiles/myemu_asm.dir/rule
 .PHONY : src/asm/executable/CMakeFiles/myemu_asm.dir/rule
 
 # Convenience name for target.
@@ -127,7 +127,7 @@ myemu_asm: src/asm/executable/CMakeFiles/myemu_asm.dir/rule
 
 # fast build rule for target.
 myemu_asm/fast:
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f src/asm/executable/CMakeFiles/myemu_asm.dir/build.make src/asm/executable/CMakeFiles/myemu_asm.dir/build
+	cd /Users/heathfortin/programing/myemu/build && $(MAKE) $(MAKESILENT) -f src/asm/executable/CMakeFiles/myemu_asm.dir/build.make src/asm/executable/CMakeFiles/myemu_asm.dir/build
 .PHONY : myemu_asm/fast
 
 main.o: main.c.o
@@ -135,7 +135,7 @@ main.o: main.c.o
 
 # target to build an object file
 main.c.o:
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f src/asm/executable/CMakeFiles/myemu_asm.dir/build.make src/asm/executable/CMakeFiles/myemu_asm.dir/main.c.o
+	cd /Users/heathfortin/programing/myemu/build && $(MAKE) $(MAKESILENT) -f src/asm/executable/CMakeFiles/myemu_asm.dir/build.make src/asm/executable/CMakeFiles/myemu_asm.dir/main.c.o
 .PHONY : main.c.o
 
 main.i: main.c.i
@@ -143,7 +143,7 @@ main.i: main.c.i
 
 # target to preprocess a source file
 main.c.i:
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f src/asm/executable/CMakeFiles/myemu_asm.dir/build.make src/asm/executable/CMakeFiles/myemu_asm.dir/main.c.i
+	cd /Users/heathfortin/programing/myemu/build && $(MAKE) $(MAKESILENT) -f src/asm/executable/CMakeFiles/myemu_asm.dir/build.make src/asm/executable/CMakeFiles/myemu_asm.dir/main.c.i
 .PHONY : main.c.i
 
 main.s: main.c.s
@@ -151,7 +151,7 @@ main.s: main.c.s
 
 # target to generate assembly for a file
 main.c.s:
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f src/asm/executable/CMakeFiles/myemu_asm.dir/build.make src/asm/executable/CMakeFiles/myemu_asm.dir/main.c.s
+	cd /Users/heathfortin/programing/myemu/build && $(MAKE) $(MAKESILENT) -f src/asm/executable/CMakeFiles/myemu_asm.dir/build.make src/asm/executable/CMakeFiles/myemu_asm.dir/main.c.s
 .PHONY : main.c.s
 
 # Help Target
@@ -177,6 +177,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /Users/heathfortin/programs/myemu/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /Users/heathfortin/programing/myemu/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

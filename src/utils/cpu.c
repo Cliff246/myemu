@@ -10,10 +10,12 @@ void emulate(char *program, size_t size, int cycles)
 #define A_NOT_EQUAL__B 0
 #define A_EQLUAL__TO_B 1
 #define A_IS_GREATER_B 2
+
 #define A_IS_SMALLER_B 3
 #define NEXT (memory[++pc])
 #define UPDATENEXT DPRINTF("item %u at address %d\n", memory[pc], pc)
 #define EMULATOR_RAM 1024
+
     unsigned char memory[EMULATOR_RAM];
     unsigned short pc = 0, sp = 1024 - 100, rp = 0;
     unsigned short reg_D = 0;

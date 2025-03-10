@@ -53,10 +53,10 @@ RM = /opt/homebrew/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/heathfortin/programs/myemu
+CMAKE_SOURCE_DIR = /Users/heathfortin/programing/myemu
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/heathfortin/programs/myemu/build
+CMAKE_BINARY_DIR = /Users/heathfortin/programing/myemu/build
 
 # Include any dependencies generated for this target.
 include src/asm/executable/CMakeFiles/myemu_asm.dir/depend.make
@@ -73,18 +73,18 @@ src/asm/executable/CMakeFiles/myemu_asm.dir/codegen:
 .PHONY : src/asm/executable/CMakeFiles/myemu_asm.dir/codegen
 
 src/asm/executable/CMakeFiles/myemu_asm.dir/main.c.o: src/asm/executable/CMakeFiles/myemu_asm.dir/flags.make
-src/asm/executable/CMakeFiles/myemu_asm.dir/main.c.o: /Users/heathfortin/programs/myemu/src/asm/executable/main.c
+src/asm/executable/CMakeFiles/myemu_asm.dir/main.c.o: /Users/heathfortin/programing/myemu/src/asm/executable/main.c
 src/asm/executable/CMakeFiles/myemu_asm.dir/main.c.o: src/asm/executable/CMakeFiles/myemu_asm.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/heathfortin/programs/myemu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object src/asm/executable/CMakeFiles/myemu_asm.dir/main.c.o"
-	cd /Users/heathfortin/programs/myemu/build/src/asm/executable && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/asm/executable/CMakeFiles/myemu_asm.dir/main.c.o -MF CMakeFiles/myemu_asm.dir/main.c.o.d -o CMakeFiles/myemu_asm.dir/main.c.o -c /Users/heathfortin/programs/myemu/src/asm/executable/main.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/heathfortin/programing/myemu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object src/asm/executable/CMakeFiles/myemu_asm.dir/main.c.o"
+	cd /Users/heathfortin/programing/myemu/build/src/asm/executable && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/asm/executable/CMakeFiles/myemu_asm.dir/main.c.o -MF CMakeFiles/myemu_asm.dir/main.c.o.d -o CMakeFiles/myemu_asm.dir/main.c.o -c /Users/heathfortin/programing/myemu/src/asm/executable/main.c
 
 src/asm/executable/CMakeFiles/myemu_asm.dir/main.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/myemu_asm.dir/main.c.i"
-	cd /Users/heathfortin/programs/myemu/build/src/asm/executable && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/heathfortin/programs/myemu/src/asm/executable/main.c > CMakeFiles/myemu_asm.dir/main.c.i
+	cd /Users/heathfortin/programing/myemu/build/src/asm/executable && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/heathfortin/programing/myemu/src/asm/executable/main.c > CMakeFiles/myemu_asm.dir/main.c.i
 
 src/asm/executable/CMakeFiles/myemu_asm.dir/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/myemu_asm.dir/main.c.s"
-	cd /Users/heathfortin/programs/myemu/build/src/asm/executable && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/heathfortin/programs/myemu/src/asm/executable/main.c -o CMakeFiles/myemu_asm.dir/main.c.s
+	cd /Users/heathfortin/programing/myemu/build/src/asm/executable && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/heathfortin/programing/myemu/src/asm/executable/main.c -o CMakeFiles/myemu_asm.dir/main.c.s
 
 # Object files for target myemu_asm
 myemu_asm_OBJECTS = \
@@ -99,18 +99,18 @@ src/asm/executable/myemu_asm: src/utils/libmyemu_utils.a
 src/asm/executable/myemu_asm: src/asm/lib/libmyemu_asm_lib.a
 src/asm/executable/myemu_asm: src/utils/libmyemu_utils.a
 src/asm/executable/myemu_asm: src/asm/executable/CMakeFiles/myemu_asm.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/heathfortin/programs/myemu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable myemu_asm"
-	cd /Users/heathfortin/programs/myemu/build/src/asm/executable && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/myemu_asm.dir/link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/heathfortin/programing/myemu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable myemu_asm"
+	cd /Users/heathfortin/programing/myemu/build/src/asm/executable && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/myemu_asm.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 src/asm/executable/CMakeFiles/myemu_asm.dir/build: src/asm/executable/myemu_asm
 .PHONY : src/asm/executable/CMakeFiles/myemu_asm.dir/build
 
 src/asm/executable/CMakeFiles/myemu_asm.dir/clean:
-	cd /Users/heathfortin/programs/myemu/build/src/asm/executable && $(CMAKE_COMMAND) -P CMakeFiles/myemu_asm.dir/cmake_clean.cmake
+	cd /Users/heathfortin/programing/myemu/build/src/asm/executable && $(CMAKE_COMMAND) -P CMakeFiles/myemu_asm.dir/cmake_clean.cmake
 .PHONY : src/asm/executable/CMakeFiles/myemu_asm.dir/clean
 
 src/asm/executable/CMakeFiles/myemu_asm.dir/depend:
-	cd /Users/heathfortin/programs/myemu/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/heathfortin/programs/myemu /Users/heathfortin/programs/myemu/src/asm/executable /Users/heathfortin/programs/myemu/build /Users/heathfortin/programs/myemu/build/src/asm/executable /Users/heathfortin/programs/myemu/build/src/asm/executable/CMakeFiles/myemu_asm.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /Users/heathfortin/programing/myemu/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/heathfortin/programing/myemu /Users/heathfortin/programing/myemu/src/asm/executable /Users/heathfortin/programing/myemu/build /Users/heathfortin/programing/myemu/build/src/asm/executable /Users/heathfortin/programing/myemu/build/src/asm/executable/CMakeFiles/myemu_asm.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : src/asm/executable/CMakeFiles/myemu_asm.dir/depend
 

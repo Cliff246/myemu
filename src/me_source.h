@@ -1,6 +1,5 @@
-#ifndef __ME_SOURCE__
-#define __ME_SOURCE__
-
+#ifndef __SOURCE__
+#define __SOURCE__
 
 
 #endif

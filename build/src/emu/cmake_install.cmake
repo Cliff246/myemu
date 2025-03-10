@@ -1,4 +1,4 @@
-# Install script for directory: /Users/heathfortin/programs/myemu/src/emu
+# Install script for directory: /Users/heathfortin/programing/myemu/src/emu
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -37,9 +37,17 @@ if(NOT DEFINED CMAKE_OBJDUMP)
   set(CMAKE_OBJDUMP "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/objdump")
 endif()
 
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for each subdirectory.
+  include("/Users/heathfortin/programing/myemu/build/src/emu/lib/cmake_install.cmake")
+  include("/Users/heathfortin/programing/myemu/build/src/emu/tests/cmake_install.cmake")
+  include("/Users/heathfortin/programing/myemu/build/src/emu/executable/cmake_install.cmake")
+
+endif()
+
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
 if(CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "/Users/heathfortin/programs/myemu/build/src/emu/install_local_manifest.txt"
+  file(WRITE "/Users/heathfortin/programing/myemu/build/src/emu/install_local_manifest.txt"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()

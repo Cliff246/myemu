@@ -57,10 +57,10 @@ RM = /opt/homebrew/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/heathfortin/programs/myemu
+CMAKE_SOURCE_DIR = /Users/heathfortin/programing/myemu
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/heathfortin/programs/myemu/build
+CMAKE_BINARY_DIR = /Users/heathfortin/programing/myemu/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,14 +87,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /Users/heathfortin/programs/myemu/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/heathfortin/programs/myemu/build/CMakeFiles /Users/heathfortin/programs/myemu/build/src/utils//CMakeFiles/progress.marks
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/utils/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/heathfortin/programs/myemu/build/CMakeFiles 0
+	cd /Users/heathfortin/programing/myemu/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/heathfortin/programing/myemu/build/CMakeFiles /Users/heathfortin/programing/myemu/build/src/utils//CMakeFiles/progress.marks
+	cd /Users/heathfortin/programing/myemu/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/utils/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/heathfortin/programing/myemu/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/utils/clean
+	cd /Users/heathfortin/programing/myemu/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/utils/clean
 .PHONY : clean
 
 # The main clean target
@@ -103,22 +103,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/utils/preinstall
+	cd /Users/heathfortin/programing/myemu/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/utils/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/utils/preinstall
+	cd /Users/heathfortin/programing/myemu/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/utils/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /Users/heathfortin/programs/myemu/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /Users/heathfortin/programing/myemu/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 src/utils/CMakeFiles/myemu_utils.dir/rule:
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/utils/CMakeFiles/myemu_utils.dir/rule
+	cd /Users/heathfortin/programing/myemu/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/utils/CMakeFiles/myemu_utils.dir/rule
 .PHONY : src/utils/CMakeFiles/myemu_utils.dir/rule
 
 # Convenience name for target.
@@ -127,7 +127,7 @@ myemu_utils: src/utils/CMakeFiles/myemu_utils.dir/rule
 
 # fast build rule for target.
 myemu_utils/fast:
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/build
+	cd /Users/heathfortin/programing/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/build
 .PHONY : myemu_utils/fast
 
 commons.o: commons.c.o
@@ -135,7 +135,7 @@ commons.o: commons.c.o
 
 # target to build an object file
 commons.c.o:
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/commons.c.o
+	cd /Users/heathfortin/programing/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/commons.c.o
 .PHONY : commons.c.o
 
 commons.i: commons.c.i
@@ -143,7 +143,7 @@ commons.i: commons.c.i
 
 # target to preprocess a source file
 commons.c.i:
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/commons.c.i
+	cd /Users/heathfortin/programing/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/commons.c.i
 .PHONY : commons.c.i
 
 commons.s: commons.c.s
@@ -151,7 +151,7 @@ commons.s: commons.c.s
 
 # target to generate assembly for a file
 commons.c.s:
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/commons.c.s
+	cd /Users/heathfortin/programing/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/commons.c.s
 .PHONY : commons.c.s
 
 constants.o: constants.c.o
@@ -159,7 +159,7 @@ constants.o: constants.c.o
 
 # target to build an object file
 constants.c.o:
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/constants.c.o
+	cd /Users/heathfortin/programing/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/constants.c.o
 .PHONY : constants.c.o
 
 constants.i: constants.c.i
@@ -167,7 +167,7 @@ constants.i: constants.c.i
 
 # target to preprocess a source file
 constants.c.i:
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/constants.c.i
+	cd /Users/heathfortin/programing/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/constants.c.i
 .PHONY : constants.c.i
 
 constants.s: constants.c.s
@@ -175,7 +175,7 @@ constants.s: constants.c.s
 
 # target to generate assembly for a file
 constants.c.s:
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/constants.c.s
+	cd /Users/heathfortin/programing/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/constants.c.s
 .PHONY : constants.c.s
 
 cpu.o: cpu.c.o
@@ -183,7 +183,7 @@ cpu.o: cpu.c.o
 
 # target to build an object file
 cpu.c.o:
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/cpu.c.o
+	cd /Users/heathfortin/programing/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/cpu.c.o
 .PHONY : cpu.c.o
 
 cpu.i: cpu.c.i
@@ -191,7 +191,7 @@ cpu.i: cpu.c.i
 
 # target to preprocess a source file
 cpu.c.i:
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/cpu.c.i
+	cd /Users/heathfortin/programing/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/cpu.c.i
 .PHONY : cpu.c.i
 
 cpu.s: cpu.c.s
@@ -199,7 +199,7 @@ cpu.s: cpu.c.s
 
 # target to generate assembly for a file
 cpu.c.s:
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/cpu.c.s
+	cd /Users/heathfortin/programing/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/cpu.c.s
 .PHONY : cpu.c.s
 
 error.o: error.c.o
@@ -207,7 +207,7 @@ error.o: error.c.o
 
 # target to build an object file
 error.c.o:
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/error.c.o
+	cd /Users/heathfortin/programing/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/error.c.o
 .PHONY : error.c.o
 
 error.i: error.c.i
@@ -215,7 +215,7 @@ error.i: error.c.i
 
 # target to preprocess a source file
 error.c.i:
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/error.c.i
+	cd /Users/heathfortin/programing/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/error.c.i
 .PHONY : error.c.i
 
 error.s: error.c.s
@@ -223,7 +223,7 @@ error.s: error.c.s
 
 # target to generate assembly for a file
 error.c.s:
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/error.c.s
+	cd /Users/heathfortin/programing/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/error.c.s
 .PHONY : error.c.s
 
 inst.o: inst.c.o
@@ -231,7 +231,7 @@ inst.o: inst.c.o
 
 # target to build an object file
 inst.c.o:
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/inst.c.o
+	cd /Users/heathfortin/programing/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/inst.c.o
 .PHONY : inst.c.o
 
 inst.i: inst.c.i
@@ -239,7 +239,7 @@ inst.i: inst.c.i
 
 # target to preprocess a source file
 inst.c.i:
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/inst.c.i
+	cd /Users/heathfortin/programing/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/inst.c.i
 .PHONY : inst.c.i
 
 inst.s: inst.c.s
@@ -247,7 +247,7 @@ inst.s: inst.c.s
 
 # target to generate assembly for a file
 inst.c.s:
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/inst.c.s
+	cd /Users/heathfortin/programing/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/inst.c.s
 .PHONY : inst.c.s
 
 lexer.o: lexer.c.o
@@ -255,7 +255,7 @@ lexer.o: lexer.c.o
 
 # target to build an object file
 lexer.c.o:
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/lexer.c.o
+	cd /Users/heathfortin/programing/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/lexer.c.o
 .PHONY : lexer.c.o
 
 lexer.i: lexer.c.i
@@ -263,7 +263,7 @@ lexer.i: lexer.c.i
 
 # target to preprocess a source file
 lexer.c.i:
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/lexer.c.i
+	cd /Users/heathfortin/programing/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/lexer.c.i
 .PHONY : lexer.c.i
 
 lexer.s: lexer.c.s
@@ -271,7 +271,7 @@ lexer.s: lexer.c.s
 
 # target to generate assembly for a file
 lexer.c.s:
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/lexer.c.s
+	cd /Users/heathfortin/programing/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/lexer.c.s
 .PHONY : lexer.c.s
 
 utill_io.o: utill_io.c.o
@@ -279,7 +279,7 @@ utill_io.o: utill_io.c.o
 
 # target to build an object file
 utill_io.c.o:
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/utill_io.c.o
+	cd /Users/heathfortin/programing/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/utill_io.c.o
 .PHONY : utill_io.c.o
 
 utill_io.i: utill_io.c.i
@@ -287,7 +287,7 @@ utill_io.i: utill_io.c.i
 
 # target to preprocess a source file
 utill_io.c.i:
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/utill_io.c.i
+	cd /Users/heathfortin/programing/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/utill_io.c.i
 .PHONY : utill_io.c.i
 
 utill_io.s: utill_io.c.s
@@ -295,7 +295,7 @@ utill_io.s: utill_io.c.s
 
 # target to generate assembly for a file
 utill_io.c.s:
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/utill_io.c.s
+	cd /Users/heathfortin/programing/myemu/build && $(MAKE) $(MAKESILENT) -f src/utils/CMakeFiles/myemu_utils.dir/build.make src/utils/CMakeFiles/myemu_utils.dir/utill_io.c.s
 .PHONY : utill_io.c.s
 
 # Help Target
@@ -339,6 +339,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /Users/heathfortin/programs/myemu/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /Users/heathfortin/programing/myemu/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

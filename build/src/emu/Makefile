@@ -57,10 +57,10 @@ RM = /opt/homebrew/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/heathfortin/programs/myemu
+CMAKE_SOURCE_DIR = /Users/heathfortin/programing/myemu
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/heathfortin/programs/myemu/build
+CMAKE_BINARY_DIR = /Users/heathfortin/programing/myemu/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,14 +87,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /Users/heathfortin/programs/myemu/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/heathfortin/programs/myemu/build/CMakeFiles /Users/heathfortin/programs/myemu/build/src/emu//CMakeFiles/progress.marks
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/emu/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/heathfortin/programs/myemu/build/CMakeFiles 0
+	cd /Users/heathfortin/programing/myemu/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/heathfortin/programing/myemu/build/CMakeFiles /Users/heathfortin/programing/myemu/build/src/emu//CMakeFiles/progress.marks
+	cd /Users/heathfortin/programing/myemu/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/emu/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/heathfortin/programing/myemu/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/emu/clean
+	cd /Users/heathfortin/programing/myemu/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/emu/clean
 .PHONY : clean
 
 # The main clean target
@@ -103,80 +103,18 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/emu/preinstall
+	cd /Users/heathfortin/programing/myemu/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/emu/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/emu/preinstall
+	cd /Users/heathfortin/programing/myemu/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/emu/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /Users/heathfortin/programs/myemu/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /Users/heathfortin/programing/myemu/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
-
-# Convenience name for target.
-src/emu/CMakeFiles/emu.dir/rule:
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/emu/CMakeFiles/emu.dir/rule
-.PHONY : src/emu/CMakeFiles/emu.dir/rule
-
-# Convenience name for target.
-emu: src/emu/CMakeFiles/emu.dir/rule
-.PHONY : emu
-
-# fast build rule for target.
-emu/fast:
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f src/emu/CMakeFiles/emu.dir/build.make src/emu/CMakeFiles/emu.dir/build
-.PHONY : emu/fast
-
-emu.o: emu.c.o
-.PHONY : emu.o
-
-# target to build an object file
-emu.c.o:
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f src/emu/CMakeFiles/emu.dir/build.make src/emu/CMakeFiles/emu.dir/emu.c.o
-.PHONY : emu.c.o
-
-emu.i: emu.c.i
-.PHONY : emu.i
-
-# target to preprocess a source file
-emu.c.i:
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f src/emu/CMakeFiles/emu.dir/build.make src/emu/CMakeFiles/emu.dir/emu.c.i
-.PHONY : emu.c.i
-
-emu.s: emu.c.s
-.PHONY : emu.s
-
-# target to generate assembly for a file
-emu.c.s:
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f src/emu/CMakeFiles/emu.dir/build.make src/emu/CMakeFiles/emu.dir/emu.c.s
-.PHONY : emu.c.s
-
-main.o: main.c.o
-.PHONY : main.o
-
-# target to build an object file
-main.c.o:
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f src/emu/CMakeFiles/emu.dir/build.make src/emu/CMakeFiles/emu.dir/main.c.o
-.PHONY : main.c.o
-
-main.i: main.c.i
-.PHONY : main.i
-
-# target to preprocess a source file
-main.c.i:
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f src/emu/CMakeFiles/emu.dir/build.make src/emu/CMakeFiles/emu.dir/main.c.i
-.PHONY : main.c.i
-
-main.s: main.c.s
-.PHONY : main.s
-
-# target to generate assembly for a file
-main.c.s:
-	cd /Users/heathfortin/programs/myemu/build && $(MAKE) $(MAKESILENT) -f src/emu/CMakeFiles/emu.dir/build.make src/emu/CMakeFiles/emu.dir/main.c.s
-.PHONY : main.c.s
 
 # Help Target
 help:
@@ -186,13 +124,6 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... emu"
-	@echo "... emu.o"
-	@echo "... emu.i"
-	@echo "... emu.s"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
 .PHONY : help
 
 
@@ -204,6 +135,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /Users/heathfortin/programs/myemu/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /Users/heathfortin/programing/myemu/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

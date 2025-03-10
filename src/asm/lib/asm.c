@@ -851,14 +851,10 @@ int assemble(const char *dir, char **bytes)
 
     size_t asmerr_ary_len = 1;
     const size_t increment = 1024;
-	LINE;
     char *program_ptr = (char *)malloc(sizeof(char) * increment);
     memset(program_ptr, 0, increment);
-	LINE;
 
-	LINE;
     p_asmerr_t *asmerr_array = (p_asmerr_t *)calloc(asmerr_ary_len, sizeof(asmerr_t));
-	LINE;
 
     program_t program = {.p_program = program_ptr, .n_memorysize = increment, .n_increment = increment, .n_used = 0};
     context_t context = {
@@ -869,10 +865,8 @@ int assemble(const char *dir, char **bytes)
         .p_sections = NULL,
         .n_sections = 0
     };
-	LINE;
 
     stage1(&context, &program);
-	LINE;
 
     asmerr_array[0] = NULL;
     //free_hash_table(context.p_identifier_table);
@@ -882,5 +876,7 @@ int assemble(const char *dir, char **bytes)
     *bytes = program.p_program;
    // LINE;
     //print_range(program.p_program, 0, 64, program.n_memorysize);
+    free(program_ptr);
+    free(asmerr_array);
     return program.n_used;
 }

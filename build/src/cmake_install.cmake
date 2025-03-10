@@ -1,4 +1,4 @@
-# Install script for directory: /Users/heathfortin/programs/myemu/src
+# Install script for directory: /Users/heathfortin/programing/myemu/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,16 +39,16 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/Users/heathfortin/programs/myemu/build/src/emu/cmake_install.cmake")
-  include("/Users/heathfortin/programs/myemu/build/src/asm/cmake_install.cmake")
-  include("/Users/heathfortin/programs/myemu/build/src/tests/cmake_install.cmake")
-  include("/Users/heathfortin/programs/myemu/build/src/utils/cmake_install.cmake")
+  include("/Users/heathfortin/programing/myemu/build/src/emu/cmake_install.cmake")
+  include("/Users/heathfortin/programing/myemu/build/src/asm/cmake_install.cmake")
+  include("/Users/heathfortin/programing/myemu/build/src/tests/cmake_install.cmake")
+  include("/Users/heathfortin/programing/myemu/build/src/utils/cmake_install.cmake")
 
 endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
 if(CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "/Users/heathfortin/programs/myemu/build/src/install_local_manifest.txt"
+  file(WRITE "/Users/heathfortin/programing/myemu/build/src/install_local_manifest.txt"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()

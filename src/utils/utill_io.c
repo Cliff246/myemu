@@ -65,6 +65,11 @@ size_t get_tokens(p_tok_t **reftok, char *dir)
         *reftok = tokens;
         return numline;
     }
+    else
+    {
+        printf("failed to open document %s\n", dir);
+        exit(1);
+    }
 	
     return 0;
 }

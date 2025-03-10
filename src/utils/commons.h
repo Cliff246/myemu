@@ -40,7 +40,7 @@
 #if DEBUG == 1
 #define OFFSET_DPRINTF(f, ...) \
     DPRINTF("%s", offset);     \
-    DPRINTF(f, __VA_ARGS__)    
+    DPRINTF(f, __VA_ARGS__)
 #define DPRINTF(f, ...) printf(f, __VA_ARGS__)
 #define DPRINT(f) printf(f)
 #define LINE printf("\n------%s:%d-------\n", __FILE__, __LINE__)

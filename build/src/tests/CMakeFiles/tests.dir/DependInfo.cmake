@@ -8,8 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/Users/heathfortin/programs/myemu/src/tests/main.c" "src/tests/CMakeFiles/tests.dir/main.c.o" "gcc" "src/tests/CMakeFiles/tests.dir/main.c.o.d"
-  "/Users/heathfortin/programs/myemu/src/tests/test.c" "src/tests/CMakeFiles/tests.dir/test.c.o" "gcc" "src/tests/CMakeFiles/tests.dir/test.c.o.d"
+  "/Users/heathfortin/programing/myemu/src/tests/main.c" "src/tests/CMakeFiles/tests.dir/main.c.o" "gcc" "src/tests/CMakeFiles/tests.dir/main.c.o.d"
+  "/Users/heathfortin/programing/myemu/src/tests/test.c" "src/tests/CMakeFiles/tests.dir/test.c.o" "gcc" "src/tests/CMakeFiles/tests.dir/test.c.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

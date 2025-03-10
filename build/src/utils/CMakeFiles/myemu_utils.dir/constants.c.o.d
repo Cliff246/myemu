@@ -1,7 +1,7 @@
 src/utils/CMakeFiles/myemu_utils.dir/constants.c.o: \
-  /Users/heathfortin/programs/myemu/src/utils/constants.c \
-  /Users/heathfortin/programs/myemu/src/utils/constants.h \
-  /Users/heathfortin/programs/myemu/src/utils/myemu.h \
+  /Users/heathfortin/programing/myemu/src/utils/constants.c \
+  /Users/heathfortin/programing/myemu/src/utils/constants.h \
+  /Users/heathfortin/programing/myemu/src/utils/myemu.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include/stdbool.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/stdlib.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/_stdlib.h \
@@ -107,7 +107,7 @@ src/utils/CMakeFiles/myemu_utils.dir/constants.c.o: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/runetype.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_wint_t.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/math.h \
-  /Users/heathfortin/programs/myemu/src/utils/commons.h \
-  /Users/heathfortin/programs/myemu/src/utils/utill_io.h \
-  /Users/heathfortin/programs/myemu/src/utils/lexer.h \
-  /Users/heathfortin/programs/myemu/src/utils/cpu.h
+  /Users/heathfortin/programing/myemu/src/utils/commons.h \
+  /Users/heathfortin/programing/myemu/src/utils/utill_io.h \
+  /Users/heathfortin/programing/myemu/src/utils/lexer.h \
+  /Users/heathfortin/programing/myemu/src/utils/cpu.h

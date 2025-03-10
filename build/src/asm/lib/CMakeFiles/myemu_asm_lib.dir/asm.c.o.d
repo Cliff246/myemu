@@ -1,5 +1,5 @@
 src/asm/lib/CMakeFiles/myemu_asm_lib.dir/asm.c.o: \
-  /Users/heathfortin/programs/myemu/src/asm/lib/asm.c \
+  /Users/heathfortin/programing/myemu/src/asm/lib/asm.c \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/stdio.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/_stdio.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/sys/cdefs.h \
@@ -91,8 +91,8 @@ src/asm/lib/CMakeFiles/myemu_asm_lib.dir/asm.c.o: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/_strings.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/secure/_strings.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/secure/_string.h \
-  /Users/heathfortin/programs/myemu/src/asm/lib/asm.h \
-  /Users/heathfortin/programs/myemu/src/utils/myemu.h \
+  /Users/heathfortin/programing/myemu/src/asm/lib/asm.h \
+  /Users/heathfortin/programing/myemu/src/utils/commons.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/errno.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/sys/errno.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include/stdarg.h \
@@ -107,9 +107,9 @@ src/asm/lib/CMakeFiles/myemu_asm_lib.dir/asm.c.o: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/runetype.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_wint_t.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/math.h \
-  /Users/heathfortin/programs/myemu/src/utils/commons.h \
-  /Users/heathfortin/programs/myemu/src/utils/utill_io.h \
-  /Users/heathfortin/programs/myemu/src/utils/lexer.h \
-  /Users/heathfortin/programs/myemu/src/utils/inst.h \
-  /Users/heathfortin/programs/myemu/src/utils/constants.h \
-  /Users/heathfortin/programs/myemu/src/utils/cpu.h
+  /Users/heathfortin/programing/myemu/src/utils/myemu.h \
+  /Users/heathfortin/programing/myemu/src/utils/utill_io.h \
+  /Users/heathfortin/programing/myemu/src/utils/lexer.h \
+  /Users/heathfortin/programing/myemu/src/utils/inst.h \
+  /Users/heathfortin/programing/myemu/src/utils/constants.h \
+  /Users/heathfortin/programing/myemu/src/utils/cpu.h

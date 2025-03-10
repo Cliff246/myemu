@@ -53,10 +53,10 @@ RM = /opt/homebrew/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/heathfortin/programs/myemu
+CMAKE_SOURCE_DIR = /Users/heathfortin/programing/myemu
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/heathfortin/programs/myemu/build
+CMAKE_BINARY_DIR = /Users/heathfortin/programing/myemu/build
 
 # Include any dependencies generated for this target.
 include src/utils/CMakeFiles/myemu_utils.dir/depend.make
@@ -73,102 +73,102 @@ src/utils/CMakeFiles/myemu_utils.dir/codegen:
 .PHONY : src/utils/CMakeFiles/myemu_utils.dir/codegen
 
 src/utils/CMakeFiles/myemu_utils.dir/commons.c.o: src/utils/CMakeFiles/myemu_utils.dir/flags.make
-src/utils/CMakeFiles/myemu_utils.dir/commons.c.o: /Users/heathfortin/programs/myemu/src/utils/commons.c
+src/utils/CMakeFiles/myemu_utils.dir/commons.c.o: /Users/heathfortin/programing/myemu/src/utils/commons.c
 src/utils/CMakeFiles/myemu_utils.dir/commons.c.o: src/utils/CMakeFiles/myemu_utils.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/heathfortin/programs/myemu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object src/utils/CMakeFiles/myemu_utils.dir/commons.c.o"
-	cd /Users/heathfortin/programs/myemu/build/src/utils && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/utils/CMakeFiles/myemu_utils.dir/commons.c.o -MF CMakeFiles/myemu_utils.dir/commons.c.o.d -o CMakeFiles/myemu_utils.dir/commons.c.o -c /Users/heathfortin/programs/myemu/src/utils/commons.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/heathfortin/programing/myemu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object src/utils/CMakeFiles/myemu_utils.dir/commons.c.o"
+	cd /Users/heathfortin/programing/myemu/build/src/utils && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/utils/CMakeFiles/myemu_utils.dir/commons.c.o -MF CMakeFiles/myemu_utils.dir/commons.c.o.d -o CMakeFiles/myemu_utils.dir/commons.c.o -c /Users/heathfortin/programing/myemu/src/utils/commons.c
 
 src/utils/CMakeFiles/myemu_utils.dir/commons.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/myemu_utils.dir/commons.c.i"
-	cd /Users/heathfortin/programs/myemu/build/src/utils && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/heathfortin/programs/myemu/src/utils/commons.c > CMakeFiles/myemu_utils.dir/commons.c.i
+	cd /Users/heathfortin/programing/myemu/build/src/utils && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/heathfortin/programing/myemu/src/utils/commons.c > CMakeFiles/myemu_utils.dir/commons.c.i
 
 src/utils/CMakeFiles/myemu_utils.dir/commons.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/myemu_utils.dir/commons.c.s"
-	cd /Users/heathfortin/programs/myemu/build/src/utils && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/heathfortin/programs/myemu/src/utils/commons.c -o CMakeFiles/myemu_utils.dir/commons.c.s
+	cd /Users/heathfortin/programing/myemu/build/src/utils && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/heathfortin/programing/myemu/src/utils/commons.c -o CMakeFiles/myemu_utils.dir/commons.c.s
 
 src/utils/CMakeFiles/myemu_utils.dir/lexer.c.o: src/utils/CMakeFiles/myemu_utils.dir/flags.make
-src/utils/CMakeFiles/myemu_utils.dir/lexer.c.o: /Users/heathfortin/programs/myemu/src/utils/lexer.c
+src/utils/CMakeFiles/myemu_utils.dir/lexer.c.o: /Users/heathfortin/programing/myemu/src/utils/lexer.c
 src/utils/CMakeFiles/myemu_utils.dir/lexer.c.o: src/utils/CMakeFiles/myemu_utils.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/heathfortin/programs/myemu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object src/utils/CMakeFiles/myemu_utils.dir/lexer.c.o"
-	cd /Users/heathfortin/programs/myemu/build/src/utils && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/utils/CMakeFiles/myemu_utils.dir/lexer.c.o -MF CMakeFiles/myemu_utils.dir/lexer.c.o.d -o CMakeFiles/myemu_utils.dir/lexer.c.o -c /Users/heathfortin/programs/myemu/src/utils/lexer.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/heathfortin/programing/myemu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object src/utils/CMakeFiles/myemu_utils.dir/lexer.c.o"
+	cd /Users/heathfortin/programing/myemu/build/src/utils && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/utils/CMakeFiles/myemu_utils.dir/lexer.c.o -MF CMakeFiles/myemu_utils.dir/lexer.c.o.d -o CMakeFiles/myemu_utils.dir/lexer.c.o -c /Users/heathfortin/programing/myemu/src/utils/lexer.c
 
 src/utils/CMakeFiles/myemu_utils.dir/lexer.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/myemu_utils.dir/lexer.c.i"
-	cd /Users/heathfortin/programs/myemu/build/src/utils && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/heathfortin/programs/myemu/src/utils/lexer.c > CMakeFiles/myemu_utils.dir/lexer.c.i
+	cd /Users/heathfortin/programing/myemu/build/src/utils && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/heathfortin/programing/myemu/src/utils/lexer.c > CMakeFiles/myemu_utils.dir/lexer.c.i
 
 src/utils/CMakeFiles/myemu_utils.dir/lexer.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/myemu_utils.dir/lexer.c.s"
-	cd /Users/heathfortin/programs/myemu/build/src/utils && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/heathfortin/programs/myemu/src/utils/lexer.c -o CMakeFiles/myemu_utils.dir/lexer.c.s
+	cd /Users/heathfortin/programing/myemu/build/src/utils && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/heathfortin/programing/myemu/src/utils/lexer.c -o CMakeFiles/myemu_utils.dir/lexer.c.s
 
 src/utils/CMakeFiles/myemu_utils.dir/cpu.c.o: src/utils/CMakeFiles/myemu_utils.dir/flags.make
-src/utils/CMakeFiles/myemu_utils.dir/cpu.c.o: /Users/heathfortin/programs/myemu/src/utils/cpu.c
+src/utils/CMakeFiles/myemu_utils.dir/cpu.c.o: /Users/heathfortin/programing/myemu/src/utils/cpu.c
 src/utils/CMakeFiles/myemu_utils.dir/cpu.c.o: src/utils/CMakeFiles/myemu_utils.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/heathfortin/programs/myemu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object src/utils/CMakeFiles/myemu_utils.dir/cpu.c.o"
-	cd /Users/heathfortin/programs/myemu/build/src/utils && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/utils/CMakeFiles/myemu_utils.dir/cpu.c.o -MF CMakeFiles/myemu_utils.dir/cpu.c.o.d -o CMakeFiles/myemu_utils.dir/cpu.c.o -c /Users/heathfortin/programs/myemu/src/utils/cpu.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/heathfortin/programing/myemu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object src/utils/CMakeFiles/myemu_utils.dir/cpu.c.o"
+	cd /Users/heathfortin/programing/myemu/build/src/utils && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/utils/CMakeFiles/myemu_utils.dir/cpu.c.o -MF CMakeFiles/myemu_utils.dir/cpu.c.o.d -o CMakeFiles/myemu_utils.dir/cpu.c.o -c /Users/heathfortin/programing/myemu/src/utils/cpu.c
 
 src/utils/CMakeFiles/myemu_utils.dir/cpu.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/myemu_utils.dir/cpu.c.i"
-	cd /Users/heathfortin/programs/myemu/build/src/utils && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/heathfortin/programs/myemu/src/utils/cpu.c > CMakeFiles/myemu_utils.dir/cpu.c.i
+	cd /Users/heathfortin/programing/myemu/build/src/utils && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/heathfortin/programing/myemu/src/utils/cpu.c > CMakeFiles/myemu_utils.dir/cpu.c.i
 
 src/utils/CMakeFiles/myemu_utils.dir/cpu.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/myemu_utils.dir/cpu.c.s"
-	cd /Users/heathfortin/programs/myemu/build/src/utils && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/heathfortin/programs/myemu/src/utils/cpu.c -o CMakeFiles/myemu_utils.dir/cpu.c.s
+	cd /Users/heathfortin/programing/myemu/build/src/utils && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/heathfortin/programing/myemu/src/utils/cpu.c -o CMakeFiles/myemu_utils.dir/cpu.c.s
 
 src/utils/CMakeFiles/myemu_utils.dir/utill_io.c.o: src/utils/CMakeFiles/myemu_utils.dir/flags.make
-src/utils/CMakeFiles/myemu_utils.dir/utill_io.c.o: /Users/heathfortin/programs/myemu/src/utils/utill_io.c
+src/utils/CMakeFiles/myemu_utils.dir/utill_io.c.o: /Users/heathfortin/programing/myemu/src/utils/utill_io.c
 src/utils/CMakeFiles/myemu_utils.dir/utill_io.c.o: src/utils/CMakeFiles/myemu_utils.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/heathfortin/programs/myemu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object src/utils/CMakeFiles/myemu_utils.dir/utill_io.c.o"
-	cd /Users/heathfortin/programs/myemu/build/src/utils && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/utils/CMakeFiles/myemu_utils.dir/utill_io.c.o -MF CMakeFiles/myemu_utils.dir/utill_io.c.o.d -o CMakeFiles/myemu_utils.dir/utill_io.c.o -c /Users/heathfortin/programs/myemu/src/utils/utill_io.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/heathfortin/programing/myemu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object src/utils/CMakeFiles/myemu_utils.dir/utill_io.c.o"
+	cd /Users/heathfortin/programing/myemu/build/src/utils && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/utils/CMakeFiles/myemu_utils.dir/utill_io.c.o -MF CMakeFiles/myemu_utils.dir/utill_io.c.o.d -o CMakeFiles/myemu_utils.dir/utill_io.c.o -c /Users/heathfortin/programing/myemu/src/utils/utill_io.c
 
 src/utils/CMakeFiles/myemu_utils.dir/utill_io.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/myemu_utils.dir/utill_io.c.i"
-	cd /Users/heathfortin/programs/myemu/build/src/utils && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/heathfortin/programs/myemu/src/utils/utill_io.c > CMakeFiles/myemu_utils.dir/utill_io.c.i
+	cd /Users/heathfortin/programing/myemu/build/src/utils && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/heathfortin/programing/myemu/src/utils/utill_io.c > CMakeFiles/myemu_utils.dir/utill_io.c.i
 
 src/utils/CMakeFiles/myemu_utils.dir/utill_io.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/myemu_utils.dir/utill_io.c.s"
-	cd /Users/heathfortin/programs/myemu/build/src/utils && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/heathfortin/programs/myemu/src/utils/utill_io.c -o CMakeFiles/myemu_utils.dir/utill_io.c.s
+	cd /Users/heathfortin/programing/myemu/build/src/utils && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/heathfortin/programing/myemu/src/utils/utill_io.c -o CMakeFiles/myemu_utils.dir/utill_io.c.s
 
 src/utils/CMakeFiles/myemu_utils.dir/error.c.o: src/utils/CMakeFiles/myemu_utils.dir/flags.make
-src/utils/CMakeFiles/myemu_utils.dir/error.c.o: /Users/heathfortin/programs/myemu/src/utils/error.c
+src/utils/CMakeFiles/myemu_utils.dir/error.c.o: /Users/heathfortin/programing/myemu/src/utils/error.c
 src/utils/CMakeFiles/myemu_utils.dir/error.c.o: src/utils/CMakeFiles/myemu_utils.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/heathfortin/programs/myemu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object src/utils/CMakeFiles/myemu_utils.dir/error.c.o"
-	cd /Users/heathfortin/programs/myemu/build/src/utils && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/utils/CMakeFiles/myemu_utils.dir/error.c.o -MF CMakeFiles/myemu_utils.dir/error.c.o.d -o CMakeFiles/myemu_utils.dir/error.c.o -c /Users/heathfortin/programs/myemu/src/utils/error.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/heathfortin/programing/myemu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object src/utils/CMakeFiles/myemu_utils.dir/error.c.o"
+	cd /Users/heathfortin/programing/myemu/build/src/utils && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/utils/CMakeFiles/myemu_utils.dir/error.c.o -MF CMakeFiles/myemu_utils.dir/error.c.o.d -o CMakeFiles/myemu_utils.dir/error.c.o -c /Users/heathfortin/programing/myemu/src/utils/error.c
 
 src/utils/CMakeFiles/myemu_utils.dir/error.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/myemu_utils.dir/error.c.i"
-	cd /Users/heathfortin/programs/myemu/build/src/utils && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/heathfortin/programs/myemu/src/utils/error.c > CMakeFiles/myemu_utils.dir/error.c.i
+	cd /Users/heathfortin/programing/myemu/build/src/utils && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/heathfortin/programing/myemu/src/utils/error.c > CMakeFiles/myemu_utils.dir/error.c.i
 
 src/utils/CMakeFiles/myemu_utils.dir/error.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/myemu_utils.dir/error.c.s"
-	cd /Users/heathfortin/programs/myemu/build/src/utils && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/heathfortin/programs/myemu/src/utils/error.c -o CMakeFiles/myemu_utils.dir/error.c.s
+	cd /Users/heathfortin/programing/myemu/build/src/utils && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/heathfortin/programing/myemu/src/utils/error.c -o CMakeFiles/myemu_utils.dir/error.c.s
 
 src/utils/CMakeFiles/myemu_utils.dir/constants.c.o: src/utils/CMakeFiles/myemu_utils.dir/flags.make
-src/utils/CMakeFiles/myemu_utils.dir/constants.c.o: /Users/heathfortin/programs/myemu/src/utils/constants.c
+src/utils/CMakeFiles/myemu_utils.dir/constants.c.o: /Users/heathfortin/programing/myemu/src/utils/constants.c
 src/utils/CMakeFiles/myemu_utils.dir/constants.c.o: src/utils/CMakeFiles/myemu_utils.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/heathfortin/programs/myemu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object src/utils/CMakeFiles/myemu_utils.dir/constants.c.o"
-	cd /Users/heathfortin/programs/myemu/build/src/utils && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/utils/CMakeFiles/myemu_utils.dir/constants.c.o -MF CMakeFiles/myemu_utils.dir/constants.c.o.d -o CMakeFiles/myemu_utils.dir/constants.c.o -c /Users/heathfortin/programs/myemu/src/utils/constants.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/heathfortin/programing/myemu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object src/utils/CMakeFiles/myemu_utils.dir/constants.c.o"
+	cd /Users/heathfortin/programing/myemu/build/src/utils && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/utils/CMakeFiles/myemu_utils.dir/constants.c.o -MF CMakeFiles/myemu_utils.dir/constants.c.o.d -o CMakeFiles/myemu_utils.dir/constants.c.o -c /Users/heathfortin/programing/myemu/src/utils/constants.c
 
 src/utils/CMakeFiles/myemu_utils.dir/constants.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/myemu_utils.dir/constants.c.i"
-	cd /Users/heathfortin/programs/myemu/build/src/utils && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/heathfortin/programs/myemu/src/utils/constants.c > CMakeFiles/myemu_utils.dir/constants.c.i
+	cd /Users/heathfortin/programing/myemu/build/src/utils && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/heathfortin/programing/myemu/src/utils/constants.c > CMakeFiles/myemu_utils.dir/constants.c.i
 
 src/utils/CMakeFiles/myemu_utils.dir/constants.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/myemu_utils.dir/constants.c.s"
-	cd /Users/heathfortin/programs/myemu/build/src/utils && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/heathfortin/programs/myemu/src/utils/constants.c -o CMakeFiles/myemu_utils.dir/constants.c.s
+	cd /Users/heathfortin/programing/myemu/build/src/utils && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/heathfortin/programing/myemu/src/utils/constants.c -o CMakeFiles/myemu_utils.dir/constants.c.s
 
 src/utils/CMakeFiles/myemu_utils.dir/inst.c.o: src/utils/CMakeFiles/myemu_utils.dir/flags.make
-src/utils/CMakeFiles/myemu_utils.dir/inst.c.o: /Users/heathfortin/programs/myemu/src/utils/inst.c
+src/utils/CMakeFiles/myemu_utils.dir/inst.c.o: /Users/heathfortin/programing/myemu/src/utils/inst.c
 src/utils/CMakeFiles/myemu_utils.dir/inst.c.o: src/utils/CMakeFiles/myemu_utils.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/heathfortin/programs/myemu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object src/utils/CMakeFiles/myemu_utils.dir/inst.c.o"
-	cd /Users/heathfortin/programs/myemu/build/src/utils && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/utils/CMakeFiles/myemu_utils.dir/inst.c.o -MF CMakeFiles/myemu_utils.dir/inst.c.o.d -o CMakeFiles/myemu_utils.dir/inst.c.o -c /Users/heathfortin/programs/myemu/src/utils/inst.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/heathfortin/programing/myemu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object src/utils/CMakeFiles/myemu_utils.dir/inst.c.o"
+	cd /Users/heathfortin/programing/myemu/build/src/utils && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/utils/CMakeFiles/myemu_utils.dir/inst.c.o -MF CMakeFiles/myemu_utils.dir/inst.c.o.d -o CMakeFiles/myemu_utils.dir/inst.c.o -c /Users/heathfortin/programing/myemu/src/utils/inst.c
 
 src/utils/CMakeFiles/myemu_utils.dir/inst.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/myemu_utils.dir/inst.c.i"
-	cd /Users/heathfortin/programs/myemu/build/src/utils && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/heathfortin/programs/myemu/src/utils/inst.c > CMakeFiles/myemu_utils.dir/inst.c.i
+	cd /Users/heathfortin/programing/myemu/build/src/utils && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/heathfortin/programing/myemu/src/utils/inst.c > CMakeFiles/myemu_utils.dir/inst.c.i
 
 src/utils/CMakeFiles/myemu_utils.dir/inst.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/myemu_utils.dir/inst.c.s"
-	cd /Users/heathfortin/programs/myemu/build/src/utils && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/heathfortin/programs/myemu/src/utils/inst.c -o CMakeFiles/myemu_utils.dir/inst.c.s
+	cd /Users/heathfortin/programing/myemu/build/src/utils && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/heathfortin/programing/myemu/src/utils/inst.c -o CMakeFiles/myemu_utils.dir/inst.c.s
 
 # Object files for target myemu_utils
 myemu_utils_OBJECTS = \
@@ -192,19 +192,19 @@ src/utils/libmyemu_utils.a: src/utils/CMakeFiles/myemu_utils.dir/constants.c.o
 src/utils/libmyemu_utils.a: src/utils/CMakeFiles/myemu_utils.dir/inst.c.o
 src/utils/libmyemu_utils.a: src/utils/CMakeFiles/myemu_utils.dir/build.make
 src/utils/libmyemu_utils.a: src/utils/CMakeFiles/myemu_utils.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/heathfortin/programs/myemu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking C static library libmyemu_utils.a"
-	cd /Users/heathfortin/programs/myemu/build/src/utils && $(CMAKE_COMMAND) -P CMakeFiles/myemu_utils.dir/cmake_clean_target.cmake
-	cd /Users/heathfortin/programs/myemu/build/src/utils && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/myemu_utils.dir/link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/heathfortin/programing/myemu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking C static library libmyemu_utils.a"
+	cd /Users/heathfortin/programing/myemu/build/src/utils && $(CMAKE_COMMAND) -P CMakeFiles/myemu_utils.dir/cmake_clean_target.cmake
+	cd /Users/heathfortin/programing/myemu/build/src/utils && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/myemu_utils.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 src/utils/CMakeFiles/myemu_utils.dir/build: src/utils/libmyemu_utils.a
 .PHONY : src/utils/CMakeFiles/myemu_utils.dir/build
 
 src/utils/CMakeFiles/myemu_utils.dir/clean:
-	cd /Users/heathfortin/programs/myemu/build/src/utils && $(CMAKE_COMMAND) -P CMakeFiles/myemu_utils.dir/cmake_clean.cmake
+	cd /Users/heathfortin/programing/myemu/build/src/utils && $(CMAKE_COMMAND) -P CMakeFiles/myemu_utils.dir/cmake_clean.cmake
 .PHONY : src/utils/CMakeFiles/myemu_utils.dir/clean
 
 src/utils/CMakeFiles/myemu_utils.dir/depend:
-	cd /Users/heathfortin/programs/myemu/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/heathfortin/programs/myemu /Users/heathfortin/programs/myemu/src/utils /Users/heathfortin/programs/myemu/build /Users/heathfortin/programs/myemu/build/src/utils /Users/heathfortin/programs/myemu/build/src/utils/CMakeFiles/myemu_utils.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /Users/heathfortin/programing/myemu/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/heathfortin/programing/myemu /Users/heathfortin/programing/myemu/src/utils /Users/heathfortin/programing/myemu/build /Users/heathfortin/programing/myemu/build/src/utils /Users/heathfortin/programing/myemu/build/src/utils/CMakeFiles/myemu_utils.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : src/utils/CMakeFiles/myemu_utils.dir/depend
 

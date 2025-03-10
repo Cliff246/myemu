@@ -11,7 +11,7 @@
 
 void readdir(char *dir)
 {
-
+    
 }
 
 void readfile(char *str)
@@ -24,7 +24,8 @@ void readfile(char *str)
 
 void outfile(char *out)
 {
-
+    
+    scanf("%s", buffer);
 }
 
 void testfile(char *str)

@@ -53,10 +53,10 @@ RM = /opt/homebrew/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/heathfortin/programs/myemu
+CMAKE_SOURCE_DIR = /Users/heathfortin/programing/myemu
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/heathfortin/programs/myemu/build
+CMAKE_BINARY_DIR = /Users/heathfortin/programing/myemu/build
 
 # Include any dependencies generated for this target.
 include src/tests/CMakeFiles/tests.dir/depend.make
@@ -73,32 +73,32 @@ src/tests/CMakeFiles/tests.dir/codegen:
 .PHONY : src/tests/CMakeFiles/tests.dir/codegen
 
 src/tests/CMakeFiles/tests.dir/test.c.o: src/tests/CMakeFiles/tests.dir/flags.make
-src/tests/CMakeFiles/tests.dir/test.c.o: /Users/heathfortin/programs/myemu/src/tests/test.c
+src/tests/CMakeFiles/tests.dir/test.c.o: /Users/heathfortin/programing/myemu/src/tests/test.c
 src/tests/CMakeFiles/tests.dir/test.c.o: src/tests/CMakeFiles/tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/heathfortin/programs/myemu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object src/tests/CMakeFiles/tests.dir/test.c.o"
-	cd /Users/heathfortin/programs/myemu/build/src/tests && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/tests/CMakeFiles/tests.dir/test.c.o -MF CMakeFiles/tests.dir/test.c.o.d -o CMakeFiles/tests.dir/test.c.o -c /Users/heathfortin/programs/myemu/src/tests/test.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/heathfortin/programing/myemu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object src/tests/CMakeFiles/tests.dir/test.c.o"
+	cd /Users/heathfortin/programing/myemu/build/src/tests && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/tests/CMakeFiles/tests.dir/test.c.o -MF CMakeFiles/tests.dir/test.c.o.d -o CMakeFiles/tests.dir/test.c.o -c /Users/heathfortin/programing/myemu/src/tests/test.c
 
 src/tests/CMakeFiles/tests.dir/test.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/tests.dir/test.c.i"
-	cd /Users/heathfortin/programs/myemu/build/src/tests && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/heathfortin/programs/myemu/src/tests/test.c > CMakeFiles/tests.dir/test.c.i
+	cd /Users/heathfortin/programing/myemu/build/src/tests && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/heathfortin/programing/myemu/src/tests/test.c > CMakeFiles/tests.dir/test.c.i
 
 src/tests/CMakeFiles/tests.dir/test.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/tests.dir/test.c.s"
-	cd /Users/heathfortin/programs/myemu/build/src/tests && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/heathfortin/programs/myemu/src/tests/test.c -o CMakeFiles/tests.dir/test.c.s
+	cd /Users/heathfortin/programing/myemu/build/src/tests && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/heathfortin/programing/myemu/src/tests/test.c -o CMakeFiles/tests.dir/test.c.s
 
 src/tests/CMakeFiles/tests.dir/main.c.o: src/tests/CMakeFiles/tests.dir/flags.make
-src/tests/CMakeFiles/tests.dir/main.c.o: /Users/heathfortin/programs/myemu/src/tests/main.c
+src/tests/CMakeFiles/tests.dir/main.c.o: /Users/heathfortin/programing/myemu/src/tests/main.c
 src/tests/CMakeFiles/tests.dir/main.c.o: src/tests/CMakeFiles/tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/heathfortin/programs/myemu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object src/tests/CMakeFiles/tests.dir/main.c.o"
-	cd /Users/heathfortin/programs/myemu/build/src/tests && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/tests/CMakeFiles/tests.dir/main.c.o -MF CMakeFiles/tests.dir/main.c.o.d -o CMakeFiles/tests.dir/main.c.o -c /Users/heathfortin/programs/myemu/src/tests/main.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/heathfortin/programing/myemu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object src/tests/CMakeFiles/tests.dir/main.c.o"
+	cd /Users/heathfortin/programing/myemu/build/src/tests && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT src/tests/CMakeFiles/tests.dir/main.c.o -MF CMakeFiles/tests.dir/main.c.o.d -o CMakeFiles/tests.dir/main.c.o -c /Users/heathfortin/programing/myemu/src/tests/main.c
 
 src/tests/CMakeFiles/tests.dir/main.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/tests.dir/main.c.i"
-	cd /Users/heathfortin/programs/myemu/build/src/tests && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/heathfortin/programs/myemu/src/tests/main.c > CMakeFiles/tests.dir/main.c.i
+	cd /Users/heathfortin/programing/myemu/build/src/tests && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/heathfortin/programing/myemu/src/tests/main.c > CMakeFiles/tests.dir/main.c.i
 
 src/tests/CMakeFiles/tests.dir/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/tests.dir/main.c.s"
-	cd /Users/heathfortin/programs/myemu/build/src/tests && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/heathfortin/programs/myemu/src/tests/main.c -o CMakeFiles/tests.dir/main.c.s
+	cd /Users/heathfortin/programing/myemu/build/src/tests && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/heathfortin/programing/myemu/src/tests/main.c -o CMakeFiles/tests.dir/main.c.s
 
 # Object files for target tests
 tests_OBJECTS = \
@@ -115,18 +115,18 @@ src/tests/tests: src/utils/libmyemu_utils.a
 src/tests/tests: src/asm/lib/libmyemu_asm_lib.a
 src/tests/tests: src/utils/libmyemu_utils.a
 src/tests/tests: src/tests/CMakeFiles/tests.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/heathfortin/programs/myemu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable tests"
-	cd /Users/heathfortin/programs/myemu/build/src/tests && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/tests.dir/link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/heathfortin/programing/myemu/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable tests"
+	cd /Users/heathfortin/programing/myemu/build/src/tests && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/tests.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 src/tests/CMakeFiles/tests.dir/build: src/tests/tests
 .PHONY : src/tests/CMakeFiles/tests.dir/build
 
 src/tests/CMakeFiles/tests.dir/clean:
-	cd /Users/heathfortin/programs/myemu/build/src/tests && $(CMAKE_COMMAND) -P CMakeFiles/tests.dir/cmake_clean.cmake
+	cd /Users/heathfortin/programing/myemu/build/src/tests && $(CMAKE_COMMAND) -P CMakeFiles/tests.dir/cmake_clean.cmake
 .PHONY : src/tests/CMakeFiles/tests.dir/clean
 
 src/tests/CMakeFiles/tests.dir/depend:
-	cd /Users/heathfortin/programs/myemu/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/heathfortin/programs/myemu /Users/heathfortin/programs/myemu/src/tests /Users/heathfortin/programs/myemu/build /Users/heathfortin/programs/myemu/build/src/tests /Users/heathfortin/programs/myemu/build/src/tests/CMakeFiles/tests.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /Users/heathfortin/programing/myemu/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/heathfortin/programing/myemu /Users/heathfortin/programing/myemu/src/tests /Users/heathfortin/programing/myemu/build /Users/heathfortin/programing/myemu/build/src/tests /Users/heathfortin/programing/myemu/build/src/tests/CMakeFiles/tests.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : src/tests/CMakeFiles/tests.dir/depend
 
