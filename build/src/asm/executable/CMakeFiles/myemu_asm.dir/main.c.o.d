@@ -108,5 +108,6 @@ src/asm/executable/CMakeFiles/myemu_asm.dir/main.c.o: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/sys/_types/_wint_t.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/include/math.h \
   /Users/heathfortin/programing/myemu/src/utils/myemu.h \
+  /Users/heathfortin/programing/myemu/src/utils/shared_ptr.h \
   /Users/heathfortin/programing/myemu/src/utils/utill_io.h \
   /Users/heathfortin/programing/myemu/src/utils/lexer.h

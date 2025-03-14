@@ -7,14 +7,27 @@
 #define SYSTEM_TYPESTR_LEN 10
 #define COMPONENT_TYPESTR_LEN 10
 
+#define COMPONENT_NAMESTR_LEN 10
+
 typedef struct component
 {
-
-    void *component_content; 
+    //children list
+    struct component *children;
+    //parent component
+    struct component *parent;
+    //ptr to content str
+    void *content_member; 
+    int *content_member_types;
+    //specific functions
     void (*update_this_component)(struct component *, char *fmt, ...);
     void (*free_this_component)(struct component *);
+    //component_type
     char comp_type[COMPONENT_TYPESTR_LEN + 1];
-
+    char comp_name[COMPONENT_NAMESTR_LEN + 1];
+    //length of content;
+    int ncontent_member;
+    //length of children list
+    int nchildren;
 }component_t, *p_component_t;
 
 void malloc_component(char *typestr, void (*free_fnptr)(p_component_t *));
@@ -22,7 +35,9 @@ void free_component(void *);
 typedef struct system 
 {
     p_hashtable_t table;
-    int devices;
+    p_shared_ptr_t head;
+   
+    int ndevices;
     char type[SYSTEM_TYPESTR_LEN + 1];
         
     

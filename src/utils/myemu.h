@@ -13,6 +13,7 @@
 
 #define DEBUG 1
 
+#include "shared_ptr.h"
 #include "commons.h"
 #include "utill_io.h"
 #include "lexer.h"

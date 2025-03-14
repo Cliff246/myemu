@@ -1,16 +1,17 @@
 #ifndef __SHARED_PTR__
 #define __SHARED_PTR__
 
-struct shared_ptr {
+typedef struct shared_ptr
+{
   void *ptr;
   int shared;
-};
+}shared_ptr_t, *p_shared_ptr_t;
 
-struct shared_ptr *new_shared_ptr(void *ptr);
+p_shared_ptr_t new_shared_ptr(void *ptr);
 
-void *retrieve_shared_ptr(struct shared_ptr *sptr);
-void release_shared_ptr(struct shared_ptr *sptr);
+void *retrieve_shared_ptr(p_shared_ptr_t sptr);
+void release_shared_ptr(p_shared_ptr_t sptr);
 
-void free_shared_ptr(struct shared_ptr *sptr);
+void free_shared_ptr(p_shared_ptr_t sptr);
 
 #endif
