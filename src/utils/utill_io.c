@@ -13,7 +13,7 @@ size_t get_tokens(p_tok_t **reftok, char *dir)
         size_t fchars = 0, numline = 0, len_history = len_history_constant, i_history = 0, tokiter = 0;
         p_tok_t *tokens = (p_tok_t *)calloc(numline, sizeof(p_tok_t));
         size_t tokenalloca = numline + 1;
-        char *history = (char *)calloc(len_history + 1, sizeof(char));
+        char *history = (char *)calloc(len_history + 1, sizeof(char) * 4);
         char c = fgetc(pfile);
         bool gogo = true;
         while (gogo)
@@ -36,22 +36,22 @@ size_t get_tokens(p_tok_t **reftok, char *dir)
                     tokens = (p_tok_t *)REALLOC_SAFE(tokens, sizeof(p_tok_t) * tokenalloca);
                 }
                 tokens[tokiter++] = tok;
-                if (i_history < 1000)
+                if (i_history < len_history_constant)
                 {
                     memset(history, 0, len_history + 1);
                 }
                 else
                 {
-                    len_history = 1000;
-                    history = REALLOC_SAFE(history, len_history + 1);
-                    memset(history, 0, len_history + 1);
+                    len_history = len_history_constant;
+                    history = REALLOC_SAFE(history, len_history * 4 + 1 );
+                    memset(history, 0, len_history * 4 + 1);
                 }
                 i_history = 0;
                 numline++;
             }
             if (i_history == len_history - 1)
             {
-                history = REALLOC_SAFE(history, len_history += 1001);
+                history = REALLOC_SAFE(history, len_history += (len_history_constant * 4 + 1));
             }
             feof(pfile);
             fchars++;
