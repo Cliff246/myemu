@@ -8,7 +8,7 @@
 void print_p_toks_st(p_tok_t token)
 {
 
-    printf("--- p_toks %p ---\n tokenary_len = %lld\n", (void *)&token, token->nstr);
+    printf("--- p_toks %p ---\n tokenary_len = %lu\n", (void *)&token, token->nstr);
 
     if (token->nstr == 0)
         return;
@@ -21,7 +21,7 @@ void print_p_toks_st(p_tok_t token)
                 *c = 0;
         }
 
-        printf(" token = '%s' col = %lld\n", token->p_sz_toks[iter], token->p_u_col[iter]);
+        printf(" token = '%s' col = %lu\n", token->p_sz_toks[iter], token->p_u_col[iter]);
     }
 }
 
@@ -396,13 +396,13 @@ p_tok_t split_str_into_tokens(char *inp, const char *sep)
     }
     size_t nsep = 0, ntok = 1;
 
-    bool prev_is_sep = char_exist(inp[0], sep);
+    bool prev_is_sep = char_exist(inp[0], (char *)sep);
     char last_sep = inp[0];
 
     for (char *cur = inp + 1; *cur != 0; cur++)
     {
         char this_sep = *cur;
-        bool is_sep = char_exist(this_sep, sep);
+        bool is_sep = char_exist(this_sep, (char *)sep);
 
 
         if (is_sep && this_sep != last_sep)
@@ -434,14 +434,14 @@ p_tok_t split_str_into_tokens(char *inp, const char *sep)
     if (!colary)
         exit(1);
     last_sep = inp[0];
-    prev_is_sep = char_exist(inp[0], sep);
+    prev_is_sep = char_exist(inp[0], (char *)sep);
     //DPRINTF("%s\n", inp);
    // DPRINTF("%d\n", nsep);
 
     for (char *n = inp ; *n != 0; n++, current++)
     {
         char this_sep = *n;
-        bool is_sep = char_exist(this_sep, sep);
+        bool is_sep = char_exist(this_sep, (char *) sep);
         //DPRINTF("|%c| %d %d\n", *n, is_sep, prev_is_sep);
         // DPRINTF("%s\n", n);
 
@@ -490,7 +490,7 @@ p_tok_t split_str_into_tokens(char *inp, const char *sep)
         prev_is_sep = is_sep;
         last_sep = this_sep;
     }
-    if (char_exist(last_sep, sep))
+    if (char_exist(last_sep,(char *) sep))
     {
         //DPRINTF("%c\n", last_sep);
         colary[itr] = prev;

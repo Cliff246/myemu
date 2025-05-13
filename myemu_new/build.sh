@@ -3,7 +3,6 @@
 BUILD_DIR="build"
 CMAKE_OPTIONS="-DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
 
-
 # Clean the build directory if '--clean' flag is provided
 if [[ "$1" == "--clean" ]]; then
     echo "Cleaning build directory..."
@@ -18,4 +17,4 @@ fi
 # Run CMake and build
 cd "$BUILD_DIR" || exit 1
 cmake .. $CMAKE_OPTIONS
-make "-j$(nproc)"
+make

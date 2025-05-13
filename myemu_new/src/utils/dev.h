@@ -10,7 +10,7 @@
 typedef struct system 
 {
     p_hashtable_t table;
-    p_shared_ptr_t head;
+    p_shared_t head;
    
     int ndevices;
     char type[SYSTEM_TYPESTR_LEN + 1];

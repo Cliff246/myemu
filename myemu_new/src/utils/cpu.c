@@ -23,7 +23,7 @@ void emulate(char *program, size_t size, int cycles)
     memset(memory, 0, EMULATOR_RAM * sizeof(*memory));
     memcpy(memory, program, sizeof(program) * size);
 
-    print_range(memory, 0, 80, 1024);
+    print_range((char *)memory, 0, 80, 1024);
     char inst[CYCLES];
     memset(inst, 0, CYCLES);
     bool con = true;

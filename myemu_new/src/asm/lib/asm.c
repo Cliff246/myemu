@@ -321,6 +321,7 @@ size_t convert_token_to_bytes(char *str, argument_type_t type, char *bytes, size
         DPRINT("CANNOT CONVERT TOKEN TO BYTES");
         exit(1);
     }
+	return 0;
 }
 
 void *make_reference(p_section_t section)
@@ -332,6 +333,7 @@ void *make_reference(p_section_t section)
 
         return (void *)ref;
     }
+	return NULL;
 }
 
 p_reference_t get_reference(void *ptr)
