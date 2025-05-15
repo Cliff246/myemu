@@ -326,7 +326,7 @@ void free_syntax_ptr(void *syntax)
 
 bool validate_asminst_is_valid(p_asminst_t asminst, p_syntax_t syntax )
 {
-	if(strcmp( asminst->inst_keyword, syntax->keyword) == );
+	return false;
 }
 
 char *convert_asminst_to_bytes(p_asminst_t asminst, p_syntax_t syntax )
@@ -340,7 +340,7 @@ char *convert_asminst_to_bytes(p_asminst_t asminst, p_syntax_t syntax )
 
 	
 
-	
+	return NULL;	
 }
 
  
