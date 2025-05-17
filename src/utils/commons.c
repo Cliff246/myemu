@@ -7,7 +7,6 @@
 #include "hashmap.h"
 #include "myemu.h"
 #include "commons.h"
-#include "inst.h"
 
 bool char_exist(char ref, char *p_sz_cmp)
 {
@@ -229,35 +228,7 @@ bool cmpstrings(const char *str1, const char *str2)
 
 
 
-void print_range(char *range, size_t start, size_t stop, size_t size)
-{
-    if (size < stop)
-    {
-        return;
-    }
-    for (size_t i = start; i < stop; i++)
-    {
-        print_bin(range[i], 8, 0);
-        printf(" %02lu  %04d ", i, range[i]);
 
-        print_hex(range[i], 0);
-        printf(" ");
-        if (isprint(range[i]))
-        {
-            printf("|%c| ", range[i]);
-        }
-        else
-        {
-            printf("____");
-        }
-
-        if (range[i] >= 0 && range[i] < sizeof(str_instructions) / sizeof(*str_instructions))
-        {
-            printf(" %s", str_instructions[(size_t)range[(int)i]]);
-        }
-        printf("\n");
-    }
-}
 
 size_t getstr_with_cut_chars(char *buffer, size_t buffer_size, const char *p_sz_ref, const char *p_sz_tocut)
 {

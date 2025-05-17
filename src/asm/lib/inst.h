@@ -1,10 +1,9 @@
 #ifndef __ME_INSTRUCTION__
 #define __ME_INSTRUCTION__
 
-#include "myemu.h"
 
 #include "constants.h"
-#include "lexer.h"
+#include "tokenizer.h"
 
 #include "cpu.h"
 
@@ -152,10 +151,11 @@ typedef struct assembly_instruction
 //how to do this 
 
 char *convert_to_byteinst(p_asminst_t inst);
-p_asminst_t make_asminst();
 void free_asminst(p_asminst_t inst);
 
 extern char *asm_keywords[];
 
+p_asminst_t make_asminst(p_tok_t line);
+void print_range(char *range, size_t start, size_t stop, size_t size);
 
 #endif

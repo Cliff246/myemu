@@ -1,6 +1,6 @@
 #include "myemu.h"
 #include "commons.h"
-#include "lexer.h"
+#include "tokenizer.h"
 
 #include <stdbool.h>
 #include <string.h>

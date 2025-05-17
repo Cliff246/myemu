@@ -1,6 +1,6 @@
 #include "myemu.h"
 #include "cpu.h"
-#include "inst.h"
+#include "../asm/lib/inst.h"
 #include "commons.h"
 
 void emulate(char *program, size_t size, int cycles)

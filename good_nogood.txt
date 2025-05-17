@@ -1,0 +1,50 @@
+
+good no good check
+
+utils/
+commons.c -> a bit weird but fine and good ✅
+commons.h -> fine ✅
+component.c -> limited and built on a flawed foundation❌ 
+component.h -> flawed ❌
+constants.c -> fine and clearn ✅
+constants.h -> sloppy but fine✅
+cpu.c -> full rewrite❌
+cpu.h -> deeply flawed but good idea❌
+dev.c -> very limited ⚠️
+dev.h -> flawed but right idea❌
+error.h -> empty ⚠️
+error.c -> empty ⚠️
+hashmap.c -> works but is not scope of myemu.⚠️
+hashmap.h -> works but is outside of scope of myemu⚠️
+member.c -> ambiguous and unneeded❌
+member.h -> ambiguous and unneeded❌
+myemu.h -> flawed but works... rewrite needed⚠️
+shared_ptr.c -> sketchy lol ✅
+shared_ptr.h -> primative but functional ✅
+tokenizer.c -> fragile but worth keeping⚠️
+tokenizer.h -> powerful but underdocumented ???✅
+
+utill_io.c -> ugh weird but it works ✅ clean up required
+utill_io.h -> just defs ✅
+
+asm/lib/
+
+asm.c -> old and bloated ❌
+asm.h -> old and vague but fine⚠️
+inst.c -> important but a shell ❌
+inst.h -> fail... to old, needs refinment❌
+parser.c -> unused ⚠️
+parser.h -> unused ⚠️
+syntax.c -> flawed ❌
+syntax.h -> flawed needs work ⚠️
+
+
+
+Current architecture design:
+
+	working on dynamic libraries as the main entrance into isa uses. For both emu and asm
+	
+	HOWEVER currently the core system is too flawed to continue towards that right now. We must begin setting up a strong core system.
+		
+
+	

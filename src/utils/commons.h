@@ -65,7 +65,6 @@ void *__realloc_s_nofun(void *ptr, size_t size, const char *src_file, size_t lin
 void print_bin(long bin, char len, bool newline);
 void print_hex(char hex, bool newline);
 void print_str_hex(char *str, bool newline);
-void print_range(char *range, size_t start, size_t stop, size_t size);
 
 
 void reverse(char *ary);

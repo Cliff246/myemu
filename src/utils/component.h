@@ -1,7 +1,6 @@
 #ifndef __COMPONENT__
 #define __COMPONENT__
 
-#include "myemu.h"
 
 #define COMPONENT_TYPESTR_LEN 10
 
@@ -14,7 +13,7 @@ typedef struct component
     //parent component
     struct component *parent;
     //ptr to content str
-    void *content_member; 
+    void *content_member;
     int *content_member_types;
     //specific functions
     void (*update_this_component)(struct component *, char *fmt, ...);
@@ -28,6 +27,10 @@ typedef struct component
     int nchildren;
 }component_t, *p_component_t;
 
-void malloc_component(char *typestr, void (*free_fnptr)(p_component_t *));
+p_component_t malloc_component(char *typestr, void (*free_fnptr)(p_component_t *));
 void free_component(void *);
+
+
+
+
 #endif

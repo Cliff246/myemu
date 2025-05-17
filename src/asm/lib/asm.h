@@ -3,8 +3,8 @@
 
 #include "commons.h"
 #include "myemu.h"
-#include "lexer.h"
-#include "utill_io.h"
+#include "tokenizer.h"
+#include "util_io.h"
 
 
 
@@ -85,7 +85,7 @@ void update_section(p_section_t section, p_tok_t tok);
 void free_section(p_section_t section);
 
 void free_memsegment(p_memseg_t memseg);
-void *make_reference();
+void *make_reference(p_section_t section);
 p_memseg_t make_memsegment(char *bytes, size_t start, size_t end);
 p_reference_t get_reference(void *ptr);
 // does not free key

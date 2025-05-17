@@ -4,11 +4,9 @@
 #include <string.h>
 
 #include "asm.h"
-#include "utill_io.h"
+#include "util_io.h"
 #include "inst.h"
-#include "constants.h"
-#include "myemu.h"
-#include "lexer.h"
+#include "tokenizer.h"
 
 #define MAX_FILE_SIZE 1024
 #define MAX_LINE_SIZE 1024
@@ -842,7 +840,7 @@ int assemble(const char *dir, char **bytes)
 {
 
     p_tok_t *tokens = NULL;
-    size_t lines = get_tokens(&tokens, dir);
+    size_t lines = get_tokens(&tokens, (char *) dir);
 	for(int i = 0; i < lines; i++)
 	{
 		print_p_toks_st(tokens[i]);
@@ -862,7 +860,7 @@ int assemble(const char *dir, char **bytes)
     context_t context = {
         .nlines = lines,
         .p_identifier_table = NULL,
-        .p_sz_fname = dir,
+        .p_sz_fname = strdup(dir),
         .p_tokens = tokens,
         .p_sections = NULL,
         .n_sections = 0
@@ -878,7 +876,8 @@ int assemble(const char *dir, char **bytes)
     *bytes = program.p_program;
    // LINE;
     //print_range(program.p_program, 0, 64, program.n_memorysize);
-    free(program_ptr);
+	free(context.p_sz_fname);
+	free(program_ptr);
     free(asmerr_array);
     return program.n_used;
 }

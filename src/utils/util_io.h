@@ -2,7 +2,7 @@
 #define __UTILL_IO__
 
 #include "commons.h"
-#include "lexer.h"
+#include "tokenizer.h"
 #include <stdio.h>
 #include <stdlib.h>
 

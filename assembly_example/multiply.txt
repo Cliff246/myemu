@@ -4,7 +4,6 @@ $num1
 $num2
     u25
 
-
 backtrack:
     NOTHING_
     MV_DL_A_
@@ -13,7 +12,6 @@ backtrack:
     OUTPUT_A
     OUTPUT_D
     RETURN__
-
 
 multiply_helper:
     NOTHING_ 
@@ -31,8 +29,6 @@ multiply_helper:
     MV_C_B__
     DEC_X___
     JMP____I multiply_helper
-
-
 
 multiply_:
     NOTHING_

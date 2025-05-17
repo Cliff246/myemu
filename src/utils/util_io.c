@@ -1,12 +1,12 @@
 
 #include "commons.h"
-#include "lexer.h"
+#include "tokenizer.h"
 
-#include "utill_io.h"
+#include "util_io.h"
 
 size_t get_tokens(p_tok_t **reftok, char *dir)
 {
-    FILE *pfile = fopen(dir, "r;");
+    FILE *pfile = fopen(dir, "r");
     if (pfile)
     {
         const size_t len_history_constant = 1000;
@@ -70,7 +70,7 @@ size_t get_tokens(p_tok_t **reftok, char *dir)
         printf("failed to open document %s\n", dir);
         exit(1);
     }
-	
+
     return 0;
 }
 
@@ -79,6 +79,6 @@ size_t get_tokens(p_tok_t **reftok, char *dir)
 //incomplete
 p_hashtable_t read_hashtable_file(char *path)
 {
-    
+
     return NULL;
 }

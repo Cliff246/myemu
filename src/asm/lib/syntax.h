@@ -31,7 +31,7 @@ typedef struct instsyntax
 	size_t *offset;
 }syntax_t, *p_syntax_t;
 
-int get_id();
+int get_id(void);
 
 
 p_syntax_t create_syntax_t(char *base, char *keyword);
