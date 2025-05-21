@@ -1,6 +1,13 @@
 #ifndef __DEVICE_DESCRIPTOR__
 #define __DEVICE_DESCRIPTOR__
 
+#ifdef _WIN32
+#  define DEVICE_EXPORT __declspec(dllexport)
+#else
+#  define DEVICE_EXPORT __attribute__((visibility("default")))
+#endif
+
+
 #include "device_commons.h"
 #include "device_interface.h"
 #include "device_files.h"
@@ -12,6 +19,7 @@ typedef struct device_descriptor
 {
 	//lib identifiers
 	int id;
+	int version;
 	const char *device_name;
 	const char *device_typeclass;
 	const char *lib_name;
@@ -30,7 +38,6 @@ typedef struct device_descriptor
 	p_devemu_t device_emulator_core;
 	
 
-	p_devfilesys_t device_file_system;
 
 
 	//contains extras
@@ -38,6 +45,7 @@ typedef struct device_descriptor
 
 }devdesc_t, *p_devdesc_t;
 
+DEVICE_EXPORT const p_devdesc_t get_device_description();
 
 #endif
 

@@ -1,7 +1,5 @@
-#include "myemu.h"
+#include "../headers/tokenizer.h"
 #include "commons.h"
-#include "tokenizer.h"
-
 #include <stdbool.h>
 #include <string.h>
 
@@ -27,24 +25,24 @@ void print_p_toks_st(p_tok_t token)
 
 void print_p_toks_string(p_tok_t token, bool offset)
 {
-    // DPRINTF("LINE %s:%d\n", __FILE__, __LINE__);
+    // fprintf(stderr,"LINE %s:%d\n", __FILE__, __LINE__);
 
     if (token == NULL)
     {
-        DPRINTF("failed token%p\n", token);
+        fprintf(stderr,"failed token%p\n", token);
         return;
     }
     else if (token->nstr == 0)
     {
-        // DPRINTF("LINE %s:%d\n", __FILE__, __LINE__);
+        // fprintf(stderr,"LINE %s:%d\n", __FILE__, __LINE__);
 
         return;
     }
     else
     {
-        // DPRINTF("LINE %s:%d\n", __FILE__, __LINE__);
+        // fprintf(stderr,"LINE %s:%d\n", __FILE__, __LINE__);
 
-        //  DPRINTF("%d\n", token->nstr);
+        //  fprintf(stderr,"%d\n", token->nstr);
 
         size_t last = 0;
         for (int iter = 0; iter < token->nstr; iter++)
@@ -114,7 +112,7 @@ p_tok_t malloc_p_toks_st()
     p_tok_t tok = (p_tok_t)calloc(1, sizeof(tok_t));
     if (!tok)
     {
-        DPRINTF("MALLOC ERROR %s:%d\n", __FILE__, __LINE__);
+        fprintf(stderr,"MALLOC ERROR %s:%d\n", __FILE__, __LINE__);
         exit(1);
     }
     tok->nstr = 0;
@@ -129,7 +127,7 @@ void free_p_toks_st(p_tok_t token)
 
     if (token == NULL)
     {
-        DPRINTF("wtf are you doing not even deleting known data. we need to set your toks data to 0 %s:%d\n", __FILE__, __LINE__);
+        fprintf(stderr,"wtf are you doing not even deleting known data. we need to set your toks data to 0 %s:%d\n", __FILE__, __LINE__);
         exit(1);
     }
     if (tok != NULL)
@@ -141,13 +139,13 @@ void free_p_toks_st(p_tok_t token)
         }
         free(tok->p_sz_toks);
         free(tok);
-        // DPRINTF("freed token %p\n", token);
+        // fprintf(stderr,"freed token %p\n", token);
         //  I AM GOING TO TRUST THIS IS FREED CAUSE (IDOIT)
     }
     else
     {
         free(tok);
-        // DPRINTF("token ptr not defined, freed anyways %s:%d\n", __FILE__, __LINE__);
+        // fprintf(stderr,"token ptr not defined, freed anyways %s:%d\n", __FILE__, __LINE__);
         //  fuck it free it anyways
     }
 }
@@ -161,7 +159,7 @@ char **copy_all_strary(char **src, size_t src_size)
     char **copy = (char **)calloc(src_size, sizeof(char *));
     if (!copy)
     {
-        DPRINTF("MALLOC ERROR %s:%d\n", __FILE__, __LINE__);
+        fprintf(stderr,"MALLOC ERROR %s:%d\n", __FILE__, __LINE__);
         exit(1);
     }
 
@@ -173,7 +171,7 @@ char **copy_all_strary(char **src, size_t src_size)
 
         if (!cpystr)
         {
-            DPRINTF("MALLOC ERROR %s:%d\n", __FILE__, __LINE__);
+            fprintf(stderr,"MALLOC ERROR %s:%d\n", __FILE__, __LINE__);
             exit(1);
         }
 
@@ -187,13 +185,13 @@ p_tok_t cut_p_toks_st(p_tok_t ref, size_t nstart, size_t nstop)
 {
     if (!ref)
     {
-        DPRINTF("failed %s:%d\n", __FILE__, __LINE__);
+        fprintf(stderr,"failed %s:%d\n", __FILE__, __LINE__);
         exit(1);
     }
     const int64_t delta_len = nstop - nstart;
     if (ref->nstr < delta_len || ref->nstr == 0 || delta_len < 0)
     {
-        DPRINTF("failed %s:%d\n", __FILE__, __LINE__);
+        fprintf(stderr,"failed %s:%d\n", __FILE__, __LINE__);
         exit(1);
     }
     p_tok_t new = malloc_p_toks_st();
@@ -202,7 +200,7 @@ p_tok_t cut_p_toks_st(p_tok_t ref, size_t nstart, size_t nstop)
     size_t *column_copy = (size_t *)calloc(new_len, sizeof(size_t));
     if (!column_copy)
     {
-        DPRINTF("MALLOC ERROR %s:%d\n", __FILE__, __LINE__);
+        fprintf(stderr,"MALLOC ERROR %s:%d\n", __FILE__, __LINE__);
         exit(1);
     }
     memcpy(column_copy, ref->p_u_col + nstart, new_len * sizeof(size_t));
@@ -218,12 +216,12 @@ p_tok_t split_p_toks_st(p_tok_t ref, size_t nsplit)
 {
     if (!ref)
     {
-        DPRINTF("failed %s:%d\n", __FILE__, __LINE__);
+        fprintf(stderr,"failed %s:%d\n", __FILE__, __LINE__);
         exit(1);
     }
     if (ref->nstr < nsplit || ref->nstr == 0)
     {
-        DPRINTF("failed %s:%d\n", __FILE__, __LINE__);
+        fprintf(stderr,"failed %s:%d\n", __FILE__, __LINE__);
         exit(1);
     }
     p_tok_t new = malloc_p_toks_st();
@@ -232,7 +230,7 @@ p_tok_t split_p_toks_st(p_tok_t ref, size_t nsplit)
     size_t *column_copy = (size_t *)calloc(new_len, sizeof(size_t));
     if (!column_copy)
     {
-        DPRINTF("MALLOC ERROR %s:%d\n", __FILE__, __LINE__);
+        fprintf(stderr,"MALLOC ERROR %s:%d\n", __FILE__, __LINE__);
         exit(1);
     }
     memcpy(column_copy, ref->p_u_col + nsplit, new_len * sizeof(size_t));
@@ -268,7 +266,7 @@ p_tok_t copy_p_toks_st(p_tok_t ref)
 
         if (!column_copy)
         {
-            DPRINTF("MALLOC ERROR %s:%d\n", __FILE__, __LINE__);
+            fprintf(stderr,"MALLOC ERROR %s:%d\n", __FILE__, __LINE__);
             exit(1);
         }
         memcpy(column_copy, ref->p_u_col, len * sizeof(size_t));
@@ -351,7 +349,7 @@ p_tok_t cut_substr_p_tok_t(p_tok_t ref, const char *substr)
     {
         if (!cmpstrings(ref->p_sz_toks[i], substr))
         {
-            //DPRINTF("toks |%s| substr |%s|\n", ref->p_sz_toks[i], substr);
+            //fprintf(stderr,"toks |%s| substr |%s|\n", ref->p_sz_toks[i], substr);
             newlen++;
             toremove_ary[i] = false;
         }
@@ -416,11 +414,11 @@ p_tok_t split_str_into_tokens(char *inp, const char *sep)
         last_sep = this_sep;
 
         prev_is_sep = is_sep;
-        //DPRINTF("%d %d %d |%c| |%c|\n", is_sep, prev_is_sep, nsep, last_sep, this_sep);
+        //fprintf(stderr,"%d %d %d |%c| |%c|\n", is_sep, prev_is_sep, nsep, last_sep, this_sep);
     }
     if(nsep == 0)
     {
-       // DPRINTF("%d\n", nsep);
+       // fprintf(stderr,"%d\n", nsep);
         ntok = 1;
     }
     else
@@ -435,20 +433,20 @@ p_tok_t split_str_into_tokens(char *inp, const char *sep)
         exit(1);
     last_sep = inp[0];
     prev_is_sep = char_exist(inp[0], (char *)sep);
-    //DPRINTF("%s\n", inp);
-   // DPRINTF("%d\n", nsep);
+    //fprintf(stderr,"%s\n", inp);
+   // fprintf(stderr,"%d\n", nsep);
 
     for (char *n = inp ; *n != 0; n++, current++)
     {
         char this_sep = *n;
         bool is_sep = char_exist(this_sep, (char *) sep);
-        //DPRINTF("|%c| %d %d\n", *n, is_sep, prev_is_sep);
-        // DPRINTF("%s\n", n);
+        //fprintf(stderr,"|%c| %d %d\n", *n, is_sep, prev_is_sep);
+        // fprintf(stderr,"%s\n", n);
 
-        //DPRINTF("%d %d %d |%c| |%c|\n", is_sep, prev_is_sep, nsep, last_sep, this_sep);
+        //fprintf(stderr,"%d %d %d |%c| |%c|\n", is_sep, prev_is_sep, nsep, last_sep, this_sep);
         if (is_sep && prev_is_sep && last_sep != this_sep)
         {
-            // DPRINTF("set %d\n",itr);
+            // fprintf(stderr,"set %d\n",itr);
 
             colary[itr] = prev;
             (p_token_st->p_sz_toks)[itr] = REALLOC_SAFE(p_token_st->p_sz_toks[itr], 2);
@@ -465,8 +463,8 @@ p_tok_t split_str_into_tokens(char *inp, const char *sep)
             (p_token_st->p_sz_toks)[itr] = REALLOC_SAFE(p_token_st->p_sz_toks[itr], 2 * sizeof(char));
             p_token_st->p_sz_toks[itr][0] = last_sep;
             p_token_st->p_sz_toks[itr][1] = 0;
-            // DPRINTF("%s\n", p_token_st->p_sz_toks[itr]);
-            // DPRINTF("set %d\n", itr);
+            // fprintf(stderr,"%s\n", p_token_st->p_sz_toks[itr]);
+            // fprintf(stderr,"set %d\n", itr);
             prev = current;
 
             itr++;
@@ -474,12 +472,12 @@ p_tok_t split_str_into_tokens(char *inp, const char *sep)
         if (is_sep && !prev_is_sep)
         {
             colary[itr] = prev;
-            // DPRINTF("current - prev + 1 %d\n", current - prev + 1);
+            // fprintf(stderr,"current - prev + 1 %d\n", current - prev + 1);
             (p_token_st->p_sz_toks)[itr] = REALLOC_SAFE(p_token_st->p_sz_toks[itr], current - prev + 1);
             memcpy(p_token_st->p_sz_toks[itr], inp + prev, current - prev);
-            // DPRINTF("%s\n", p_token_st->p_sz_toks[itr]);
+            // fprintf(stderr,"%s\n", p_token_st->p_sz_toks[itr]);
             p_token_st->p_sz_toks[itr][current - prev] = 0;
-            // DPRINTF("set %d\n", itr);
+            // fprintf(stderr,"set %d\n", itr);
             prev = current;
 
             itr++;
@@ -492,24 +490,24 @@ p_tok_t split_str_into_tokens(char *inp, const char *sep)
     }
     if (char_exist(last_sep,(char *) sep))
     {
-        //DPRINTF("%c\n", last_sep);
+        //fprintf(stderr,"%c\n", last_sep);
         colary[itr] = prev;
         (p_token_st->p_sz_toks)[itr] = REALLOC_SAFE(p_token_st->p_sz_toks[itr], 2 * sizeof(char));
         p_token_st->p_sz_toks[itr][0] = last_sep;
         p_token_st->p_sz_toks[itr][1] = 0;
-        // DPRINTF("%s\n", p_token_st->p_sz_toks[itr]);
-        // DPRINTF("set %d\n", itr);
+        // fprintf(stderr,"%s\n", p_token_st->p_sz_toks[itr]);
+        // fprintf(stderr,"set %d\n", itr);
     }
     else
     {
-    //DPRINTF("%d %d\n", ntok, itr);
+    //fprintf(stderr,"%d %d\n", ntok, itr);
         size_t remaining = strlen(inp + prev);
         colary[itr] = prev;
-    //DPRINTF("set %d %s\n", itr, inp + prev);
+    //fprintf(stderr,"set %d %s\n", itr, inp + prev);
         p_token_st->p_sz_toks[itr] = REALLOC_SAFE(p_token_st->p_sz_toks[itr], remaining  + 1);
         memset(p_token_st->p_sz_toks[itr], 0, remaining + 1);
         memcpy(p_token_st->p_sz_toks[itr], inp + prev, remaining );
-    //DPRINTF("|%s|\n", inp + prev);
+    //fprintf(stderr,"|%s|\n", inp + prev);
     }
     memcpy(p_token_st->p_u_col, colary, sizeof(size_t) * (ntok));
     //print_p_toks_st(p_token_st);

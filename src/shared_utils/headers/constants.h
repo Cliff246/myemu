@@ -3,10 +3,6 @@
 #ifndef __ME_CONSTANTS__
 #define __ME_CONSTANTS__
 
-#include "myemu.h"
-#include "commons.h"
-#include "cpu.h"
-
 extern const char *break_characters;
 
 extern const char *function_token;

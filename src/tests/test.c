@@ -3,7 +3,10 @@
 #include "tokenizer.h"
 #include "test.h"
 #include "asm.h"
-
+#include "modules.h"
+#include "device_descriptor.h"
+#include "assert.h"
+#include "errno.h"
 int getdata(void *ptr)
 {
     int *iptr = (int *)ptr;
@@ -102,3 +105,33 @@ void test_asm()
 	printf("\n");
     int size = assemble(dir, &data);
 }
+
+
+
+void test_module()
+{
+	const char *path_riscv = "/Users/heathfortin/programing/myemu/myemu_new/build/src/device_libs/riscv/libriscv_isa.dylib";
+	const char *path_basic_ram = "/Users/heathfortin/programing/myemu/myemu_new/build/src/device_libs/basic_ram/libbasic_ram_device.dylib";
+
+	
+	p_module_t riscv_module = open_module(path_riscv);
+	p_module_t ram_module = open_module(path_basic_ram);
+
+	//module assert
+	
+	assert(ram_module != NULL && "in this test module must not return null"); 
+	assert(riscv_module != NULL && "in this test module must not return null"); 
+	//get desc
+	p_devdesc_t desc_riscv = get_device_from_module(riscv_module);	
+	p_devdesc_t desc_ram = get_device_from_module(ram_module);	
+	fprintf(stderr, "%s\n", strerror(errno));
+	//description assert
+	assert(desc_riscv != NULL && "description from a module must not return null");
+	assert(desc_ram != NULL && "description from a module must not return null");
+
+	printf("made it to the end\n");
+	printf("%s\n",desc_riscv->lib_name);
+	printf("%s\n",desc_ram->lib_name);
+
+}
+

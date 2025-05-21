@@ -7,5 +7,6 @@ void test2();
 void testsuite();
 void test_asm();
 
+void test_module();
 
 #endif

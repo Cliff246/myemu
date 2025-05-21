@@ -33,8 +33,6 @@ int start_tests()
 
 int main()
 {
-    start_tests();
-	test1();
-	printf("test");
-	test_asm();
+	freopen("stderr_capture.log", "w", stderr);
+	test_module();
 }

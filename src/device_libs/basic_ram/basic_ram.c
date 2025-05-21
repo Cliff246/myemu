@@ -1,6 +1,9 @@
-#include "commons.h"
+
+
 #include "device_descriptor.h"
-#include "isa_riscv.h"
+#include "basic_ram.h"
+
+
 
 #ifdef _WIN32
   #define ISA_API __declspec(dllexport)
@@ -11,13 +14,13 @@
 
 static devdesc_t riscv_descriptor = 
 {
-    .id = 0x01,
-    .device_name = "riscv",
-    .device_typeclass = "cpu",
-    .lib_name = "riscv_isa",
+    .id = 0x02,
+    .device_name = "ram",
+    .device_typeclass = "ram",
+    .lib_name = "basic_ram",
     .flags = { false },  // or fill in your flags
     .carries_emulation_core = true,
-    .carries_assembly_core = true,
+    .carries_assembly_core = false,
 
     .create_device = NULL,  // replace with your real creation function later
     .free_device = NULL,    // same here

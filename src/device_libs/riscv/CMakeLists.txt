@@ -9,12 +9,9 @@ set(RISCV_HEADERS
 	${CMAKE_CURRENT_SOURCE_DIR}/commons/riscv_commons.h
 )
 
-add_library(riscv_isa SHARED ${RISCV_HEADERS} ${RISCV_HEADERS})
-target_link_libraries(riscv_isa PRIVATE myemu_utils)
-target_include_directories(riscv_isa PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+add_library(riscv_isa SHARED ${RISCV_SOURCE} ${RISCV_HEADERS})
+target_link_libraries(riscv_isa PRIVATE shared_utils device_commons_interface)
 
 target_include_directories(riscv_isa
 	PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
-	PRIVATE ${CMAKE_SOURCE_DIR}/src/utils
-	PRIVATE ${CMAKE_SOURCE_DIR}/src/device_libs/commons
 )

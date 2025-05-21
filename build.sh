@@ -1,7 +1,7 @@
 #!/bin/bash
 
 BUILD_DIR="build"
-CMAKE_OPTIONS="-DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
+CMAKE_OPTIONS="-DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_BUILD_TYPE=Debug "
 
 # Clean the build directory if '--clean' flag is provided
 if [[ "$1" == "--clean" ]]; then

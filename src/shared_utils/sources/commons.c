@@ -5,7 +5,6 @@
 #include <stdbool.h>
 
 #include "hashmap.h"
-#include "myemu.h"
 #include "commons.h"
 
 bool char_exist(char ref, char *p_sz_cmp)

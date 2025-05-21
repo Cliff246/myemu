@@ -1,13 +1,9 @@
 #ifndef __ME_ASSEMBLER__
 #define __ME_ASSEMBLER__
 
-#include "commons.h"
-#include "myemu.h"
 #include "tokenizer.h"
+#include "hashmap.h"
 #include "util_io.h"
-
-
-
 typedef enum section_type
 {
     none,
