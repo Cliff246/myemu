@@ -8,7 +8,6 @@ set(MYEMU_CORE_SRC
 	${CMAKE_CURRENT_SOURCE_DIR}/util_io.c
 	${CMAKE_CURRENT_SOURCE_DIR}/member.c
 	${CMAKE_CURRENT_SOURCE_DIR}/modules.c
-	${CMAKE_CURRENT_SOURCE_DIR}/device_core/devices.c
 )
 
 set(MYEMU_CORE_HEADERS 
@@ -16,7 +15,6 @@ set(MYEMU_CORE_HEADERS
 	${CMAKE_CURRENT_SOURCE_DIR}/myemu.h
 	${CMAKE_CURRENT_SOURCE_DIR}/modules.c
 
-	${CMAKE_CURRENT_SOURCE_DIR}/device_core/devices.h
 	${CMAKE_CURRENT_SOURCE_DIR}/util_io.h
 	${CMAKE_CURRENT_SOURCE_DIR}/member.h
 
@@ -30,13 +28,16 @@ target_sources(myemu_core
 	${MYEMU_CORE_HEADERS}
 )
 
-target_include_directories(myemu_core PRIVATE ${CJSON_INCLUDE_DIRS})
+target_include_directories(myemu_core 
+	PRIVATE 
+	${CJSON_INCLUDE_DIRS}
+)
 target_link_libraries(myemu_core 
 	PRIVATE
    	${CJSON_LIBRARIES}
 	dl
 	PUBLIC
-	device_commons_interface
+	modules_core_runtime
 	shared_utils
 )
 target_include_directories(myemu_core

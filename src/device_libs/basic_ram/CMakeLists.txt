@@ -8,7 +8,7 @@ set(BASIC_RAM_HEADERS
 )
 
 add_library(basic_ram_device SHARED ${BASIC_RAM_SOURCE} ${BASIC_RAM_HEADERS})
-target_link_libraries(basic_ram_device PRIVATE shared_utils device_commons_interface)
+target_link_libraries(basic_ram_device PRIVATE shared_utils modules_core_interface)
 
 target_include_directories(basic_ram_device
 	PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}

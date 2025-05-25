@@ -10,7 +10,7 @@ set(RISCV_HEADERS
 )
 
 add_library(riscv_isa SHARED ${RISCV_SOURCE} ${RISCV_HEADERS})
-target_link_libraries(riscv_isa PRIVATE shared_utils device_commons_interface)
+target_link_libraries(riscv_isa PRIVATE shared_utils modules_core_interface)
 
 target_include_directories(riscv_isa
 	PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}

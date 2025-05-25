@@ -2,7 +2,6 @@
 #include "commons.h"
 #include "tokenizer.h"
 #include "test.h"
-#include "asm.h"
 #include "modules.h"
 #include "device_descriptor.h"
 #include "assert.h"
@@ -103,7 +102,6 @@ void test_asm()
 	const char *dir = "multiply.txt";
     char *data = NULL;
 	printf("\n");
-    int size = assemble(dir, &data);
 }
 
 
