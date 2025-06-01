@@ -6,6 +6,8 @@
 #include "device_descriptor.h"
 #include "assert.h"
 #include "errno.h"
+#include "tests_manager.h"
+
 int getdata(void *ptr)
 {
     int *iptr = (int *)ptr;
@@ -133,3 +135,34 @@ void test_module()
 
 }
 
+#include "tokenizer.h"
+void test_pair_split(void)
+{
+	
+
+}
+
+
+void free_data(void *data)
+{
+	free(data);
+}
+
+#include "linked_list.h"
+
+void test_linkedlist()
+{
+	p_linkedlist_t ll = new_linked_list_ptr(free_data);
+	int *data = malloc(sizeof(int) * 10);
+	for(int i = 0; i < 10; ++i)
+	{
+		data[i] = (int)i;
+		printf("data[i] = %d\n", data[i]); 
+	}
+	insert_linked_list(ll, 0, data); 
+	void *ptr = index_linked_list(ll, 0);
+	for(int k = 0; k < 10; ++k)
+	{
+		printf("dup %d\n", ((int *)(ptr))[k]);
+	}
+}

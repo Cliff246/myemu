@@ -3,36 +3,25 @@
 #include <stdbool.h>
 #include "commons.h"
 
+#include "tests_manager.h"
 #include "test.h"
 
 
-#define TEST()
 
-int start_tests()
+
+
+
+int main(int argc, char *argv[])
 {
-    const int  tests_count = 0;
-    printf("%d\n", tests_count);
-    int success[tests_count];
-    
 
-    
-    int retvalue = 0;
-    int (* func[tests_count])();
-    for(int i = 0; i < tests_count; i++)
-    {
-        int val = func[i]();
-        success[i] = val; 
-        retvalue |= val;
-    } 
-    
-    return retvalue;
-}
-
-
-
-
-int main()
-{
-	freopen("stderr_capture.log", "w", stderr);
-	test_module();
+	collect_tests();
+	if(argc == 2)
+	{
+		int data = atoi(argv[1]);
+		int result = tests_registry[data].func();	
+		printf("result: %d\n", result);
+		return 0;
+	}
+	start_tests();
+	display_tests();
 }

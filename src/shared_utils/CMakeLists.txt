@@ -7,6 +7,7 @@ set(SHARED_UTILS_SRC
     ${CMAKE_CURRENT_SOURCE_DIR}/sources/constants.c
     ${CMAKE_CURRENT_SOURCE_DIR}/sources/error.c
     ${CMAKE_CURRENT_SOURCE_DIR}/sources/hashmap.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/sources/linked_list.c
     ${CMAKE_CURRENT_SOURCE_DIR}/sources/shared_ptr.c
     ${CMAKE_CURRENT_SOURCE_DIR}/sources/tokenizer.c
 )

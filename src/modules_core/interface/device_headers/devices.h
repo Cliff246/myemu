@@ -6,7 +6,6 @@
 
 typedef struct device device_t, *p_device_t; 
 
-#include "device_descriptor.h"
 typedef struct device
 {
 	

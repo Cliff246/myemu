@@ -24,6 +24,8 @@ bool char_exist(char ref, char *p_sz_cmp)
 
 
 
+
+
 char last_char(char *ptr)
 {
     char *last = ptr;

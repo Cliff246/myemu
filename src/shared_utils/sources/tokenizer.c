@@ -2,6 +2,7 @@
 #include "commons.h"
 #include <stdbool.h>
 #include <string.h>
+#include "linked_list.h"
 
 void print_p_toks_st(p_tok_t token)
 {
@@ -294,9 +295,8 @@ void update_p_toks_st(p_tok_t ref_tok, size_t length)
     }
     if(ref_tok->nstr == 0)
     {
-        void
-            *tmp1 = calloc(length, sizeof(size_t)),
-            *tmp2 = calloc(length, sizeof(char *));
+        void *tmp1 = calloc(length, sizeof(size_t));
+        void  *tmp2 = calloc(length, sizeof(char *));
         if (!tmp1 || !tmp2)
         {
             exit(1);
@@ -340,6 +340,7 @@ void update_p_toks_st(p_tok_t ref_tok, size_t length)
     return;
 }
 
+//cut substring
 p_tok_t cut_substr_p_tok_t(p_tok_t ref, const char *substr)
 {
     size_t newlen = 0;
@@ -381,7 +382,6 @@ p_tok_t cut_substr_p_tok_t(p_tok_t ref, const char *substr)
 
 p_tok_t split_str_into_tokens(char *inp, const char *sep)
 {
-    LINE;
 
     if (inp == NULL)
         return NULL;
@@ -516,3 +516,288 @@ p_tok_t split_str_into_tokens(char *inp, const char *sep)
 
     return p_token_st;
 }
+
+
+p_tok_t merge_p_toks(p_tok_t tok_a, p_tok_t tok_b)
+{
+	
+	const size_t needed_size = tok_a->nstr + tok_b->nstr;
+	
+	p_tok_t combine = malloc_p_toks_st();
+	update_p_toks_st(combine, needed_size);
+	
+	for(size_t i = 0; i < tok_a->nstr; ++i)
+	{
+		combine->p_sz_toks[i] = strdup(tok_a->p_sz_toks[i]);
+		const size_t a_column = tok_a->p_u_col[i];
+		combine->p_u_col[i]	= a_column;
+
+	}
+	const size_t last = tok_a->nstr - 1;
+	const size_t last_size = strlen(tok_a->p_sz_toks[last]) + tok_a->p_u_col[last];
+	const size_t start = tok_b->nstr;	
+	for(size_t k = 0; k < tok_b->nstr; ++k)
+	{
+		combine->p_sz_toks[start + k] = strdup(tok_b->p_sz_toks[k]);
+
+		combine->p_u_col[k]	= last_size + tok_b->p_u_col[k];
+	
+	}
+	combine->nstr = needed_size;
+	return combine;
+}
+
+int get_tok_i_column(p_tok_t ref, int index)
+{
+	if(ref->nstr > index)
+	{
+		if(index == 0)
+		{
+			return 0;
+		}
+		
+		return ref->p_u_col[index - 1];
+
+	}
+	else
+	{
+		return -1;
+	}	
+}
+
+
+
+
+
+static void free_delim_index_remover(void *data)
+{
+	return;
+}
+
+static int get_data_length_from_ll(void *data)
+{
+	return sizeof(int); 
+}	
+
+static int convert_to_data_stream_ll(void *data, char *buffer)
+{
+	//lol i know
+	const int *stream_data	= (int *)data;
+	memcpy(buffer, stream_data, sizeof(int));	
+	return sizeof(int);
+}
+
+//order must be characters for open and closed. if not it will die quickly
+int pair_toks_delims(p_tok_t ref, p_tok_t *dest, const char *delims)
+{
+
+	struct pair
+	{
+		int delim_index;	
+		int start;
+		int end;	
+	};
+	int error = 0;
+	
+	size_t delims_len = strlen(delims);
+	if(delims_len % 2 == 1)
+		return (error = 1);
+	size_t groups = delims_len /2;
+	p_tok_t destination = copy_p_toks_st(ref);	
+	
+	
+	int allocated = 100;
+	size_t pairs_size = 0;
+	//array of delims
+	struct pair *delim_pairs = (struct pair *)calloc(allocated, sizeof(struct pair));	
+	//current pair
+	int *pairs_current = (int *)calloc(groups, sizeof(int));
+	//memset so everything is not valid
+	memset(pairs_current, 0, groups * sizeof(int));
+	//index
+	p_linkedlist_t *pairs_index = (p_linkedlist_t *)calloc(groups, sizeof(p_linkedlist_t)); 	
+	int *pairs_index_scope =  (int *)calloc(groups, sizeof(int));
+	for(size_t lli = 0; lli < groups; ++lli)
+	{
+		pairs_index[lli] = new_linked_list_inline(free_delim_index_remover, convert_to_data_stream_ll, get_data_length_from_ll); 
+		
+	}
+	const int size = 256;
+	//do not fuck with this
+	char pair_mask[size] = {0};
+	bool pair_same[size] = {0};	
+	int count = 1;
+	for(size_t d = 0; d < delims_len; d+=2)
+	{	
+		unsigned char spot1 = delims[d], spot2 = delims[d + 1];
+		pair_mask[(unsigned char)delims[d]] = count;
+		pair_mask[(unsigned char)delims[d + 1]] = count++;
+		bool same = (delims[d] == delims[d+1])? true : false;
+		if(same)
+		{
+
+			pair_same[(unsigned char)delims[d]] = same;
+		}
+
+
+		printf(" %c %c %d %d  %d %d\n",delims[d], delims[d+1],pair_mask[spot1], pair_mask[spot2], pair_same[spot1], pair_same[spot2]);
+	}	
+	//fuck done
+	int current_pair = 0;
+	size_t *tok_len_cache = (size_t *)malloc(sizeof(size_t) * ref->nstr);
+	size_t total_len = 0;
+	for(size_t i = 0; i < ref->nstr; ++i)
+	{
+		size_t tok_psz_len = strlen(ref->p_sz_toks[i]);	
+		total_len += tok_psz_len;
+		tok_len_cache[i] = tok_psz_len;
+		for(size_t psz_i = 0; psz_i < tok_psz_len; ++psz_i)
+		{
+			
+			char current = ref->p_sz_toks[i][psz_i];
+			char mask = pair_mask[current];
+			int group_point = (int)mask / 2;	
+			//in mask			
+			if(mask > 0)
+			{
+
+
+				int scope = pairs_index_scope[group_point];	
+				//double check if delim is in mask?
+				bool outin = (current == delims[mask])? true: false;
+
+				//column of char
+				int column = get_tok_i_column(ref, i);					
+				printf("outin %c %d\n",current, outin); 
+				printf("pair same %d\n", pair_same[group_point]);
+				if(pair_same[current] == true)
+				{
+					if(scope == 1)
+					{
+						int get_recent = *(int *)index_linked_list(pairs_index[group_point], 0);
+
+						delim_pairs[get_recent].start = pairs_current[group_point];	
+						delim_pairs[get_recent].end = column  + psz_i;
+						delim_pairs[get_recent].delim_index = group_point;
+						scope--;
+					}
+					else if(scope == 0)
+					{
+
+						int copy = current_pair;
+						insert_linked_list(pairs_index[group_point], 0, &copy);
+						pairs_current[group_point] = column + psz_i;
+						scope++;
+						current_pair++;
+
+					}
+					else
+					{
+						printf("the fuck\n");
+					}
+				}
+				else
+				{
+					if(outin == true)
+					{
+						const int pos = column + psz_i;
+
+						
+						//is starter
+						pairs_current[group_point] = pos;
+						insert_linked_list(pairs_index[group_point], 0, &current_pair);
+						
+						delim_pairs[current_pair].start = pos;
+						scope++;
+						current_pair++;
+					}
+					else if(outin == false)
+					{
+						//is ender
+						if(scope < 0)
+						{
+							printf("fucked\n");
+							exit(1);
+
+						}	
+						int get_recent = *(int *)index_linked_list(pairs_index[group_point], scope - 1);
+						printf("get recent%d\n", get_recent);
+						if(scope == 0)
+						{
+							printf("not overwriting\n");
+							delim_pairs[get_recent].start = pairs_current[group_point];
+
+						}
+						delim_pairs[get_recent].end = column  + psz_i;
+						delim_pairs[get_recent].delim_index = group_point;
+						scope--;	
+					}		
+					else
+					{
+
+					}
+						
+				}
+				pairs_index_scope[group_point] = scope;
+			}
+		}
+	}
+	int cuts = 0;
+
+
+
+	size_t token_scroll = 0;	
+   	size_t sum = sum + tok_len_cache[token_scroll];
+	size_t prev_sum = 0;
+	size_t current_cache = tok_len_cache[token_scroll];
+	for(int cut_i  = 0; cut_i < current_pair; ++cut_i)
+	{
+		
+		int tok_zone = 0;
+		int cut_start = delim_pairs[cut_i].start, cut_end = delim_pairs[cut_i].end;
+		
+		
+
+		if(cut_start < sum + tok_len_cache[token_scroll])
+		{
+			if(cut_start - prev_sum >= tok_len_cache[token_scroll])
+			{
+
+			}
+			else
+			{
+
+			}
+		}
+		//carry over
+		if(cut_end > sum)
+		{
+			prev_sum = sum;
+			
+			if(token_scroll <= ref->nstr)
+			{
+
+				sum = sum + tok_len_cache[++token_scroll];
+					
+			}
+			else
+			{
+				fprintf(stderr,"end went over limits\n");
+			}
+		}
+	}
+
+
+
+	for(int to_free_i = 0; to_free_i < groups; to_free_i++)
+	{
+		free_linked_list(pairs_index[to_free_i]);
+	}
+	free(pairs_current);
+	free(pairs_index);
+	free(pairs_index_scope);
+	free(delim_pairs);
+	free(tok_len_cache);
+	return error;
+}
+
