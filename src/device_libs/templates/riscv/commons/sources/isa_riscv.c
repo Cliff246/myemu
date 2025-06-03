@@ -34,3 +34,4 @@ const devdesc_t *get_device_descriptor(void)
 {
     return &riscv_descriptor;
 }
+

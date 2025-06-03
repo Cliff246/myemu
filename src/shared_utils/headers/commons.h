@@ -77,5 +77,10 @@ int64_t str_contains(const char *p_sz_ref, char check);
 bool char_exist(char ref, char *p_sz_cmp);
 
 bool cmpstrings(const char *str1, const char *str2);
+uint64_t convert_str_to_binary(const char *str);
 
+
+uint32_t rotate_right(uint32_t value, unsigned int shift, unsigned int width);
+
+uint32_t rotate_left(uint32_t value, unsigned int shift, unsigned int width);
 #endif

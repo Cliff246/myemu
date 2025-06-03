@@ -14,8 +14,7 @@ typedef struct riscv_cpu
 	size_t extentions_count;
 	void *extentions;		
 	
-	
-
+		
 
 
 }riscv_cpu_t, *p_riscv_cpu_t;

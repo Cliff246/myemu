@@ -1,0 +1,6 @@
+#ifndef __RISCV_DEVICE_EMULATOR_CORE__
+#define __RISCV_DEVICE_EMULATOR_CORE__
+
+
+
+#endif

@@ -7,6 +7,7 @@
 #include "hashmap.h"
 #include "commons.h"
 
+
 bool char_exist(char ref, char *p_sz_cmp)
 {
 
@@ -279,4 +280,43 @@ int64_t str_contains(const char *p_sz_ref, char check)
             return count;
     }
     return -1;
+}
+
+
+
+uint64_t convert_str_to_binary(const char *str)
+{
+	char *copy = strdup(str);
+	reverse(copy);	
+	const size_t size = strlen(copy);
+	uint64_t output = 0;
+	for (size_t i = 0; i < 64 & i < size; ++i)
+	{
+		uint64_t val = 0;
+		if(copy[i] == '1')
+			val = 1;
+		else if(copy[i] == '0')
+			val = 0;
+		else
+		{
+			fprintf(stderr, "only char \'1\' and char \'0\' are valid in converting to binary\n");
+		}
+		output = SETBIT(output, i);
+	}
+	free(copy);
+	return output;
+}
+
+
+uint32_t rotate_left(uint32_t value, unsigned int shift, unsigned int width)
+{
+    shift %= width;
+    return ((value << shift) | (value >> (width - shift))) & ((1U << width) - 1);
+}
+
+
+uint32_t rotate_right(uint32_t value, unsigned int shift, unsigned int width)
+{
+    shift %= width;
+    return ((value >> shift) | (value << (width - shift))) & ((1U << width) - 1);
 }

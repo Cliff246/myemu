@@ -1,0 +1,4 @@
+#ifndef __DEVICE_HANDLER_RISCV_TEMPLATE__
+#define __DEVICE_HANDLER_RISCV_TEMPLATE__
+
+#endif

@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include "modules_commons.h"
 #include "device_descriptor.h"
-#include "device.h"
+#include "devices.h"
 
 
 typedef struct modtop
